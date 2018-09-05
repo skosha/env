@@ -1,0 +1,11 @@
+*.pyc
+*.t32
+/builds
+.cproject
+.project
+.settings
+
+cscope*
+*.vim
+scratch
+src_index

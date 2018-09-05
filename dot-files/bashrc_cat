@@ -1,0 +1,3 @@
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.dot-config/.aliasrc ] && source ~/.dot-config/.aliasrc
+[ -f ~/.dot-config/.mostrc ] && source ~/.dot-config/.mostrc
