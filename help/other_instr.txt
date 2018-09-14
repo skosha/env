@@ -53,3 +53,6 @@ https://robots.thoughtbot.com/faster-grepping-in-vim
 https://github.com/Wyntau/fzf-zsh
 
 https://github.com/junegunn/fzf
+
+https://gitlab.com/bimlas/vim-high
+https://github.com/jrosiek/vim-mark
