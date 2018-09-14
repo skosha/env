@@ -33,6 +33,7 @@ Plugin 'skwp/greplace.vim'                  " Global search and replace for VI
 Plugin 'AndrewRadev/linediff.vim'           " Diff selected blocks
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }  " reformat range of code
 Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
+Plugin 'andymass/vim-matchup'               " enhance all of matchit's features
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,5 +52,7 @@ call vundle#rc(expand(vimDir . '/bundle'))
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+let g:loaded_matchit = 1
 
 " }}} Vundle
