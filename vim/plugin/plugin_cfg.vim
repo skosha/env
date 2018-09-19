@@ -1,6 +1,14 @@
 """""""""""""""""""""" Plugin configurations
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Show PASTE if in paste mode
+let g:airline_detect_paste=1
+" Show airline for tabs too
+let g:airline#extensions#tabline#enabled = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tmux navigator
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:tmux_navigator_no_mappings = 1
@@ -56,6 +64,7 @@ map <A-f> :MRU<CR>
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
+let g:gitgutter_updatetime=750
 nnoremap <A-g> :GitGutterToggle<cr>
 
 """"""""""""""""""""""""""""""
@@ -81,17 +90,27 @@ let g:ale_sign_error = '⌦'
 let g:ale_sign_warning = '∙∙'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Tagbar
+" => majutsushi/tagbar settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <A-t> :TagbarToggle<CR>
+nmap <C-b> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ag
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if !has('win32') && executable('ag')
-    set grepprg=ag
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
     let g:grep_cmd_opts = '--line-numbers --noheading --ignore-dir=log --ignore-dir=tmp'
-    let g:ackprg = 'ag --nogroup --nocolor --column'
+
+    " Override CtrlP settings to use Ag
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+
+    " bind K to grep word under cursor
+    nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -107,3 +126,45 @@ if has("autocmd")
         au Syntax * RainbowParenthesesLoadBraces        " {}
     augroup END
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => delimitMate
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => xolox/vim-easytags settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Where to look for tags files
+set tags=./tags;,~/.vimtags
+" Sensible defaults
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => scrooloose/syntastic settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi clear SignColumn
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"automatically jump to the error when saving the file
+let g:syntastic_auto_jump=0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END

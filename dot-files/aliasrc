@@ -80,5 +80,3 @@ r-sync() {
     repo sync
     popd
 }
-
-source ~/.dot-config/mostrc

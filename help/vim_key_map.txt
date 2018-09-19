@@ -29,7 +29,7 @@ other                                                                           
                 Q           W           E           R           T           Y           U           I           O           P           {               }
 key
 C-key
-A-key                                                           tagbar
+A-key
 <Leader>-key    quickfix                cscope                  cscope                              cscope      nerdtree    yankstack
 other
 
@@ -37,7 +37,7 @@ other
 key                                                             gl lasttab
 C-key                       save
 A-key                                               MRU         gitgutter
-<Leader>-key    diff        cscope      cscope      cscope      cscope      hx hex      scrollbind
+<Leader>-key    diff        cscope      cscope      cscope      cscope      hx hex      scrollbind  Ag search
 other           _al Ale                                         <leader>gb                                      ldt, ldo
 
                 A           S           D           F           G           H           J           K           L           @           ~
@@ -49,7 +49,7 @@ other
 
                 \           z           x           c           v           b           n           m           ,           .           /
 key             <Leader>
-C-key                                                                                   togglenu
+C-key                                                                       tagbar      togglenu
 A-key
 <Leader>-key                                        cscope                  toggle buf  nerdtree    highlights  space
 other

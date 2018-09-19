@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin bash
 
 if [ -d '~/env' ]; then
 
@@ -16,7 +16,7 @@ if [ -d '~/env' ]; then
     cp -af ~/env/vim/* ~/.vim/
 
     [ -d ~/dot-config ] || mkdir ~/dot-config
-    ln -s ~/env/dot-files/aliasesrc ~/.dot-config/.aliasesrc
+    ln -s ~/env/dot-files/aliasrc ~/.dot-config/.aliasrc
     ln -s ~/env/dot-files/mostrc ~/.dot-config/.mostrc
     ln -s ~/env/dot-files/fzf.bash ~/.fzf.bash
     ln -s ~/env/dot-files/gitignore ~/.gitignore

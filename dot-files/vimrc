@@ -2,46 +2,54 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set shell=/bin/bash
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 
-Plugin 'vim-airline/vim-airline'            " Lean status line
-Plugin 'tpope/vim-fugitive'                 " Git wrapper
-Plugin 'scrooloose/nerdtree'                " NERD Tree file explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin'        " Shows git status in nerd tree
-Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the 'gutter'
-Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file
+Plugin 'vim-scripts/a.vim'                  " Open alternate .c,.cpp/.h files quickly
+Plugin 'rking/ag.vim'                       " The silver searcher
 Plugin 'w0rp/ale'                           " Asynchronous Lint Engine
-Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
-Plugin 'godlygeek/tabular'                  " Vim script for text filtering and alignment
-Plugin 'christoomey/vim-tmux-navigator'     " Seamless navigation between tmux panes and vim splits
-Plugin 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events with tmux
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
-Plugin 'machakann/vim-highlightedyank'      " Make the yanked region apparent!
-Plugin 'yegappan/mru'                       " most recently used files
-Plugin 'maxbrunsfeld/vim-yankstack'         " yank ring
-Plugin 'tpope/vim-eunuch'
-Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
+Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
+Plugin 'ekalinin/Dockerfile.vim'            " Syntax highlight for Docker file
+Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file
 Plugin 'skwp/greplace.vim'                  " Global search and replace for VI
 Plugin 'AndrewRadev/linediff.vim'           " Diff selected blocks
+Plugin 'yegappan/mru'                       " most recently used files
+Plugin 'scrooloose/nerdtree'                " NERD Tree file explorer
+Plugin 'Xuyuanp/nerdtree-git-plugin'        " Shows git status in nerd tree
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/rainbow_parentheses.vim'       " Rainbow colored parnatheses
+Plugin 'scrooloose/syntastic'               " Error checking
+Plugin 'godlygeek/tabular'                  " Vim script for text filtering and alignment
+Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
+Plugin 'tomtom/tcomment_vim'                " file-type sensible comments
+Plugin 'vim-airline/vim-airline'            " Lean status line
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'xolox/vim-easytags'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'                 " Git wrapper
+Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the 'gutter'
+Plugin 'machakann/vim-highlightedyank'      " Make the yanked region apparent!
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'xolox/vim-misc'
+Plugin 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events with tmux
+Plugin 'christoomey/vim-tmux-navigator'     " Seamless navigation between tmux panes and vim splits
+Plugin 'maxbrunsfeld/vim-yankstack'         " yank ring
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }  " reformat range of code
-Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-let win_shell = (has('win32') || has('win64')) && &shellcmdflag =~ '/'
-let vimDir = win_shell ? '$HOME/vimfiles' : '$HOME/.vim'
-let &runtimepath .= ',' . expand(vimDir . '/bundle/Vundle.vim')
-call vundle#rc(expand(vimDir . '/bundle'))
 
 " Brief help
 " :PluginList       - lists configured plugins

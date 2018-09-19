@@ -16,17 +16,21 @@ else
     colorscheme PaperColor
 endif
 
-set path=.,,**                  " Set search path
+" Set path to current and sub-directories only, will not search other system related directories
+set path=.,,**
 set path+=./**                  " Add the current directory to path
+
+" tabs and indents
 set autoindent                  " set auto indent on
 set copyindent                  " copy the previous indentation on autoindenting
 set smartindent                 " Set smart indent on
+set shiftround                  " Round indent to nearest shiftwidth multiple
 set smarttab                    " Set smart tabbing on
 set shiftwidth=4                " Shiftwidth to be 4
 set softtabstop=4
 set expandtab                   " Expand tab to spaces
 set tabstop=4                   " 1 tab = 4 spaces
-set shiftround                  " Round indent to nearest shiftwidth multiple
+
 set number                      " line numbers
 set showmatch                   " Show the matching bracket
 set matchtime=1                 " shorten the jump time for showmatch
@@ -63,7 +67,20 @@ set scrolloff=3
 
 " Easy pasting to windows apps - http://vim.wikia.com/wiki/VimTip21
 " yank always copies to unnamed register, so it is available in windows clipboard for other applications.
-set clipboard=unnamed
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
+
+" copy to clipboard with Ctrl-C
+map <C-x> :!pbcopy<CR>
+vmap <C-c> :w !pbcopy<CR><CR>
+" paste from clipboard with Ctrl-V
+set pastetoggle=<F10>
+noremap <C-v> <F10><C-r>+<F10>
 
 " Default split to right and below
 set splitbelow
