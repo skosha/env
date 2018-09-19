@@ -294,7 +294,7 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " clear the search buffer when hitting return
-nnoremap <CR> :nohlsearch<cr>
+nnoremap <silent> <CR> :nohlsearch<cr>
 
 " Use 'X' to invoke search for visually selected text
 vmap X y/<C-R>"<CR>
@@ -302,23 +302,26 @@ vmap X y/<C-R>"<CR>
 " Use 'gX' to invoke global search for visually selected text
 vmap gX y:vimgrep /<C-R>"/ **/*<CR>
 
+" Map double-click to search the word under cursor
+nnoremap <silent> <2-LeftMouse> :let @/='\V'.escape(expand('<cword>'), '\')<cr>:set hls<cr>
+
 " Toggle scrollbind for all open windows in the tab
-nnoremap <Leader>j :windo set scb!
+nnoremap <silent> <Leader>j :windo set scb!
 
 " Use <Leader>hx to toggle between binary/hex
-noremap <Leader>hx :call HexMe()<CR>
+noremap <silent> <Leader>hx :call HexMe()<CR>
 
 " replace number under cursor with its decimal equivalent
-nnoremap _d :call Hex2Dec()<CR>
+nnoremap <silent> _d :call Hex2Dec()<CR>
 
 " replace number under cursor with its hex equivalent
-noremap _h :call Dec2Hex()<CR>
+noremap <silent> _h :call Dec2Hex()<CR>
 
 " replace ascii hex under cursor with its char equivalent
-noremap _c :call Ascii2Char()<CR>
+noremap <silent> _c :call Ascii2Char()<CR>
 
 " replace char under cursor with its ascii hex equivalent
-noremap _a :call Char2Ascii()<CR>
+noremap <silent> _a :call Char2Ascii()<CR>
 
 " Shortcuts for navigating quickfix list
 noremap ]q :cnext<CR>

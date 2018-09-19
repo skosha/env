@@ -1,0 +1,17 @@
+Alt + B - go back one word
+Alt + F - go forward one word
+Ctrl + XX - toggle between start of line and current position
+Alt + D: Delete all characters after the cursor on the current line.
+Alt + T: Swap the current word with the previous word.
+Ctrl + T: Swap the last two characters before the cursor with each other. You can use this to quickly fix typos when you type two characters in the wrong order.
+Ctrl + _: Undo your last key press. You can repeat this to undo multiple times.
+Ctrl + W: Cut the word before the cursor, adding it to the clipboard.
+Ctrl + K: Cut the part of the line after the cursor, adding it to the clipboard.
+Ctrl + U: Cut the part of the line before the cursor, adding it to the clipboard.
+Ctrl + Y: Paste the last thing you cut from the clipboard. The y here stands for “yank”.
+Alt + U: Capitalize every character from the cursor to the end of the current word, converting the characters to upper case.
+Alt + L: Uncapitalize every character from the cursor to the end of the current word, converting the characters to lower case.
+Alt + C: Capitalize the character under the cursor. Your cursor will move to the end of the current word.
+
+Alt + R: Revert any changes to a command you’ve pulled from your history if you’ve edited it.
+Ctrl + G: Leave history searching mode without running a command.

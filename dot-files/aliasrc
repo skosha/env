@@ -20,6 +20,7 @@ alias br='git branch'
 alias n-br='git checkout -b'
 alias commit='git commit'
 alias a-commit='git commit --amend'
+alias ae-commit='git commit --amend --no-edit'
 alias add='git add'
 alias add-all='git add --all'
 alias g-show='git show'
@@ -68,7 +69,7 @@ r-sync() {
         if [[ $next = ${next#*$substr} ]] ; then
             break
         elif [[ $next == "/" ]] ; then
-            echo "ERROR: could not find scsc-fw-* directory"
+            echo "ERROR: could not find fw-* directory"
             exit 1
         else
             repo_dir=$next

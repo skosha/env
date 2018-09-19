@@ -24,6 +24,7 @@ Plugin 'ekalinin/Dockerfile.vim'            " Syntax highlight for Docker file
 Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file
 Plugin 'skwp/greplace.vim'                  " Global search and replace for VI
 Plugin 'AndrewRadev/linediff.vim'           " Diff selected blocks
+Plugin 'andymass/vim-matchup'               " enhance all of matchit's features
 Plugin 'yegappan/mru'                       " most recently used files
 Plugin 'scrooloose/nerdtree'                " NERD Tree file explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin'        " Shows git status in nerd tree
@@ -59,5 +60,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+let g:loaded_matchit = 1
 
 " }}} Vundle

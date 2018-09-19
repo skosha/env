@@ -1,0 +1,158 @@
+git clone <remote_repository> <local_dir>
+git init    # Create new local repository
+
+# Create local working branch of remote branch, expects origin to be set for
+# url and fetch
+git checkout -b <local_branch> --track origin/<remote_branch>
+git checkout --track origin/<MYBRANCH>      # create a new local branch with the same name as the remote and set "upstream" configuration
+
+# Create and checkout new branch
+git checkout -b <new_branch>
+
+# Lists all remotes (verbose)
+git remote -v
+
+# List local branches
+git branch
+git branch -a   # list branches including remotes
+
+# Rename current branch
+git branch -m <new_name>
+
+# Rename git branch
+git branch -m <old_name> <new_name>
+
+# Delete branch
+git branch -d <branch>
+
+# Move to another branch
+git checkout <branch_name>
+git checkout <prev_commit>  # browse a previous commit in detached HEAD state. git checkout master to reattach.
+git checkout HEAD~          # checkout prev (older) revision
+
+# Move to another branch on steroids
+git checkout $(git branch | fzf)
+
+# Lists all new or modified files to be committed
+git status
+
+# Shows file differences not yet staged
+git diff
+
+# Add files to stage for commit
+git add <file>
+git add -A          # Stage all
+git add .           # Stage new and modified, not deletes
+git add -u          # Stage modified and deletes, not new
+git add -p <file>   # Stage only a few changes from the file
+
+# Commit all staged files
+git commit
+git commit -a                   # stage and commit
+git commit --amend              # amend the last commit
+git commit --amend --no-edit    # Do so without having to edit the commit message.
+git commit -s                   # Signed off commit
+
+# Uploads all local branch commits to remote
+git push <local_branch> <remote_branch>
+
+# Shows file differences between staging and the last file version
+git diff --staged
+
+# Unstage a file, but preserve its contents
+git reset <file>
+
+# Rebase current branch to another branch, usually the master
+git rebase <another_branch>
+
+# Rebase current branch to another branch, usually the master, on steroids
+git rebase $(git branch | fzf)
+
+# Delete a file from working directory and stage it for deleting
+git rm <file>
+
+# Delete a file from version control, but preserve it
+git rm --cached <file>
+
+# Move/Rename a file and add to staging
+git mv <org_file> <new_file>
+
+# Revert
+git checkout -- <FILE>      # throw away local modifications and reset to last committed version of given file
+git clean -f                # remove untracked files
+git revert HEAD             # Make a commit that undoes the last commit. Used to reset a commit that has already been pushed to a remote.
+
+# Resets
+git reset --hard <commit>   # Discards all history and changes back to the specified commit
+git reset <commit>          # Undoes all commits after [commit], preserving changes locally
+git reset --hard HEAD       # throw away local modifications and reset to latest of current branch
+git reset --hard <commit>   # throw away local modifications and reset to specific commit
+git reset HEAD~             # Remove the last commit and update the working directory with its changes
+git reset HEAD^             # Remove the last commit without affecting the working directory
+
+                            Updates     Updates     Updates     Working Dir
+                            Current br  Index       Working Dir Safe
+reset --soft [commit]       YES         NO          NO          YES
+reset (--mixed) [commit]    YES         YES         NO          YES
+reset --hard [commit]       YES         YES         YES         NO
+checkout [commit]           NO          YES         YES         YES
+
+# Stash
+git stash
+git stash list
+git stash apply
+git stash apply $(git stash list | fzf | cut -d':' -f1)
+git stash show $(git stash list | fzf | cut -d':' -f1)
+
+# Lists version history for the current branch
+git log
+git log --follow <file>         # Lists version history for a file, including renames
+git log --author=<name pattern> # Find commits by certain author
+git log -Sword                  # Find out all commits where "word" was added or removed in the file contents (to be more exact: where number of occurences of "word" changed)
+git log --grep=word             # Find out all commits where commit message contains given word
+git log --diff-filter=A -- <file>   # Find out when a file has been added
+git log --after={<date>} --name-only  -- <path>
+
+# Shows content differences between two branches
+git diff <first-branch>...<second-branch>
+
+# Outputs metadata and content changes of the specified commit
+git show <commit>
+git show --name-only <commit>   # Which files have been changed in a specific commit
+
+# List all revisions between two revisions
+git rev-list --ancestry-path <rev_1>..<rev_2>
+
+# Who changed what and when in a file
+git blame <file>
+
+# tagging
+git tag                           # list available tags
+git tag -l v1.4.2.*               # search for specific tags
+git tag -a v1.4 -m 'version 1.4'  # create an annotated tag
+git tag -a v1.2 9fceb02           # tag a specific commit (if you forgot)
+git show v1.4                     # show the tag data of a specific tag
+git tag v1.4                      # create a lightweight tag
+git push --tag                    # you have to explicitly push tags to remotes
+git log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d' # show tags with creation dates
+
+# checkout next (newer) commit
+git_next() {
+    BRANCH=`git show-ref | grep $(git show-ref -s -- HEAD) | sed 's|.*/\(.*\)|\1|' | grep -v HEAD | sort | uniq`
+    HASH=`git rev-parse $BRANCH`
+    PREV=`git rev-list --topo-order HEAD..$HASH | tail -1`
+    git checkout $PREV
+}
+
+# create a new repo from a directory in an old repo, preserving history
+git clone <old repo>
+cd <old repo>
+git remote rm origin
+git filter-branch --subdirectory-filter <new repo> -- --all
+cd <new repo>
+curl -u '<username>' https://api.github.com/user/repos -d '{"name":"<new repo>"}'
+git remote add origin <new repo>
+git push origin master
+
+# display branches sorted by date
+git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate) %(authorname) %(refname:short)'
