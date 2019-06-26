@@ -57,7 +57,7 @@ set startofline                 " Jump to non-blank start of line
 set laststatus=2                " Always show the statusline
 set hidden                      " Don't complain about unsaved files when switching buffers.
 set gdefault                    " use g in substitute by default. Adding 'g' flag to the command will now toggle it
-set lazyredraw                  " Don't redraw while executing macros (good performance config)
+set lazyredraw                  " Don't redraw while executing macros (good performance co#nfig)
 set ttyfast                     " Performance improvements
 set foldcolumn=1                " Add a bit extra margin to the left
 set mouse=a                     " use mouse in all modes
@@ -80,7 +80,7 @@ map <C-x> :!pbcopy<CR>
 vmap <C-c> :w !pbcopy<CR><CR>
 " paste from clipboard with Ctrl-V
 set pastetoggle=<F10>
-noremap <C-v> <F10><C-r>+<F10>
+"noremap <C-v> <F10><C-r>+<F10>
 
 " Default split to right and below
 set splitbelow
@@ -144,7 +144,7 @@ set magic
     " use \m and \M to switch 'magic' on or off.
 
 " Add fzf to runtime path
-set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
 
 " Enable filetype plugins
 filetype plugin on
@@ -154,6 +154,9 @@ if has("autocmd")
 
     augroup file_types
         autocmd!
+        " Auto load vimrc once it changes, handy with Vundle
+        autocmd BufWritePost .vimrc so %
+
         " Use tabs in Makefile
         autocmd FileType make setlocal noexpandtab
 
@@ -167,8 +170,12 @@ if has("autocmd")
         autocmd FileType php set omnifunc=phpcomplete#CompletePHP
         autocmd FileType c set omnifunc=ccomplete#Complete
 
+        au FileType gitcommit
+        \ setlocal spell textwidth=72 |
+        \ startinsert
+
         " To jump between the '=' and ';' in an assignment using <S-%>. Useful for languages like C/C++ and Java.
-        autocmd FileType c,cpp,java set matchpairs+==:;
+        "autocmd FileType c,cpp,java set matchpairs+==:;
     augroup END
 
     augroup trail_whitespace
@@ -270,9 +277,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 " duplicate tab
 noremap _t :tab split<CR>
 
-" Open a new tab with Ctrl+T
-map <C-t> <esc>:tabnew<CR>
-
 " Disable F1 for help screen - I open this accidentally all the time!
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
@@ -336,11 +340,22 @@ noremap <Leader>qc :cclose<CR>
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 if !has("win32")
-    command W w !sudo tee % > /dev/null
+    command! W w !sudo tee % > /dev/null
 endif
 
 " Shortcut for toggling a diff in a window
 nnoremap <Leader>a :call WinStartDiff()<CR>
+
+" Add #if 0 ... #endif around a block of code
+map ;' mz'aO<Esc>i#if 0<Esc>'zo<Esc>i#endif<Esc>
+
+" Add #ifdef <> ... #endif around a block of code
+map ;; mz'aO<Esc>i#ifdef <C-r>"<Esc>'zo<Esc>i#endif /* <C-r>" */<Esc>
+
+" Add curly braces around a piece of code
+map ;[ mz'aO<Esc>i{<Esc>lx<Esc>'zo<Esc>i}<Esc>'a=aB
+
+map <Leader>cc :s/\/\/\(.*\)/\/\*\1 \*\//<CR>
 
 " }}}
 
@@ -417,7 +432,7 @@ function! g:ToggleNuMode()
 endfunc
 
 let $in_hex=0
-function HexMe()
+function! HexMe()
     set binary
     set noeol
     if $in_hex>0
@@ -429,7 +444,7 @@ function HexMe()
     endif
 endfunction
 
-function Hex2Dec()
+function! Hex2Dec()
     " Save cursor position
     let l:save = winsaveview()
     " goto start of the word
@@ -455,7 +470,7 @@ function Hex2Dec()
     call winrestview(l:save)
 endfunction
 
-function Dec2Hex()
+function! Dec2Hex()
     " Save cursor position
     let l:save = winsaveview()
     " goto start of the word
@@ -480,7 +495,7 @@ function Dec2Hex()
     call winrestview(l:save)
 endfunction
 
-function Ascii2Char()
+function! Ascii2Char()
     " Save cursor position
     let l:save = winsaveview()
     " yank the current word into register 'l'
@@ -502,7 +517,7 @@ function Ascii2Char()
     call winrestview(l:save)
 endfunction
 
-function Char2Ascii()
+function! Char2Ascii()
     " Save cursor position
     let l:save = winsaveview()
     " yank the char into register 'l'
@@ -518,7 +533,7 @@ function Char2Ascii()
 endfunction
 
 let $diff_started=0
-function WinStartDiff()
+function! WinStartDiff()
     if $diff_started>0
         let $diff_started=0
         :windo diffoff
@@ -543,7 +558,7 @@ function! DeleteHiddenBuffers()
 endfunction
 
 " Display number of open buffers
-fun! NumberOfOpenBuffers()
+function! NumberOfOpenBuffers()
     echo len(getbufinfo({'buflisted':1}))
 endfun
 
@@ -559,7 +574,7 @@ function! RebuildCscope(total)
     if has('win32')
         execute '!.\cscope_sym.bat '.a:total
     else
-        execute '!./cscope_sym.sh '.a:total
+        execute '!cscope_sym.sh '.a:total
     endif
     cs add cscope.out
 endfunction
@@ -654,8 +669,10 @@ if has('win32')
     "set csprg=C:\Work\Tools\my_gvim\cscope.exe
     set csprg=$VIM/vimfiles/cscope.exe
     let $TMP="C:/tmp"
+elseif has('mac')
+    set csprg=/usr/local/bin/cscope
 else
-    set csprg=/usr/bin/cscope
+    set csprg=/usr/local/bin/cscope
 endif
 
 let g:cscope_loaded = 0
@@ -778,14 +795,14 @@ if (g:cscope_loaded == 0)
         nmap <Leader>E :tab cs find e
         nmap <Leader>I :tab cs find i <C-R><C-W><CR>
     else
-        nmap <Leader>S :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>G :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>C :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>T :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>E :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>F :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-        nmap <Leader>I :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-        nmap <Leader>D :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>S :tab scs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>G :tab scs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>C :tab scs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>D :tab scs find d <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>F :tab scs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <Leader>T :tab scs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>E :tab scs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <Leader>I :tab scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
     endif
 
 

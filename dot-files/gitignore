@@ -5,7 +5,16 @@
 .project
 .settings
 
+.git*
+*.patch
 cscope*
+.vimrc
 *.vim
 scratch
 src_index
+tags
+sdkconfig.old
+.python-version
+*.dump
+*.bak
+.DS_Store

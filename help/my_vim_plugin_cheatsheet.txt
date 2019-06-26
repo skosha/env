@@ -1,0 +1,35 @@
+/* Git Gutter */
+git gutter toggle - <A-g>
+jump between hunks - [c and ]c
+preview hunk - <leader>hp
+stage hunk - <leader>hs
+undo hunk - <leader>hu
+
+/* Fugitive */
+Undo changes - 'u' on visual selection
+
+/* Tabular */
+:Tabular /: - ':' as separator
+title : My picture
+src   : img.jpg
+
+:Tabular /:/r0 - right align
+title:My picture
+  src:   img.jpg
+
+:Tabular /:\zs - ':' is excluded from the search
+title:  My picture
+src:    img.jpg
+
+:Tab /:/r1c1l0 - right align with 1 space, center align the ':' with 1 space and left align with 0 spaces
+title : My picture
+  src : img.jpg
+
+:Tabularize /^[^,]*\zs,/r0c0l0 - use Vim regex - filters on only first ','
+    abc,def,ghi
+      a,b
+      a,b,c
+
+:AddTabularPattern first_comma /^[^,]*\zs,/r0c0l0 - add a pattern with a name and then just call
+:Tabularize first_comma
+

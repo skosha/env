@@ -1,0 +1,16 @@
+# Home brew
+brew list
+brew cask list
+brew update
+brew upgrade `brew outdated`
+brew prune - Remove dead symlinks from the Homebrew prefix
+brew cleanup - For all installed or specific formulae, remove any older versions from the cellar
+brew doctor - Check your system for potential problems
+
+# mas
+mas list
+mas search <pattern>
+mas lucky <pattern>
+mas outdated
+mas upgrade
+mas signin mas@example.com

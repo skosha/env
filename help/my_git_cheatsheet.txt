@@ -9,12 +9,18 @@ git checkout --track origin/<MYBRANCH>      # create a new local branch with the
 # Create and checkout new branch
 git checkout -b <new_branch>
 
+# Fetch remote branch without merge
+git fetch origin <branch>
+
 # Lists all remotes (verbose)
 git remote -v
 
 # List local branches
 git branch
 git branch -a   # list branches including remotes
+
+# List remote branches
+git branch -r
 
 # Rename current branch
 git branch -m <new_name>
@@ -30,14 +36,14 @@ git checkout <branch_name>
 git checkout <prev_commit>  # browse a previous commit in detached HEAD state. git checkout master to reattach.
 git checkout HEAD~          # checkout prev (older) revision
 
-# Move to another branch on steroids
-git checkout $(git branch | fzf)
-
 # Lists all new or modified files to be committed
 git status
 
 # Shows file differences not yet staged
 git diff
+
+# Shows file differences between staging and the last file version
+git diff --staged
 
 # Add files to stage for commit
 git add <file>
@@ -45,6 +51,13 @@ git add -A          # Stage all
 git add .           # Stage new and modified, not deletes
 git add -u          # Stage modified and deletes, not new
 git add -p <file>   # Stage only a few changes from the file
+Stage this hunk [y/n/a/d/K/j/J/e/?]?
+y - Yes, add this hunk
+n - No, don’t add this hunk
+d - No, don’t add this hunk and all other remaining hunks.
+s - Split the hunk into smaller hunks. This only works if there’s unchanged lines between the changes in the displayed hunk
+e - Manually edit the hunk. As promised, it will open the hunk in a text editor and you can edit it to your hearts content
+
 
 # Commit all staged files
 git commit
@@ -53,20 +66,24 @@ git commit --amend              # amend the last commit
 git commit --amend --no-edit    # Do so without having to edit the commit message.
 git commit -s                   # Signed off commit
 
+# Delete a commit
+git rebase -i HEAD~2            # Delete the local commit
+git push -f                     # Force the delete to remote
+
+# Delete a specific older commit
+git rebase --onto commit-id^ commit-id
+
 # Uploads all local branch commits to remote
 git push <local_branch> <remote_branch>
 
-# Shows file differences between staging and the last file version
-git diff --staged
+# Push local branch to new remote branch
+git push -u origin <branch>
 
 # Unstage a file, but preserve its contents
 git reset <file>
 
 # Rebase current branch to another branch, usually the master
 git rebase <another_branch>
-
-# Rebase current branch to another branch, usually the master, on steroids
-git rebase $(git branch | fzf)
 
 # Delete a file from working directory and stage it for deleting
 git rm <file>
@@ -113,6 +130,9 @@ git log --grep=word             # Find out all commits where commit message cont
 git log --diff-filter=A -- <file>   # Find out when a file has been added
 git log --after={<date>} --name-only  -- <path>
 
+# Version history of a remote branch (after a fetch/pull)
+git log remotename/branchname
+
 # Shows content differences between two branches
 git diff <first-branch>...<second-branch>
 
@@ -127,13 +147,15 @@ git rev-list --ancestry-path <rev_1>..<rev_2>
 git blame <file>
 
 # tagging
-git tag                           # list available tags
-git tag -l v1.4.2.*               # search for specific tags
-git tag -a v1.4 -m 'version 1.4'  # create an annotated tag
-git tag -a v1.2 9fceb02           # tag a specific commit (if you forgot)
-git show v1.4                     # show the tag data of a specific tag
-git tag v1.4                      # create a lightweight tag
-git push --tag                    # you have to explicitly push tags to remotes
+git tag                             # list available tags
+git tag -l v1.4.2.*                 # search for specific tags
+git tag -a v1.4 -m 'version 1.4'    # create an annotated tag
+git tag -a v1.2 9fceb02             # tag a specific commit (if you forgot)
+git show v1.4                       # show the tag data of a specific tag
+git tag v1.4                        # create a lightweight tag
+git push origin --tags              # you have to explicitly push tags to remotes
+git push origin --delete <tag>      # Delete remote tag
+git tag -d <tag>                    # Delete local tag
 git log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d' # show tags with creation dates
 
 # checkout next (newer) commit
@@ -143,6 +165,15 @@ git_next() {
     PREV=`git rev-list --topo-order HEAD..$HASH | tail -1`
     git checkout $PREV
 }
+
+# cherry-pick
+git cherry-pick <sha>
+
+# Merge into master
+git clone <repo>
+git branch <branch> --track origin/<branch>
+git merge <branch>
+git push origin master
 
 # create a new repo from a directory in an old repo, preserving history
 git clone <old repo>
@@ -156,3 +187,46 @@ git push origin master
 
 # display branches sorted by date
 git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate) %(authorname) %(refname:short)'
+
+# generate patch
+git format-patch -1 HEAD
+or
+git format-patch -1 <sha1>
+
+# generate patch for particular file
+git format-patch -1 <sha1>/path/to/file
+
+# Apply patch
+git apply --stat file.patch # show stats.
+git apply --check file.patch # check for error before applying.
+git am < file.patch # apply the patch finally.
+
+# cache credentials
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+
+# Add upstream to your fork
+git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+
+# Sync with upstream
+git fetch upstream
+git checkout master
+git merge upstream/master
+
+# Create and sync private mirrors
+git clone --bare https://github.com/exampleuser/public-repo.git
+cd public-repo.git
+git push --mirror https://github.com/yourname/private-repo.git
+cd ..
+rm -rf public-repo.git
+
+git clone https://github.com/yourname/private-repo.git
+cd private-repo
+make some changes
+git commit
+git push origin master
+
+cd private-repo
+git remote add public https://github.com/exampleuser/public-repo.git
+git pull public master # Creates a merge commit
+git push origin master

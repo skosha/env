@@ -1,0 +1,113 @@
+To do this                                                                                                          | Press
+
+Save an item                                                                                                        | COMMAND + S
+Print an item                                                                                                       | COMMAND + P
+Undo the last action                                                                                                | COMMAND + Z
+Redo the last action                                                                                                | COMMAND + Y
+Minimize the active window                                                                                          | COMMAND + M
+Create a new folder in the navigation pane                                                                          | Shift + COMMAND + N
+Create new email (in Mail view)                                                                                     | COMMAND + N
+Hide the reading pane or show it on the right                                                                       | COMMAND + Backslash ( \ )
+Hide the reading pane or show it below                                                                              | Shift + COMMAND + Backslash ( \ )
+Move the selected item to a different folder                                                                        | Shift + COMMAND + M
+Copy the selected item to a different folder                                                                        | Shift + COMMAND + C
+Select all items in the item list, if the item list is the active pane                                              | COMMAND + A
+Minimize or expand the ribbon                                                                                       | Options + COMMAND + R
+Hide Outlook                                                                                                        | COMMAND + H
+Quit Outlook                                                                                                        | COMMAND + Q
+Start dictation                                                                                                     | Fn + Fn
+Insert emoji                                                                                                        | Control + COMMAND + Space
+
+Go to Mail view                                                                                                     | COMMAND + 1
+Go to Calendar view                                                                                                 | COMMAND + 2
+Go to Contacts view                                                                                                 | COMMAND + 3
+Go to Tasks view                                                                                                    | COMMAND + 4
+Go to Notes view                                                                                                    | COMMAND + 5
+Open the Sync Status window or make it the active window                                                            | COMMAND + 7
+Open the Sync Errors or make it the active window                                                                   | COMMAND + 8
+Open the Contacts Search window                                                                                     | COMMAND + 0
+Open the Outlook Preferences dialog box                                                                             | COMMAND + Comma ( , )
+Cycle forward through open windows                                                                                  | COMMAND + Tilde ( ~ )
+Cycle back through open windows                                                                                     | Shift + COMMAND + Tilde ( ~ )
+Close the active window                                                                                             | COMMAND + W
+Open the selected item                                                                                              | COMMAND + O
+Move forward through controls in a window                                                                           | Tab
+Move back through controls in a window                                                                              | Shift + Tab
+
+Search current folder                                                                                               | Option + COMMAND + F
+Do an advanced search in Outlook (add Item Contains filter for searching)                                           | Shift + COMMAND + F
+Find text within an item                                                                                            | COMMAND + F
+Find the next instance of the text you searched for in an item                                                      | COMMAND + G
+Find the previous instance of the text you searched for in an item                                                  | COMMAND + Shift + G
+
+Create a new message                                                                                                | COMMAND + N
+Send the open message                                                                                               | COMMAND + Return
+Send all messages in the Outbox and receive all incoming messages                                                   | COMMAND + K
+Send all the messages in the Outbox                                                                                 | Shift + COMMAND + K
+Save the open message and store it in the Drafts folder                                                             | COMMAND + S
+Add an attachment to the open message                                                                               | COMMAND + E
+Open the Spelling and Grammar dialog box                                                                            | COMMAND + Colon ( : )
+Check recipient names in the open messages                                                                          | Control + COMMAND + C
+Reply to the sender of the message or, if the message is from a mailing list, reply to the mailing list             | COMMAND + R
+Reply to all                                                                                                        | Shift+ COMMAND + R
+Forward the message                                                                                                 | COMMAND + J
+Open the selected message in a separate window                                                                      | COMMAND + O
+Clear the flag for the selected message                                                                             | Option + COMMAND + Apostrophe ( ' )
+Mark the selected message as junk mail                                                                              | COMMAND + Shift + J
+Mark the selected message as not junk mail                                                                          | COMMAND + Shift + Option + J
+Display the previous message                                                                                        | Control + Opening bracket ( [ )
+Display the next message                                                                                            | Control + Closing bracket ( ] )
+Navigate to the previous pane in the Mail view                                                                      | Shift + Control + Opening bracket ( [ )
+Navigate to the next pane in the Mail view                                                                          | Shift + Control + Closing bracket ( ] )
+Move the selected message to a folder                                                                               | Shift + COMMAND + M
+Decrease the display size of text in an open message or in the reading pane                                         | COMMAND + Hyphen ( - )
+Increase the display size of text in an open message or in the reading pane                                         | COMMAND + Plus sign ( + )
+Scroll down to the next screen of text or, if you are at the end of a message, display the next message             | Spacebar
+Scroll up to the previous screen of text or, if you are at the beginning of a message, display the previous message | Shift+ Spacebar
+Delete the selected message                                                                                         | Delete
+Permanently delete the selected message                                                                             | Shift + Delete
+Delete the current message, and, if the message window is open, close it                                            | COMMAND + Delete
+Mark selected messages as read                                                                                      | COMMAND + T
+Mark selected messages as unread                                                                                    | Shift + COMMAND + T
+Mark all messages in a folder as read                                                                               | Option + COMMAND + T
+
+Cut the selected text to the clipboard                                                                              | COMMAND + X
+Copy a selection to the clipboard                                                                                   | COMMAND + C
+Paste a selection from the clipboard                                                                                | COMMAND + V
+Paste a selection from the clipboard and match the destination style                                                | Shift + Option + COMMAND + V
+Make the selected text bold                                                                                         | COMMAND + B
+Make the selected text italic                                                                                       | COMMAND + I
+Underline the selected text                                                                                         | COMMAND + U
+Strike through the selected text                                                                                    | Shift + COMMAND + X
+Insert a hyperlink                                                                                                  | Control + COMMAND + K
+Move the cursor left one character                                                                                  | Left arrow
+Move the cursor right one character                                                                                 | Right arrow
+Move the cursor up one line                                                                                         | Up arrow
+Move the cursor down one line                                                                                       | Down arrow
+Move the cursor to the beginning of the current paragraph                                                           | Option + Up arrow
+Move the cursor to the end of the current paragraph                                                                 | Option + Down arrow
+Move the cursor to the beginning of the current word                                                                | Option + Left arrow
+Move the cursor to the end of the current word                                                                      | Option + Right arrow
+Decrease indent                                                                                                     | Delete + Opening brace ( { )
+Increase indent                                                                                                     | Delete + Closing brace ( { )
+Delete the character to the left of the cursor, or delete the selected text                                         | Delete
+Delete the character to the right side of the cursor, or delete the selected text                                   | Delete. If your keyboard doesn't have a Delete key, use FN + Delete.
+Insert a tab stop                                                                                                   | Tab
+Move the cursor to the beginning of the line                                                                        | COMMAND + Left arrow
+Move the cursor to the end of the line                                                                              | COMMAND + Right arrow
+Move the cursor to the top of the message body                                                                      | COMMAND + Up arrow
+Move the cursor to the bottom of the message body                                                                   | COMMAND + Down arrow
+Move the cursor to the beginning of the selected text                                                               | COMMAND + Home
+Move the cursor to the end of the selected text                                                                     | COMMAND + End
+Scroll up                                                                                                           | Page up
+Scroll down                                                                                                         | Page down
+
+Flag the selected item for follow up, with Today as Due Date                                                        | Control + 1
+Flag the selected item for follow up, with Tomorrow as Due Date                                                     | Control + 2
+Flag the selected item for follow up, with This Week as Due Date                                                    | Control + 3
+Flag the selected item for follow up, with Next Week as Due Date                                                    | Control + 4
+Flag the selected item for follow up, with No Due Date                                                              | Control + 5
+Flag the selected item for follow up, and add a custom Due Date                                                     | Control + 6
+Flag the selected item for follow up, and add a reminder                                                            | Control + Equal sign ( = )
+Mark the selected item as Complete                                                                                  | Control + Zero ( 0 )
+Clear the selected item's follow-up flag                                                                            | Option + COMMAND + Apostrophe ( ' )

@@ -1,0 +1,8 @@
+align_image_stack -a "aligned" -C -v -s --use-given-order *.jpg
+convert *.tif -resize %200 -evaluate-sequence mean averaged.jpg
+
+convert *.tif -layers trim-bounds -resize %200 -evaluate-sequence mean -background white -flatten -trim -depth 16 averaged.tif
+
+convert *.tif -evaluate-sequence mean -alpha off OUT.tif
+
+--> https://wiki.panotools.org/Align_image_stack

@@ -1,0 +1,77 @@
+Action | Shortcut
+
+Start playing or pause the selected song | Space bar
+Play the currently selected song from the beginning | Return
+Move forwards or backwards within a song | Option-Command-Right Arrow or Left Arrow
+Stop playing the selected song | Command-Full Stop
+When a song is playing, play the next song in a list | Right Arrow
+When a song is playing, play the previous song in a list | Left Arrow
+Show the currently playing song in the list | Command-L
+Show the Up Next list | Option-Command-U
+Listen to the next or previous album in a list | Option-Right Arrow or Left Arrow
+Go to the next or previous song in a list | Left Arrow or Right Arrow
+Increase the volume | Command-Up Arrow
+Decrease the volume | Command-Down Arrow
+Open the equaliser | Option-Command-E
+Mute (and unmute) the sound (song keeps playing) | Option-Command-Down Arrow
+Go to the next or last chapter (if available) | Shift-Command-Right Arrow or Shift-Command-Left Arrow
+Stream audio file at a specific URL to iTunes | Command-U
+
+Create a new playlist | Command-N
+Create a playlist from a selection of songs | Shift-Command-N
+Create a new Smart Playlist | Option-Command-N
+Start Genius Shuffle | Option-Space bar
+Refresh a Genius Playlist (when the playlist is selected) | Command-R
+Delete the selected playlist without confirming that you want to delete it | Command-Delete
+Delete the selected playlist, and all the songs it contains, from your library | Option-Delete
+Delete the selected song from your library and all playlists | Option-Delete
+
+Add a file to your music library | Command-O
+Show where a song file is located | Shift-Command-R
+Select the search field | Command-F
+Choose artwork for the selected video | While the video is playing, Control-click the film, then choose Set Poster Frame
+Undo your last typing change while editing an item’s information | Command-Z
+Cut the selected song’s information or artwork | Command-X
+Copy the selected song’s information or artwork | Command-C
+Paste the selected song’s information or artwork | Command-V
+Select all the songs in the list | Command-A
+Deselect all the songs in the list | Shift-Command-A
+Select or deselect all the songs in a list | Command-click the tickbox next to a song in the list
+
+Open Mini Player | Option-Command-M
+Enter or exit full-screen view | Control-Command-F
+Switch between custom and maximum window sizes | Option-click the green button in the upper-left corner of the iTunes window
+See the iTunes window resize while you are resizing it | Command-drag the resize control in the lower-right corner of the window
+Change the song information columns | Control-click a column heading
+Show the Column Browser | Command-B
+Show the status bar | Command-/
+Open the Info window for the selected song or CD | Command-I
+In the Info window, see the info for the next or previous song in the list | Command-N or Command-P
+Go to the previous or next pane in the [Item] Info or Preferences window | Shift-Command-Left Bracket ( [ ) or Shift-Command-Right Bracket ( ] )
+Open the View Options window for the selected source | Command-J
+Turn the visualiser on or off | Command-T
+See more options when a visual effect is showing | Press ?, then press the indicated key to use an option (not all visual effects support this)
+View music | Command-1
+View films | Command-2
+View TV programmes | Command-3
+View podcasts | Command-4
+View audiobooks | Command-5
+Refresh the Radio list (when Internet Radio is selected) | Command-R
+Expand or collapse all the triangles in the Radio’s Stream list | Command-click a triangle
+Open the iTunes window | Command-0 (zero)
+Close the iTunes window | Command-W
+Put the iTunes window in the Dock | Command-M
+Hide the iTunes window | Command-H
+Hide all other applications | Option-Command-H
+
+Initiate a search in the iTunes Store (from anywhere in iTunes) | Type a word or phrase in the search field and press Option-Return
+Go to the next page in the iTunes Store | Command-Right Bracket ( ] )
+Go to the previous page in the iTunes Store | Command-Left Bracket ( [ )
+Reload the current page | Command-R
+
+Prevent iPod, iPhone or iPad from automatically syncing when you connect it to your computer | Press and hold Option-Command as you connect the device to your computer until the device appears in the iTunes window
+Open iTunes Preferences | Command-Comma
+Quit iTunes | Command-Q
+Eject a CD | Command-E
+Open iTunes Help menu | Command-?
+Open iTunes in “safe mode” (without external plug-ins) | Option-Command (while opening iTunes)

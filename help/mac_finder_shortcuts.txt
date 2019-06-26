@@ -1,0 +1,51 @@
+Command+A                                             | Selects all items in the active window (icon view), all items in the column (column view),
+                                                        or all items in the list (cover flow view)
+Command+C                                             | Copies selected items
+Command+D                                             | Duplicates the selected item(s)
+Command+E                                             | Ejects the selected volume
+Command+F                                             | Displays the Find dialog
+Command+H                                             | Hides All Finder windows
+Command+I                                             | Shows info for selected item or items
+Command+J                                             | Shows the view options for the active window
+Command+K                                             | Displays the Connect to Server dialog
+Command+L                                             | Creates an alias for the selected item
+Command+M                                             | Minimizes the active window
+Command+N                                             | Opens a new Finder window
+Command+O                                             | Opens (or launches) the selected item
+Command+R                                             | Shows the original for selected alias
+Command+T                                             | Adds the selected item to the Sidebar
+Command+V                                             | Pastes items from the Clipboard
+Command+W                                             | Closes the active window
+Command+X                                             | Cuts the selected items
+Command+Z                                             | Undoes the last action (if possible)
+Command+,                                             | Displays Finder Preferences
+Command+1                                             | Shows the active window in icon mode
+Command+2                                             | Shows the active window in list mode
+Command+3                                             | Shows the active window in column mode
+Command+4                                             | Shows the active window in cover flow mode
+Command+[                                             | Moves back to the previous Finder location
+Command+]                                             | Moves forward to the next Finder location
+Command+Del                                           | Moves selected items to the Trash
+Command+up-arrow                                      | Show enclosing folder
+Command+`                                             | Cycles through windows
+Command+?                                             | Displays the Mac OS X Help Viewer
+Command+Shift+A                                       | Takes you to your Applications folder
+Command+Shift+C                                       | Takes you to the top-level Computer location
+Command+Shift+G                                       | Takes you to a folder that you specify
+Command+Shift+H                                       | Takes you to your Home folder
+Command+Shift+I                                       | Connects you to your iDisk
+Command+Shift+Q                                       | Logs you out
+Command+Shift+N                                       | Creates a new untitled folder in the active window
+Command+Shift+U                                       | Takes you to your Utilities folder
+Command+Shift+Del                                     | Deletes the contents of the Trash
+Command+Option+H                                      | Hides all windows except the Finder’s window(s)
+Command+Option+N                                      | Creates a new Smart Folder
+Command+Option+T                                      | Hides the Finder window toolbar
+Command+Option+Space                                  | Opens the Spotlight window
+Command+Space                                         | Opens the Spotlight menu
+F8                                                    | Choose another desktop using Spaces
+F9 (or F3, depending on your keyboard model)          | Shows all open windows using Exposé
+F10 (or Control+F3, depending on your keyboard model) | Shows all open windows for the current application using Exposé
+F11 (or Command+F3, depending on your keyboard model) | Hides all windows to display the Desktop using Exposé
+F12 (or F4, depending on your keyboard model)         | Displays your Dashboard widgets
+Space                                                 | QuickLook

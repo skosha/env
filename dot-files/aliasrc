@@ -3,38 +3,72 @@
 # Fix for using Ctrl-S in Vim
 stty -ixon
 
+# Use gls instead of ls
+alias ls='gls -a --group-directories-first --color'
+
 # some more ls aliases
 alias ll='ls -alFX' # Sort by type
 alias la='ls -AX' # Sort by type
+alias lt='ls -lt' # Sort by date
 alias l='ls -CF'
+
+# refresh shell
+alias reload='source ~/.bashrc'
 
 alias screen='screen -A'
 
 # My git aliases
-alias gitl='git log'
+alias gitl='git log --name-only'
+alias g-ls='git ls-files'
+alias go-ls='git ls-files -o --directory'
 alias st='git status'
-alias pull='git pull'
+alias g-diff='git diff'
+alias gs-diff='git diff --staged'
+alias g-show='git show'
+alias gn-show='git show --name-only'
+alias pull='git pull --rebase'
+alias r-pull='git pull --rebase origin'
+alias push='git push'
+alias f-push='git push -f'
 alias rebase='git rebase $(git branch | fzf)'
 alias co='git checkout'
-alias br='git branch'
+alias br='git branch -vv'
 alias n-br='git checkout -b'
 alias commit='git commit'
+alias f-commit='git commit $(git status | fzf -m | cut -d':' -f2)'
 alias a-commit='git commit --amend'
 alias ae-commit='git commit --amend --no-edit'
 alias add='git add'
-alias add-all='git add --all'
-alias g-show='git show'
-alias gn-show='git show --name-only'
+alias f-add='git add $(git status | fzf -m | cut -d':' -f2)'
 alias stash='git stash'
+alias save='git stash save -u'
 alias a-stash='git stash apply $(git stash list | fzf | cut -d':' -f1)'
+alias d-stash='git stash drop $(git stash list | fzf | cut -d':' -f1)'
 alias s-stash='git show $(git stash list | fzf | cut -d':' -f1)'
 alias ci='git checkout $(git branch | fzf)'
-alias b-del='git branch -D $(git branch | fzf)'
+alias b-del='git branch -d $(git branch | fzf)'
 alias r-file='git reset HEAD $(git status | fzf -m | cut -d':' -f2)'
 alias flog='git log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(dim white) - %an%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
+alias g-patch='git format-patch -1'
+alias a-patch='git am <'
+alias l-merge='git merge $(git branch | fzf)'
+alias r-merge='git merge --no-ff $(git branch | fzf)'
+alias d-commit='git reset --hard HEAD^'
+alias r-commit='git reset --soft HEAD^'
+alias s-update='git submodule update --remote'
 
 # Grep aliases
-alias grep='grep --exclude=\*.{bin,out,t32,elf,o,a}'
+alias grep='grep --color=auto --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Make mount command output pretty and human readable format
+alias mount='mount |column -t'
+
+# Resume wget by default
+alias wget='wget -c'
 
 # Moving around
 alias ..='cd ..'
@@ -47,11 +81,33 @@ alias .5='cd ../../../../../'
 alias fd='find . -type d -iname'
 alias ff='find . -type f -iname'
 
-# Check for macOS updates
-alias upc='softwareupdate -l'
+# OSX specific aliases
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+    # Check for macOS updates
+    alias upc='softwareupdate -l'
 
-# Download and install macOS updates
-alias upd='softwareupdate -i -a'
+    # Download and install macOS updates
+    alias upd='softwareupdate -i -a'
+
+    # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+    alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem updat --system; sudo gem update; sudo gem cleanup'
+
+    # Show/hide hidden files in Finder
+    alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+    alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+    # Time functions
+    alias nowtime='date +"%T"'
+    alias nowdate='date +"%d-%m-%Y"'
+    alias now='nowtime && nowdate'
+
+    # hibernation and sleep settings
+    alias hibernate='sudo pmset -a hibernatemode 25'
+    alias sleep='sudo pmset -a hibernatemode 0'
+    alias safesleep='sudo pmset -a hibernatemode 3'
+    alias smartsleep='sudo pmset -a hibernatemode 2'
+fi
 
 g-revert() {
     if [ ! -n "$1" ]; then
@@ -80,4 +136,35 @@ r-sync() {
     pushd $repo_dir
     repo sync
     popd
+}
+
+r-br() {
+    local branch
+    branch=$(git branch -r | fzf-tmux +m) && #get the branch name to checkout
+    branch=$(echo "$branch" | awk '$1=$1') && #remove extra spaces
+    remote=$(echo "$branch" | cut -d'/' -f1) && #get the remote
+    target=$(echo "$branch" | cut -d'/' -f2) && #get the remote target branch
+    git checkout -b $target --track $remote/$target
+}
+
+r-del() {
+    local branch
+    branch=$(git branch -r | fzf-tmux +m) && #get the branch name to checkout
+    branch=$(echo "$branch" | awk '$1=$1') && #remove extra spaces
+    remote=$(echo "$branch" | cut -d'/' -f1) && #get the remote
+    target=$(echo "$branch" | cut -d'/' -f2) && #get the remote target branch
+    git push $remote --delete $target
+}
+
+c-diff() {
+    local c_sha
+    c_sha=$(git log --pretty='oneline' | fzf | cut -d' ' -f1) &&
+    git diff $c_sha~ $c_sha
+}
+
+d-tag() {
+    local tag
+    tag=$(git tag | fzf-tmux) &&
+    git push --delete origin $tag &&
+    git tag -d $tag
 }

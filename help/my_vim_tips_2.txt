@@ -485,3 +485,11 @@ Ctrl-w r
 # Search pattern followed by pattern
 \(<pattern1>\)\@=<pattern2>    # pattern1 followed by pattern2
 \(<pattern1>\)\@!<pattern2>     # pattern1 not followed by pattern2
+
+# Find where anything is defined in Vim config
+:verbose map gY
+:verbose autocmd BufEnter
+:verbose abbrev bpry
+
+# Paste from insert mode
+<Ctrl-r> <register>

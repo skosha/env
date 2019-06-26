@@ -89,3 +89,6 @@ except MyErrorErr as err:
     print str(err)
 
 fn.my_print('Example string with a {filename} > symbol'.format(filename=file))
+
+for i in range(1, 101):
+    print 'Percentage [%d%%]\r'%i
