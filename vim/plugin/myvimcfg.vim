@@ -17,7 +17,11 @@ else
 endif
 
 " Set path to current and sub-directories only, will not search other system related directories
-set path=.,,**
+if has('win32')
+    set path=./**
+else
+    set path=.,,**
+endif
 set path+=./**                  " Add the current directory to path
 
 " tabs and indents
@@ -67,7 +71,7 @@ set scrolloff=3
 
 " Easy pasting to windows apps - http://vim.wikia.com/wiki/VimTip21
 " yank always copies to unnamed register, so it is available in windows clipboard for other applications.
-if has("clipboard")
+if !has('win32') && has("clipboard")
   set clipboard=unnamed " copy to the system clipboard
 
   if has("unnamedplus") " X11 support
@@ -75,12 +79,14 @@ if has("clipboard")
   endif
 endif
 
-" copy to clipboard with Ctrl-C
-map <C-x> :!pbcopy<CR>
-vmap <C-c> :w !pbcopy<CR><CR>
-" paste from clipboard with Ctrl-V
-set pastetoggle=<F10>
-"noremap <C-v> <F10><C-r>+<F10>
+if has('mac')
+    " copy to clipboard with Ctrl-C
+    map <C-x> :!pbcopy<CR>
+    vmap <C-c> :w !pbcopy<CR><CR>
+    " paste from clipboard with Ctrl-V
+    set pastetoggle=<F10>
+    "noremap <C-v> <F10><C-r>+<F10>
+endif
 
 " Default split to right and below
 set splitbelow
@@ -144,7 +150,9 @@ set magic
     " use \m and \M to switch 'magic' on or off.
 
 " Add fzf to runtime path
-set rtp+=/usr/local/opt/fzf
+if has('mac') && has('unix')
+    set rtp+=/usr/local/opt/fzf
+endif
 
 " Enable filetype plugins
 filetype plugin on
@@ -250,6 +258,10 @@ noremap <C-n> :call g:ToggleNuMode()<CR>
 " Save file with C-s
 nnoremap <silent><C-s> :w<CR>
 
+" insert blank lines in normal mode
+nno <silent> ;o :pu! _<cr>:']+1<cr>
+nno <silent> ;i :pu _<cr>:']-1<cr>
+
 " Use '\,' to add a space
 nmap <Leader>, i<Space><Esc>
 
@@ -294,8 +306,8 @@ vmap <Leader>* omxomy<ESC>`xO/*<ESC>`yo*/<ESC>
 " search for visually highlighted text
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call VisualSelection('')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('')<CR>?<C-R>=@/<CR><CR>
 
 " clear the search buffer when hitting return
 nnoremap <silent> <CR> :nohlsearch<cr>
@@ -357,6 +369,16 @@ map ;[ mz'aO<Esc>i{<Esc>lx<Esc>'zo<Esc>i}<Esc>'a=aB
 
 map <Leader>cc :s/\/\/\(.*\)/\/\*\1 \*\//<CR>
 
+" remove wrapped function call from expression
+nnoremap ;ac diw%x<c-o>x<esc>
+
+" anon func to bracket func
+nnoremap <silent> ;af c]){}<left><cr><c-r>"<enter><up><esc>
+"nnoremap <silent> ;aa :call feedkeys("ds{")<cr>J
+
+" split ternary if/else on separate lines
+nnoremap ;at 0f?hi<cr><esc>/ : <cr>:noh<cr>i<cr><esc>
+
 " }}}
 
 " Visual settings {{{
@@ -380,13 +402,15 @@ if has('gui') && has('gui_running')
     set guicursor=a:blinkon0      "Disable cursor blink
     set guioptions-=m   "no menus
     set guioptions-=T   "no toolbars
-    "set guioptions-=r   "no right-side scrollbar
-    "set guioptions-=R   "no right-side scrollbar
+    set guioptions-=r   "no right-side scrollbar
+    set guioptions-=R   "no right-side scrollbar
     set guioptions-=l   "no left-side scrollbar
     set guioptions-=L   "no left-side scrollbar
-    set guioptions+=b   "show bottom scrollbar
-    set guioptions+=F   " show footer
-    set columns=115
+    "set guioptions+=b  "show bottom scrollbar
+    set guioptions-=b   "no bottom scrollbar
+    "set guioptions+=F  " show footer
+    set guioptions-=F   " no footer
+    "set columns=115
     " Open maximized windows always
     au GUIEnter * simalt ~x
 endif
@@ -617,7 +641,7 @@ function! MyTabLine()
     return s
 endfunction
 
-function! VisualSelection(direction, extra_filter) range
+function! VisualSelection(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
 
@@ -632,6 +656,18 @@ function! VisualSelection(direction, extra_filter) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+function! s:GetVisualSelection()
+  let [line_start, column_start] = getpos("'<")[1:2]
+  let [line_end, column_end] = getpos("'>")[1:2]
+  let lines = getline(line_start, line_end)
+  if len(lines) == 0
+    return ''
+  endif
+  let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][column_start - 1:]
+  return join(lines, "\n")
 endfunction
 
 " }}}
@@ -667,8 +703,8 @@ endfunction
 " when it was compiled.  If it wasn't, time to recompile vim...
 if has('win32')
     "set csprg=C:\Work\Tools\my_gvim\cscope.exe
-    set csprg=$VIM/vimfiles/cscope.exe
-    let $TMP="C:/tmp"
+    set csprg=$HOME/.vim/vimfiles/cscope.exe
+    "let $TMP="$HOME/.vim/vimfiles/temp_dirs/tmp"
 elseif has('mac')
     set csprg=/usr/local/bin/cscope
 else
@@ -746,65 +782,39 @@ if (g:cscope_loaded == 0)
     " go back to where you were before the search.
     "
 
-    if has('win32')
-        "symbol
-        nmap <Leader>s :cs find s <C-R><C-W><CR>
-        "global
-        nmap <Leader>g :cs find g <C-R><C-W><CR>
-        "calls
-        nmap <Leader>c :cs find c <C-R><C-W><CR>
-        "called
-        nmap <Leader>d :cs find d <C-R><C-W><CR>
-        "file
-        nmap <Leader>f :cs find f
-        "text
-        nmap <Leader>t :cs find t
-        "egrep
-        nmap <Leader>e :cs find e
-        "includes
-        nmap <Leader>i :cs find i <C-R><C-W><CR>
-    else
-        " symbol
-        nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-        " global
-        nmap <Leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-        " calls
-        nmap <Leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-        " called
-        nmap <Leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-        " text
-        nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-        " egrep
-        nmap <Leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-        " file
-        nmap <Leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-        " includes
-        nmap <Leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    endif
+    " symbol
+    nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    " global
+    nmap <Leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    " calls
+    nmap <Leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    " called
+    nmap <Leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    " text
+    nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    " egrep
+    nmap <Leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    " file
+    nmap <Leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    " includes
+    nmap <Leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 
+    vnoremap <leader>s :<C-u>cs find s <C-R>=<SID>GetVisualSelection()<CR><CR>
+    vnoremap <leader>g :<C-u>cs find g <C-R>=<SID>GetVisualSelection()<CR><CR>
+    vnoremap <leader>c :<C-u>cs find c <C-R>=<SID>GetVisualSelection()<CR><CR>
+    vnoremap <leader>d :<C-u>cs find d <C-R>=<SID>GetVisualSelection()<CR><CR>
+    vnoremap <leader>t :<C-u>cs find t <C-R>=<SID>GetVisualSelection()<CR><CR>
 
     " Using '\' + capital search types (s,g,c,t,e,f,i,d) opens the search item in new tab
 
-    if has('win32')
-        nmap <Leader>S :tab cs find s <C-R><C-W><CR>
-        nmap <Leader>G :tab cs find g <C-R><C-W><CR>
-        nmap <Leader>C :tab cs find c <C-R><C-W><CR>
-        nmap <Leader>D :tab cs find d <C-R><C-W><CR>
-        nmap <Leader>F :tab cs find f
-        nmap <Leader>T :tab cs find t
-        nmap <Leader>E :tab cs find e
-        nmap <Leader>I :tab cs find i <C-R><C-W><CR>
-    else
-        nmap <Leader>S :tab scs find s <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>G :tab scs find g <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>C :tab scs find c <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>D :tab scs find d <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>F :tab scs find f <C-R>=expand("<cfile>")<CR><CR>
-        nmap <Leader>T :tab scs find t <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>E :tab scs find e <C-R>=expand("<cword>")<CR><CR>
-        nmap <Leader>I :tab scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    endif
-
+    nmap <Leader>S :tab scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>G :tab scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>C :tab scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>D :tab scs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>F :tab scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <Leader>T :tab scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>E :tab scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <Leader>I :tab scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 
     """"""""""""" key map timeouts
     "

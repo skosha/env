@@ -2,10 +2,16 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set shell=/bin/bash
+if !has('win32')
+    set shell=/bin/bash
+endif
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+if has('win32')
+    set rtp+=$HOME/.vim/bundle/Vundle.vim
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+endif
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -19,6 +25,7 @@ Plugin 'mileszs/ack.vim'                    " The search plugin
 Plugin 'vim-airline/vim-airline'            " Lean status line
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
+Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
 Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
