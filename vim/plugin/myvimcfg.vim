@@ -708,7 +708,7 @@ if has('win32')
 elseif has('mac')
     set csprg=/usr/local/bin/cscope
 else
-    set csprg=/usr/local/bin/cscope
+    set csprg=/usr/bin/cscope
 endif
 
 let g:cscope_loaded = 0
@@ -815,6 +815,22 @@ if (g:cscope_loaded == 0)
     nmap <Leader>T :tab scs find t <C-R>=expand("<cword>")<CR><CR>
     nmap <Leader>E :tab scs find e <C-R>=expand("<cword>")<CR><CR>
     nmap <Leader>I :tab scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+
+    nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR><CR>
+
+    " Short cut key
+	nmap <C-\><SPACE> :cs find<SPACE>
+	nmap <C-@><SPACE> :scs find<SPACE>
+    nmap <C-@><C-@><SPACE> :vert scs find<SPACE>
+
+    nmap <C-LeftMouse> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
 
     """"""""""""" key map timeouts
     "

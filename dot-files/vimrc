@@ -25,16 +25,17 @@ Plugin 'mileszs/ack.vim'                    " The search plugin
 Plugin 'vim-airline/vim-airline'            " Lean status line
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
+Plugin 'FooSoft/vim-argwrap'
 Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
 Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
 Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
 Plugin 'will133/vim-dirdiff'                " Diff 2 directories in Vim
 Plugin 'ekalinin/Dockerfile.vim'            " Syntax highlight for Docker file
 Plugin 'junegunn/vim-easy-align'            " Easy align
-Plugin 'VimFootnotes'                       " foot notes
 Plugin 'tpope/vim-fugitive'                 " Git wrapper
 Plugin 'junegunn/fzf'                       " fzf vim plugin
 Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file

@@ -37,13 +37,18 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 if has('win32')
     let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d' " Windows
 else
-    if executable('ag')
+    if executable ('fd')
+        let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+        let g:ctrlp_use_caching = 0
+    else
+        if executable('ag')
         " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
         let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
         " ag is fast enough that CtrlP doesn't need to cache
         let g:ctrlp_use_caching = 0
-    else
-        let g:ctrlp_user_command = 'find %s -type f'       " MacOSX/Linux
+        else
+            let g:ctrlp_user_command = 'find %s -type f'       " MacOSX/Linux
+        endif
     endif
 endif
 
@@ -66,6 +71,12 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll)$',
             \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
             \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => CtrlP Funky[1]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_funky_syntax_highlight = 1
+nnoremap <leader>pf :CtrlPFunky<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => delimitMate
