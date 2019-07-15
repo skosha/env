@@ -26,7 +26,7 @@ Plugin 'vim-airline/vim-airline'            " Lean status line
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
 Plugin 'FooSoft/vim-argwrap'
-Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
+"Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
 Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder

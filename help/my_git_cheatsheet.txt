@@ -130,6 +130,9 @@ git log --grep=word             # Find out all commits where commit message cont
 git log --diff-filter=A -- <file>   # Find out when a file has been added
 git log --after={<date>} --name-only  -- <path>
 
+# View all commits that affects particular text in a file. If the file was renamed at some point, you can add --follow-parent.
+git log -S'the line from your file' -- path/to/your/file.txt
+
 # Version history of a remote branch (after a fetch/pull)
 git log remotename/branchname
 
