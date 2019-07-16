@@ -26,9 +26,11 @@ Plugin 'vim-airline/vim-airline'            " Lean status line
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
 Plugin 'FooSoft/vim-argwrap'
+Plugin 'vim-scripts/AutoComplPop'
 "Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
-Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
+Plugin 'mbbill/code_complete'
+"Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
@@ -54,12 +56,16 @@ Plugin 'xolox/vim-reload'                   " Reload Vim plugins when saved
 Plugin 'tpope/vim-rhubarb'                  " Github plugin
 Plugin 'godlygeek/tabular'                  " Vim script for text filtering and alignment
 Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
+Plugin 'vim-scripts/taglist.vim'
 Plugin 'tomtom/tcomment_vim'                " file-type sensible comments
 Plugin 'roxma/vim-tmux-clipboard'           " Seamless clipboard between vim and tmux
+Plugin 'mbbill/undotree'
 Plugin 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events with tmux
 Plugin 'christoomey/vim-tmux-navigator'     " Seamless navigation between tmux panes and vim splits
 Plugin 'maxbrunsfeld/vim-yankstack'         " yank ring
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }  " reformat range of code
+"Plugin 'Valloric/YouCompleteMe'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -6,6 +6,7 @@ if [ $1 -ge 1 ]; then
     find . -name "*.c" -o -name "*.h" -o -name "*.s" -o -name "*.S" -o -name "*.xml" -o -name "*.cpp" | grep -v -e "/debug/" -e "/unity/" -e "/arch/" > cscope.files
     export TMPDIR=/tmp
     cscope -b
+    ctags -R --c-kinds=+p --fields=+S .
 fi
 
 # Build cscope for dir2

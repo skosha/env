@@ -84,7 +84,7 @@ if has('mac')
     map <C-x> :!pbcopy<CR>
     vmap <C-c> :w !pbcopy<CR><CR>
     " paste from clipboard with Ctrl-V
-    set pastetoggle=<F10>
+    set pastetoggle=<F2>
     "noremap <C-v> <F10><C-r>+<F10>
 endif
 
@@ -249,9 +249,25 @@ try
 catch
 endtry
 
+" {{{ <A- key work-around for gnome terminals
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set ttimeout ttimeoutlen=50
+" }}} <A- key workaround end
+
 " Mappings {{{
 
 let mapleader='\'
+
+" Vim's auto indentation feature does not work properly with text copied from outisde of Vim. Press the <F2> key to toggle paste mode on/off.
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
 
 noremap <C-n> :call g:ToggleNuMode()<CR>
 
@@ -827,10 +843,8 @@ if (g:cscope_loaded == 0)
 
     " Short cut key
 	nmap <C-\><SPACE> :cs find<SPACE>
-	nmap <C-@><SPACE> :scs find<SPACE>
+	nmap <C-@><SPACE> :tab scs find<SPACE>
     nmap <C-@><C-@><SPACE> :vert scs find<SPACE>
-
-    nmap <C-LeftMouse> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
 
     """"""""""""" key map timeouts
     "

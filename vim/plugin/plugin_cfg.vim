@@ -30,6 +30,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 
+"imap <expr> <m-h> pumvisible() ? '<esc>a<Plug>snipMateTrigger' : '<Plug>snipMateTrigger'
+
+let g:completekey = "<F4>"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CtrlP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -157,9 +161,24 @@ if has("autocmd")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => snipmate settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"imap <expr> <m-h> pumvisible() ? '<esc>a<Plug>snipMateTrigger' : '<Plug>snipMateTrigger'
+"imap <expr> <m-j> pumvisible() ? '<esc>a<Plug>snipMateNextOrTrigger' : '<Plug>snipMateNextOrTrigger'
+"smap <m-j> <Plug>snipMateNextOrTrigger
+"imap <expr> <m-k> pumvisible() ? '<esc>a<Plug>snipMateBack' : '<Plug>snipMateBack'
+"smap <m-k> <Plug>snipMateBack
+"imap <expr> <m-l> pumvisible() ? '<esc>a<Plug>snipMateShow' : '<Plug>snipMateShow'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => majutsushi/tagbar settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <C-b> :TagbarToggle<CR>
+nmap <silent> <F7> :TagbarToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => taglist settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <F8> :TlistToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tmux navigator
@@ -177,6 +196,11 @@ nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
 nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
 nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+""""""""""""""""""""""""""""""
+" => Undo tree
+""""""""""""""""""""""""""""""
+nnoremap <F6> :UndotreeToggle<cr>
 
 """"""""""""""""""""""""""""""
 " => YankStack
