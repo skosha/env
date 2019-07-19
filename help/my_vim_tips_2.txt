@@ -44,6 +44,11 @@ iB - mark inner {} block
 ab #b /**************************************************************
 ab #e **************************************************************/
 
+# Saving
+:sav <new_fname> - save as <new_fname> and "move" to <new_fname>
+:sav! %:r.<ext> - save file with a new <ext> extension
+:e! - return to unmodified file
+
 ################# Editing ####################
 
 # Use named buffers
@@ -102,6 +107,9 @@ CTRL-D   remove indent at start of line
 # Delete a paragraph
 dap
 
+# Delete a sentence
+das
+
 # Delete a code block
 daB (including braces)
 diB (excluding braces)
@@ -132,6 +140,15 @@ gJ
 
 # Insert at last position
 gi
+
+# Insert calculated number
+<C-R>=<calculation>
+
+# Appending to registers (use CAPITAL)
+# Ex: yank 5 lines into "a" then add a further 5
+"a5yy
+10j
+"A5yy
 
 ################# !Editing ####################
 
@@ -257,6 +274,7 @@ Ctrl-w c
 :b<n> - open buffer n
 :b <tab> - autocomplete buffer names
 :bnext | bdelete # - delete the next buffer
+:b <pattern> - goto buffer with pattern in name
 
 # Working with tabs
 :tabn - next tab
@@ -485,6 +503,30 @@ Ctrl-w r
 # Search pattern followed by pattern
 \(<pattern1>\)\@=<pattern2>    # pattern1 followed by pattern2
 \(<pattern1>\)\@!<pattern2>     # pattern1 not followed by pattern2
+
+# Search cursor set to end of match
+/<pattern>/e
+
+# Search cursor set to end of match + n
+/<pattern>/e+<n>
+
+# Search cursor set to start of match - n
+/<pattern>/s-<n>
+
+# Search pattern and move cursor n lines down
+/<pattern>/+n
+
+# Replace the last replacement string
+:%s/~/<new_replacement>/
+
+" Summary of repeated searches
+;      last f, t, F or T
+,      last f, t, F or T in opposite direction
+n      last / or ? search
+N      last / or ? search in opposite direction"
+
+# Repeat last : command (then @@)
+@:
 
 # Find where anything is defined in Vim config
 :verbose map gY
