@@ -4,7 +4,7 @@
 stty -ixon
 
 # Use gls instead of ls
-alias ls='gls -a --group-directories-first --color'
+alias ls='ls --color'
 
 # some more ls aliases
 alias ll='ls -alFX' # Sort by type
