@@ -6,3 +6,10 @@ https://github.com/direnv/direnv
 https://www.vim.org/scripts/script.php?script_id=3302
 https://stackoverflow.com/questions/4583394/vim-making-auto-completion-smarter
 
+https://github.com/kristijanhusak/tmux-simple-git-status
+
+https://github.com/rothgar/awesome-tmux#tutorials
+http://cheat.errtheblog.com/s/tmux
+
+https://code.google.com/archive/p/seascope/wikis/Windows.wiki
+https://bluz71.github.io/2017/10/26/turbocharge-the-ctrlp-vim-plugin.html

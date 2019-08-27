@@ -528,6 +528,10 @@ N      last / or ? search in opposite direction"
 # Repeat last : command (then @@)
 @:
 
+# Check the vim setting value
+:set <setting>?
+:verbose set <setting>?
+
 # Find where anything is defined in Vim config
 :verbose map gY
 :verbose autocmd BufEnter

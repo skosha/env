@@ -135,6 +135,15 @@ function! g:HeaderguardLine3()
 endfunction
 
 """"""""""""""""""""""""""""""
+" => vim-illuminate
+""""""""""""""""""""""""""""""
+hi illuminatedWord cterm=NONE ctermfg=white ctermbg=blue guibg=peru guifg=wheat
+" Time in milliseconds (default 250)
+let g:Illuminate_delay = 150
+
+let g:mwDefaultHighlightingPalette = 'extended'
+
+""""""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400

@@ -92,6 +92,8 @@ endif
 set splitbelow
 set splitright
 
+set viminfo+=!  " Save and restore global variables.
+
 " Ignore bin files in file search
 set wildignore+=*.o,*.d,*.a,*.obj,*.bak,*.exe,*.cfa,*.gz,*.zip,*.bin,*.db,*.dat,*.jpg,*.JPG,*.raw,*.tar,*.out,*.elf
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -395,6 +397,14 @@ nnoremap <silent> ;af c]){}<left><cr><c-r>"<enter><up><esc>
 " split ternary if/else on separate lines
 nnoremap ;at 0f?hi<cr><esc>/ : <cr>:noh<cr>i<cr><esc>
 
+" save word under cursor to ~/word.txt
+nmap ,p :call SaveWord()
+
+" opens search results in a window w/ links and highlight the matches
+command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e <args>' | copen | execute 'silent /<args>'
+" shift-control-* Greps for the word under the cursor
+:nmap _g :Grep <c-r>=expand("<cword>")<cr><cr>")'
+
 " }}}
 
 " Visual settings {{{
@@ -685,6 +695,26 @@ function! s:GetVisualSelection()
   let lines[0] = lines[0][column_start - 1:]
   return join(lines, "\n")
 endfunction
+
+function! SaveWord()
+   normal yiw
+   exe ':!echo '.@0.' >> ~/word.txt'
+endfunction
+
+" declare function for moving left when closing a tab.
+function! TabCloseLeft(cmd)
+    if winnr('$') == 1 && tabpagenr('$') > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr('$')
+        exec a:cmd | tabprevious
+    else
+        exec a:cmd
+    endif
+endfunction
+
+" define :Q command
+command! Q call TabCloseLeft('q!')
+
+" override default quit command
+cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Q' : 'q')<CR>
 
 " }}}
 

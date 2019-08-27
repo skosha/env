@@ -1,5 +1,5 @@
 " NERDTree configuration
-nnoremap <Leader>n :call <SID>MyNERDTreeToggle()<CR>
+nnoremap <Leader><Leader>n :call <SID>MyNERDTreeToggle()<CR>
 nnoremap <Leader>o :call <SID>NERDTreeOpenAllTabs()<CR>
 nnoremap <Leader>O :call <SID>NERDTreeCloseAllTabs()<CR>
 " Automatically delete the buffer of the file you just deleted with NerdTree

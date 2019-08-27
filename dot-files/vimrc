@@ -43,14 +43,17 @@ Plugin 'junegunn/fzf'                       " fzf vim plugin
 Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file
 Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the 'gutter'
 Plugin 'drmikehenry/vim-headerguard'        " Add c++/c header guards
+Plugin 'RRethy/vim-illuminate'              " illuminate all occurances of word under cursor
+Plugin 'inkarkat/vim-ingo-library'          " Dependency for vim-mark plugin
 Plugin 'sk1418/HowMuch'                     " Visual selection total sum
 Plugin 'AndrewRadev/linediff.vim'           " Diff selected blocks
+Plugin 'inkarkat/vim-mark'                  " Mark multiple searches with different highlight color
 Plugin 'xolox/vim-misc'                     " Support plugin for all xolox plugins
 Plugin 'yegappan/mru'                       " most recently used files
 Plugin 'scrooloose/nerdtree'                " NERD Tree file explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin'        " Shows git status in nerd tree
 Plugin 'xolox/vim-notes'                    " Notes from within Vim
-Plugin 'krisajenkins/vim-projectlocal'      " Local .vimrc
+"Plugin 'krisajenkins/vim-projectlocal'      " Local .vimrc
 Plugin 'kien/rainbow_parentheses.vim'       " Rainbow colored parnatheses
 Plugin 'xolox/vim-reload'                   " Reload Vim plugins when saved
 Plugin 'tpope/vim-rhubarb'                  " Github plugin
@@ -59,9 +62,10 @@ Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'tomtom/tcomment_vim'                " file-type sensible comments
 Plugin 'roxma/vim-tmux-clipboard'           " Seamless clipboard between vim and tmux
-Plugin 'mbbill/undotree'
 Plugin 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events with tmux
 Plugin 'christoomey/vim-tmux-navigator'     " Seamless navigation between tmux panes and vim splits
+Plugin 'mbbill/undotree'
+Plugin 'chrisbra/unicode.vim'               " Unicode Plugin
 Plugin 'maxbrunsfeld/vim-yankstack'         " yank ring
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }  " reformat range of code
 "Plugin 'Valloric/YouCompleteMe'
