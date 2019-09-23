@@ -237,6 +237,10 @@ endif
 set noswapfile
 set nobackup
 
+" Disable writebackup because some tools have issues with it:
+" https://github.com/neoclide/coc.nvim/issues/649
+set nowritebackup
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
@@ -266,6 +270,13 @@ set ttimeout ttimeoutlen=50
 
 let mapleader='\'
 
+" Visually select the text that was last edited/pasted (Vimcast#26).
+noremap gV `[v`]
+
+" `Ctrl-U` in insert mode deletes a lot. Use `Ctrl-G` u to first break undo,
+" so that you can undo `Ctrl-U` without undoing what you typed before it.
+inoremap <C-U> <C-G>u<C-U>
+
 " Vim's auto indentation feature does not work properly with text copied from outisde of Vim. Press the <F2> key to toggle paste mode on/off.
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
@@ -275,6 +286,7 @@ noremap <C-n> :call g:ToggleNuMode()<CR>
 
 " Save file with C-s
 nnoremap <silent><C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
 
 " insert blank lines in normal mode
 nno <silent> ;o :pu! _<cr>:']+1<cr>
@@ -311,8 +323,14 @@ noremap _t :tab split<CR>
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
 
+" Use <F9> to toggle between open windows
+nmap <F9> <C-w><C-w>
+
 " Toggle back and forth between current and previous buffer
 map <Leader>b :buffer#<cr>
+
+" Y yanks from the cursor to the end of line as expected. See :help Y.
+nnoremap Y y$
 
 " Absolute movement for word-wrapped lines.
 nnoremap j gj
@@ -715,6 +733,19 @@ command! Q call TabCloseLeft('q!')
 
 " override default quit command
 cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Q' : 'q')<CR>
+
+" Swap bytes
+function! SwapBytes()
+    " Save cursor position
+    let l:save = winsaveview()
+    normal 2l
+    normal 2x
+    " Move cursor to original position
+    call winrestview(l:save)
+    normal P
+    call winrestview(l:save)
+endfunction
+
 
 " }}}
 

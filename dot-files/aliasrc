@@ -29,30 +29,24 @@ alias gn-show='git show --name-only'
 alias pull='git pull --rebase'
 alias r-pull='git pull --rebase origin'
 alias push='git push'
-alias f-push='git push -f'
-alias rebase='git rebase $(git branch | fzf)'
+alias rebase='git rebase $(git --no-pager branch | fzf +m)'
 alias co='git checkout'
-alias br='git branch -vv'
+alias br='git --no-pager branch -vv'
 alias n-br='git checkout -b'
 alias commit='git commit'
-alias f-commit='git commit $(git status | fzf -m | cut -d':' -f2)'
 alias a-commit='git commit --amend'
 alias ae-commit='git commit --amend --no-edit'
 alias add='git add'
-alias f-add='git add $(git status | fzf -m | cut -d':' -f2)'
 alias stash='git stash'
 alias save='git stash save -u'
-alias a-stash='git stash apply $(git stash list | fzf | cut -d':' -f1)'
-alias d-stash='git stash drop $(git stash list | fzf | cut -d':' -f1)'
-alias s-stash='git show $(git stash list | fzf | cut -d':' -f1)'
-alias ci='git checkout $(git branch | fzf)'
-alias b-del='git branch -d $(git branch | fzf)'
-alias r-file='git reset HEAD $(git status | fzf -m | cut -d':' -f2)'
+alias a-stash='git stash apply $(git stash list | fzf +m -1 -0| cut -d':' -f1)'
+alias d-stash='git stash drop $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'
+alias s-stash='git show $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'
 alias flog='git log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(dim white) - %an%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
 alias g-patch='git format-patch -1'
 alias a-patch='git am <'
-alias l-merge='git merge $(git branch | fzf)'
-alias r-merge='git merge --no-ff $(git branch | fzf)'
+alias l-merge='git merge $(git --no-pager branch | fzf +m -1 -0)'
+alias r-merge='git merge --no-ff $(git --no-pager branch | fzf +m -1 -0)'
 alias d-commit='git reset --hard HEAD^'
 alias r-commit='git reset --soft HEAD^'
 alias s-update='git submodule update --remote'
@@ -109,14 +103,28 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias smartsleep='sudo pmset -a hibernatemode 2'
 fi
 
+unalias f-add 2>/dev/null
+f-add() {
+    git add $(git status -s | fzf -m -1 -0 | awk '{print $2}')
+}
+
+
+unalias r-file 2>/dev/null
+r-file() {
+    git reset HEAD $(git status -s | fzf -m -1 -0 | awk '{print $2}')
+}
+
+
+unalias g-revert 2>/dev/null
 g-revert() {
     if [ ! -n "$1" ]; then
-        git checkout $(git status | fzf -m | cut -d':' -f2)
+        git checkout $(git status -s | fzf -m | awk '{print $2}')
     else
-        git checkout "$1" $(git status | fzf -m | cut -d':' -f2)
+        git checkout "$1" $(git status | fzf -m | awk '{print $2}')
     fi
 }
 
+unalias r-sync 2>/dev/null
 r-sync() {
     next=$PWD
     substr=fw-
@@ -138,33 +146,82 @@ r-sync() {
     popd
 }
 
+unalias ci 2>/dev/null
+ci() {
+    local branch
+    branch=$(git --no-pager branch -vv | fzf +m -1 -0 | awk '{print $1}')
+    git checkout $branch
+}
+
+unalias b-del 2>/dev/null
+b-del() {
+    local branch
+    branch=$(git --no-pager branch -vv | fzf +m -1 -0 | awk '{print $1}')
+    git branch -D $branch
+}
+
+unalias r-br 2>/dev/null
 r-br() {
     local branch
-    branch=$(git branch -r | fzf-tmux +m) && #get the branch name to checkout
+    branch=$(git --no-pager branch -r | fzf +m) && #get the branch name to checkout
     branch=$(echo "$branch" | awk '$1=$1') && #remove extra spaces
     remote=$(echo "$branch" | cut -d'/' -f1) && #get the remote
     target=$(echo "$branch" | cut -d'/' -f2) && #get the remote target branch
     git checkout -b $target --track $remote/$target
 }
 
+
+unalias r-del 2>/dev/null
 r-del() {
     local branch
-    branch=$(git branch -r | fzf-tmux +m) && #get the branch name to checkout
+    branch=$(git --no-pager branch -r | fzf +m) && #get the branch name to checkout
     branch=$(echo "$branch" | awk '$1=$1') && #remove extra spaces
     remote=$(echo "$branch" | cut -d'/' -f1) && #get the remote
     target=$(echo "$branch" | cut -d'/' -f2) && #get the remote target branch
     git push $remote --delete $target
 }
 
+
+unalias c-diff 2>/dev/null
 c-diff() {
     local c_sha
-    c_sha=$(git log --pretty='oneline' | fzf | cut -d' ' -f1) &&
+    c_sha=$(git log --pretty='oneline' | fzf +m -1 -0 | cut -d' ' -f1) &&
     git diff $c_sha~ $c_sha
 }
 
+
+unalias d-tag 2>/dev/null
 d-tag() {
     local tag
-    tag=$(git tag | fzf-tmux) &&
+    tag=$(git tag | fzf-tmux +mulit -1 -0 ) &&
     git push --delete origin $tag &&
     git tag -d $tag
+}
+
+f-stash() {
+    local out q k sha
+    while out=$(
+        git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+        fzf --ansi --no-sort --query="$q" --print-query \
+            --expect=ctrl-d,ctrl-b);
+    do
+        mapfile -t out <<< "$out"
+        q="${out[0]}"
+        k="${out[1]}"
+        sha="${out[-1]}"
+        sha="${sha%% *}"
+        [[ -z "$sha" ]] && continue
+        if [[ "$k" == 'ctrl-d' ]]; then
+            git diff $sha
+        elif [[ "$k" == 'ctrl-b' ]]; then
+            git stash branch "stash-$sha" $sha
+            break;
+        else
+            git stash show -p $sha
+        fi
+    done
+}
+
+is_in_git_repo() {
+    git rev-parse HEAD > /dev/null 2>&1
 }

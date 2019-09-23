@@ -27,13 +27,14 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
 Plugin 'FooSoft/vim-argwrap'
 Plugin 'vim-scripts/AutoComplPop'
+Plugin 'jiangmiao/auto-pairs'
 "Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
 Plugin 'mbbill/code_complete'
 "Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
 Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
 Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
+"Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
 Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
 Plugin 'will133/vim-dirdiff'                " Diff 2 directories in Vim
 Plugin 'ekalinin/Dockerfile.vim'            " Syntax highlight for Docker file
@@ -57,6 +58,7 @@ Plugin 'xolox/vim-notes'                    " Notes from within Vim
 Plugin 'kien/rainbow_parentheses.vim'       " Rainbow colored parnatheses
 Plugin 'xolox/vim-reload'                   " Reload Vim plugins when saved
 Plugin 'tpope/vim-rhubarb'                  " Github plugin
+Plugin 'tpope/vim-surround'                 " Work with delimiters
 Plugin 'godlygeek/tabular'                  " Vim script for text filtering and alignment
 Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
 Plugin 'vim-scripts/taglist.vim'
