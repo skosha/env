@@ -1,0 +1,10 @@
+*** Vim Notes ***
+:tabe note:<name>
+:vs note:<name>
+:SearchNotes <regex>
+:SearchNotes (without args searches for word under cursor)
+
+*** Surround ***
+ds(
+cs{(
+Sb - add braces around visually selected text

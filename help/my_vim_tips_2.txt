@@ -12,6 +12,8 @@ let @a='blah_blah_blah'
 # Fold a function
 zf% - fold a function
 zo - open the fold
+za - toggle the fold
+zA - toggle the folds recursively
 zf#j - fold next # lines
 zf/string - fold till string
 zj or zk - move between folds
