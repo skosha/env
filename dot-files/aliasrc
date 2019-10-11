@@ -52,7 +52,9 @@ alias r-commit='git reset --soft HEAD^'
 alias s-update='git submodule update --remote'
 
 # Grep aliases
-alias grep='grep --color=auto --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'
+alias grep='grep --color=auto'
+alias grepo='grep --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'
+alias grepp='grep -rni'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias egrep='egrep --color=auto'
@@ -105,22 +107,22 @@ fi
 
 unalias f-add 2>/dev/null
 f-add() {
-    git add $(git status -s | fzf -m -1 -0 | awk '{print $2}')
+    git add $(git status -s | fzf --multi -1 -0 | awk '{print $2}')
 }
 
 
 unalias r-file 2>/dev/null
 r-file() {
-    git reset HEAD $(git status -s | fzf -m -1 -0 | awk '{print $2}')
+    git reset HEAD $(git status -s | fzf --multi -1 -0 | awk '{print $2}')
 }
 
 
 unalias g-revert 2>/dev/null
 g-revert() {
     if [ ! -n "$1" ]; then
-        git checkout $(git status -s | fzf -m | awk '{print $2}')
+        git checkout $(git status -s | fzf --multi | awk '{print $2}')
     else
-        git checkout "$1" $(git status | fzf -m | awk '{print $2}')
+        git checkout "$1" $(git status | fzf --multi | awk '{print $2}')
     fi
 }
 
@@ -185,8 +187,15 @@ r-del() {
 unalias c-diff 2>/dev/null
 c-diff() {
     local c_sha
-    c_sha=$(git log --pretty='oneline' | fzf +m -1 -0 | cut -d' ' -f1) &&
+    c_sha=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short | fzf +m -1 -0 | cut -d' ' -f1) &&
     git diff $c_sha~ $c_sha
+}
+
+unalias c-del 2>/dev/null
+c-del() {
+    local c_sha
+    c_sha=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short | fzf +m | cut -d' ' -f1) &&
+    git rebase --onto $c_sha^ $c_sha
 }
 
 
