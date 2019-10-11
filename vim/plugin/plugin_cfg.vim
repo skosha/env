@@ -83,19 +83,6 @@ let g:ctrlp_funky_syntax_highlight = 1
 nnoremap <leader>pf :CtrlPFunky<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => delimitMate
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let delimitMate_expand_cr = 1
-"let delimitMate_balance_matchpairs = 1
-"augroup mydelimitMate
-"  au!
-"  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
-"  au FileType tex let b:delimitMate_quotes = ""
-"  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
-"  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
-"augroup END
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Easy Align
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Start interactive EasyAlign in visual mode (e.g. vipta)
@@ -144,10 +131,30 @@ let g:Illuminate_delay = 150
 let g:mwDefaultHighlightingPalette = 'extended'
 
 """"""""""""""""""""""""""""""
+" => vim-mark
+""""""""""""""""""""""""""""""
+let g:mwHistAdd = '/@'
+
+nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+
+nmap <Leader>1 <Plug>MarkSearchGroupNext
+nmap <Leader>! <Plug>MarkSearchGroupPrev
+
+""""""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-map <A-f> :MRU<CR>
+
+""""""""""""""""""""""""""""""
+" => NERD Commenter
+""""""""""""""""""""""""""""""
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
 """"""""""""""""""""""""""""""
 " => Notes
@@ -158,26 +165,35 @@ let g:notes_suffix = '.txt'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Rainbow Parantheses
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("autocmd")
-    augroup rainbowParantheses
-        autocmd!
-        " Rainbow parantheses
-        au VimEnter * RainbowParenthesesToggle
-        au Syntax * RainbowParenthesesLoadRound         " ()
-        au Syntax * RainbowParenthesesLoadSquare        " []
-        au Syntax * RainbowParenthesesLoadBraces        " {}
-    augroup END
-endif
+function! SetupRainbowParentheses()
+    let l:custom_colors_light = map([
+            \ 'DarkRed',
+            \ 'LightBlue',
+            \ 'Black',
+            \ 'DarkGreen',
+            \ 'DarkBlue',
+            \ 'DarkMagenta',
+        \ ], '[v:val, v:val]')
+    let l:custom_colors_dark = map([
+            \ 'DarkRed',
+            \ 'DarkGreen',
+            \ 'DarkBlue',
+            \ 'Magenta',
+            \ 'Green',
+            \ 'LightBlue',
+            \ 'LightCyan',
+            \ 'White',
+        \ ], '[v:val, v:val]')
+    let g:rainbow#max_level = max([len(l:custom_colors_dark), len(l:custom_colors_light)])
+    let g:rainbow#colors = { 'dark': l:custom_colors_dark, 'light': l:custom_colors_light  }
+    RainbowParentheses
+endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => snipmate settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"imap <expr> <m-h> pumvisible() ? '<esc>a<Plug>snipMateTrigger' : '<Plug>snipMateTrigger'
-"imap <expr> <m-j> pumvisible() ? '<esc>a<Plug>snipMateNextOrTrigger' : '<Plug>snipMateNextOrTrigger'
-"smap <m-j> <Plug>snipMateNextOrTrigger
-"imap <expr> <m-k> pumvisible() ? '<esc>a<Plug>snipMateBack' : '<Plug>snipMateBack'
-"smap <m-k> <Plug>snipMateBack
-"imap <expr> <m-l> pumvisible() ? '<esc>a<Plug>snipMateShow' : '<Plug>snipMateShow'
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+augroup rainbowParantheses
+    autocmd!
+    au VimEnter * call SetupRainbowParentheses()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => majutsushi/tagbar settings

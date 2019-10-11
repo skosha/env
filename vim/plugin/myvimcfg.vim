@@ -163,32 +163,6 @@ filetype indent on
 
 if has("autocmd")
 
-    augroup file_types
-        autocmd!
-        " Auto load vimrc once it changes, handy with Vundle
-        autocmd BufWritePost .vimrc so %
-
-        " Use tabs in Makefile
-        autocmd FileType make setlocal noexpandtab
-
-        " Don't let too long lines to be written in text format
-        autocmd FileType txt setlocal wrapmargin=500
-
-        autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType vim set omnifunc=syntaxcomplete#Complete
-        autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-        autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-        autocmd FileType c set omnifunc=ccomplete#Complete
-
-        au FileType gitcommit
-        \ setlocal spell textwidth=72 |
-        \ startinsert
-
-        " To jump between the '=' and ';' in an assignment using <S-%>. Useful for languages like C/C++ and Java.
-        "autocmd FileType c,cpp,java set matchpairs+==:;
-    augroup END
-
     augroup trail_whitespace
         autocmd!
         " Automatically remove all trailing whitespace
@@ -228,10 +202,8 @@ if has("autocmd")
         autocmd InsertEnter,WinLeave * set nocursorcolumn
     augroup END
 
-    " Python
-    au BufNewFile,BufRead *.py
-        \ set textwidth=79
-        \ set fileformat=unix
+    " Make sure that enter is never overriden in the quickfix window
+    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 endif
 
  " No Residue files
@@ -314,11 +286,15 @@ nnoremap <Leader>4 4<C-w>w
 
 " Open last accessed tab
 let g:lasttab = 1
-nmap gl :exe "tabn ".g:lasttab<CR>
+nmap tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " duplicate tab
 noremap _t :tab split<CR>
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Disable F1 for help screen - I open this accidentally all the time!
 nmap <F1> :echo<CR>
@@ -413,10 +389,18 @@ nnoremap ;at 0f?hi<cr><esc>/ : <cr>:noh<cr>i<cr><esc>
 " save word under cursor to ~/word.txt
 nmap ,p :call SaveWord()
 
+" Remove the Windows ^M - when the encodings gets messed up
+noremap ,m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
 " opens search results in a window w/ links and highlight the matches
 command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e <args>' | copen | execute 'silent /<args>'
 " shift-control-* Greps for the word under the cursor
 :nmap _g :Grep <c-r>=expand("<cword>")<cr><cr>")'
+
+" Bash like keys for the command line
+cnoremap <C-A>        <Home>
+cnoremap <C-E>        <End>
+cnoremap <C-K>        <C-U>
 
 " }}}
 

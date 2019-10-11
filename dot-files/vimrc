@@ -10,66 +10,95 @@ call plug#begin('~/.vim/plugged')
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
 
-Plug 'vim-scripts/a.vim'                                        " Switch .c -> .h files quickly
-Plug 'mileszs/ack.vim'                                          " The search plugin
+" {{{ Aesthetics and look & feel
 Plug 'vim-airline/vim-airline'                                  " Lean status line
 Plug 'vim-airline/vim-airline-themes'
-Plug 'dense-analysis/ale', { 'on': 'ALEToggle' }                " Lint
-Plug 'powerman/vim-plugin-AnsiEsc'                              " ANSI Esc codes in Vim
-Plug 'FooSoft/vim-argwrap'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'jiangmiao/auto-pairs'
-"Plug 'MattesGroeger/vim-bookmarks'                              " Bookmarks
-Plug 'jkramer/vim-checkbox'                                     " Toggle [ ] [x]
-Plug 'mbbill/code_complete'
-"Plug 'zerowidth/vim-copy-as-rtf'                                " Copy as RTF (only on OSX)
-Plug 'ctrlpvim/ctrlp.vim'                                       " Fuzzy file finder
-Plug 'tacahiroy/ctrlp-funky'
-"Plug 'Raimondi/delimitMate'                                     " Insert closing delimiter automatically
-Plug 'EinfachToll/DidYouMean'                                   " asks for the right file to open
-Plug 'will133/vim-dirdiff'                                      " Diff 2 directories in Vim
-"Plug 'ekalinin/Dockerfile.vim'                                  " Syntax highlight for Docker file
-Plug 'junegunn/vim-easy-align'                                  " Easy align
-Plug 'tpope/vim-eunuch'                                         " Some unix commands to run from within Vim
+Plug 'RRethy/vim-illuminate', { 'on': 'IlluminationToggle'}     " illuminate all occurances of word under cursor
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'inside/vim-search-pulse'                                  " Pulse every time we search for next match
+" }}}
+
+" {{{ Git helpers
 Plug 'tpope/vim-fugitive'                                       " Git wrapper
-Plug 'junegunn/fzf'                                             " fzf vim plugin
 Plug 'zivyangll/git-blame.vim'                                  " Shows a full blown git blame for the entire file
 Plug 'airblade/vim-gitgutter'                                   " Shows a git diff in the 'gutter'
 Plug 'junegunn/gv.vim'                                          " Git commit history of current file
-Plug 'drmikehenry/vim-headerguard'                              " Add c++/c header guards
-Plug 'sk1418/HowMuch'                                           " Visual selection total sum
-Plug 'vim-scripts/HTML-AutoCloseTag'                            " Automatically insert the closing HTML tag
-Plug 'RRethy/vim-illuminate', { 'on': 'IlluminationToggle'}     " illuminate all occurances of word under cursor
-Plug 'inkarkat/vim-ingo-library'                                " Dependency for vim-mark plugin
+Plug 'Xuyuanp/nerdtree-git-plugin'                              " Shows git status in nerd tree
+Plug 'tpope/vim-rhubarb'                                        " Github plugin
+" }}}
+
+" {{{ Coding helpers
+Plug 'dense-analysis/ale', { 'on': 'ALEToggle' }                " Lint
+Plug 'vim-scripts/AutoComplPop'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mbbill/code_complete'
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }         " Syntax highlight for Docker file
+Plug 'junegunn/vim-easy-align'                                  " Easy align
 Plug 'nathanaelkane/vim-indent-guides'                          " Highlight multiple indents
-Plug 'AndrewRadev/linediff.vim'                                 " Diff selected blocks
-Plug 'glts/vim-magnum'                                          " Dependency for vim-radical
-Plug 'inkarkat/vim-mark'                                        " Mark multiple searches with different highlight color
-Plug 'xolox/vim-misc'                                           " Support plugin for all xolox plugins
+Plug 'scrooloose/nerdcommenter'                                 " Better commenting
+Plug 'majutsushi/tagbar'                                        " A class outline viewer for entire project
+Plug 'vim-scripts/taglist.vim'                                  " Local file tag list
+Plug 'google/yapf', { 'rtp': 'plugins/vim' }                    " reformat range of code
+" Plug 'Valloric/YouCompleteMe'
+" }}}
+
+" {{{ C coding helper plugins
+Plug 'vim-scripts/a.vim'                                        " Switch .c -> .h files quickly
+Plug 'FooSoft/vim-argwrap'
+Plug 'drmikehenry/vim-headerguard'                              " Add c++/c header guards
+" }}}
+
+" {{{ Python
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop'  }   " Python IDE
+Plug 'vim-scripts/indentpython.vim'                             " indent python
+Plug 'fisadev/vim-isort', { 'for': 'python' }
+" }}}
+
+" {{{ Language specifics
+Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }         " Automatically insert the closing HTML tag
+" }}}
+
+" {{{ File Utils
+Plug 'ctrlpvim/ctrlp.vim'                                       " Fuzzy file finder
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'EinfachToll/DidYouMean'                                   " asks for the right file to open
+Plug 'junegunn/fzf'                                             " fzf vim plugin
+Plug 'vim-scripts/icalendar.vim'                                " for calendar *.ics files
 Plug 'yegappan/mru'                                             " most recently used files
 Plug 'scrooloose/nerdtree'                                      " NERD Tree file explorer
-Plug 'Xuyuanp/nerdtree-git-plugin'                              " Shows git status in nerd tree
+" }}}
+
+" {{{ Utils
+Plug 'mileszs/ack.vim'                                          " The search plugin
+Plug 'powerman/vim-plugin-AnsiEsc'                              " ANSI Esc codes in Vim
+"Plug 'MattesGroeger/vim-bookmarks'                              " Bookmarks
+Plug 'jkramer/vim-checkbox'                                     " Toggle [ ] [x]
+"Plug 'zerowidth/vim-copy-as-rtf'                                " Copy as RTF (only on OSX)
+Plug 'will133/vim-dirdiff'                                      " Diff 2 directories in Vim
+Plug 'sk1418/HowMuch'                                           " Visual selection total sum
+Plug 'AndrewRadev/linediff.vim'                                 " Diff selected blocks
+Plug 'inkarkat/vim-mark'                                        " Mark multiple searches with different highlight color
 Plug 'xolox/vim-notes', { 'on': 'Note' }                        " Notes from within Vim
 "Plug 'krisajenkins/vim-projectlocal'                            " Local .vimrc
 Plug 'glts/vim-radical'                                         " Convert numbers between decimal, hex, octal and binary
-Plug 'kien/rainbow_parentheses.vim'                             " Rainbow colored parnatheses
 Plug 'xolox/vim-reload'                                         " Reload Vim plugins when saved
 Plug 'tpope/vim-repeat'                                         " Allow plugins to use '.' for repeat
-Plug 'tpope/vim-rhubarb'                                        " Github plugin
-Plug 'inside/vim-search-pulse'                                  " Pulse every time we search for next match
 Plug 'tpope/vim-surround'                                       " Work with delimiters
 Plug 'godlygeek/tabular'                                        " Vim script for text filtering and alignment
-Plug 'majutsushi/tagbar'                                        " A class outline viewer for vim
-Plug 'vim-scripts/taglist.vim'
-Plug 'tomtom/tcomment_vim'                                      " file-type sensible comments
 Plug 'roxma/vim-tmux-clipboard'                                 " Seamless clipboard between vim and tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'                       " Restore FocusGained and FocusLost events with tmux
 Plug 'christoomey/vim-tmux-navigator'                           " Seamless navigation between tmux panes and vim splits
-Plug 'mbbill/undotree'
-Plug 'chrisbra/unicode.vim'                                     " Unicode Plugin
+Plug 'mbbill/undotree'                                          " A tree of all undos
+Plug 'chrisbra/unicode.vim', { 'on': 'UnicodeToggle' }          " Unicode Plugin
 Plug 'maxbrunsfeld/vim-yankstack'                               " yank ring
-Plug 'google/yapf', { 'rtp': 'plugins/vim' }                    " reformat range of code
-"Plug 'Valloric/YouCompleteMe'
+" }}}
+
+" {{{ Dependencies
+Plug 'tpope/vim-eunuch'                                         " Some unix commands to run from within Vim
+Plug 'inkarkat/vim-ingo-library'                                " Dependency for vim-mark plugin
+Plug 'glts/vim-magnum'                                          " Dependency for vim-radical
+Plug 'xolox/vim-misc'                                           " Support plugin for all xolox plugins
+" }}}
 
 call plug#end()
 

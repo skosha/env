@@ -2,11 +2,15 @@
 nnoremap <Leader><Leader>n :call <SID>MyNERDTreeToggle()<CR>
 nnoremap <Leader>o :call <SID>NERDTreeOpenAllTabs()<CR>
 nnoremap <Leader>O :call <SID>NERDTreeCloseAllTabs()<CR>
+let g:NERDTreeHijackNetrw = 0
 " Automatically delete the buffer of the file you just deleted with NerdTree
 let NERDTreeAutoDeleteBuffer = 1
 " Looks
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+
+" Hide *.pyc files
+let NERDTreeIgnore=['\.pyc$', '\~$']
 
 let s:nerdtree_globally_active = 0
 
