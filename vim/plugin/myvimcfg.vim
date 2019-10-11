@@ -57,6 +57,7 @@ set formatoptions+=2            " use the indent of the second line of para for 
 set formatoptions+=q            " allow formatting of comments with "gq"
 set shortmess=filtIoOA          " shorten up messages
 set report=0                    " always get report for all the line changes
+set confirm                     " get a dialog when :q, :w, or :wq fails"
 set startofline                 " Jump to non-blank start of line
 set laststatus=2                " Always show the statusline
 set hidden                      " Don't complain about unsaved files when switching buffers.
@@ -363,12 +364,6 @@ nnoremap <silent> <Leader>j :windo set scb!
 " Use <Leader>hx to toggle between binary/hex
 noremap <silent> <Leader>hx :call HexMe()<CR>
 
-" replace number under cursor with its decimal equivalent
-nnoremap <silent> _d :call Hex2Dec()<CR>
-
-" replace number under cursor with its hex equivalent
-noremap <silent> _h :call Dec2Hex()<CR>
-
 " replace ascii hex under cursor with its char equivalent
 noremap <silent> _c :call Ascii2Char()<CR>
 
@@ -510,57 +505,6 @@ function! HexMe()
         :%!xxd
         let $in_hex=1
     endif
-endfunction
-
-function! Hex2Dec()
-    " Save cursor position
-    let l:save = winsaveview()
-    " goto start of the word
-    exe 'normal! b'
-    let l:start_col = col('.')
-    " yank the current word into register 'l'
-    exe 'normal! "lde'
-    " print the conversion on a new line
-    let l:save_cursor = getcurpos()
-    exe ":normal! o" . printf("%d", @l)
-    " yank the converted value and paste it at the previous cursor location
-    exe 'normal! ^"ldw'
-    call setpos('.', l:save_cursor)
-    " check if its end of line
-    if col('.') == l:start_col
-        exe 'normal! "lP'
-    else
-        exe 'normal! "lp'
-    endif
-    " delete the new line
-    exe 'normal! jdd'
-    " Move cursor to original position
-    call winrestview(l:save)
-endfunction
-
-function! Dec2Hex()
-    " Save cursor position
-    let l:save = winsaveview()
-    " goto start of the word
-    exe 'normal! b'
-    let l:start_col = col('.')
-    " yank the current word into register 'l'
-    exe 'normal! "lde'
-    " print the conversion on a new line
-    let l:save_cursor = getcurpos()
-    exe ":normal! o" . printf("0x%x", @l)
-    " yank the converted value and paste it at the previous cursor location
-    exe 'normal! ^"ldw'
-    call setpos('.', l:save_cursor)
-    if col('.') == l:start_col
-        exe 'normal! "lp'
-    else
-        exe 'normal! "lP'
-    endif
-    " delete the new line
-    exe 'normal! jdd'
-    " Move cursor to original position
-    call winrestview(l:save)
 endfunction
 
 function! Ascii2Char()

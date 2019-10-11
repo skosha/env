@@ -34,3 +34,11 @@ au BufNewFile,BufRead *.js, *.html, *.css
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml setlocal indentkeys-=0# indentkeys-=<:>
+
+" json indent
+command! -range -nargs=0 -bar IndentJson <line1>,<line2>!python -m json.tool
+command! -range -nargs=0 -bar JsonIndent <line1>,<line2>!python -m json.tool
+
+"xml indent
+command! IndentXml :silent %!xmllint --encode UTF-8 --format -
+command! XmlIndent :silent %!xmllint --encode UTF-8 --format -"
