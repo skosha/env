@@ -1,89 +1,76 @@
-" Vundle {{{
+" vim-plug {{{
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 if !has('win32')
     set shell=/bin/bash
 endif
 
-" set the runtime path to include Vundle and initialize
-if has('win32')
-    set rtp+=$HOME/.vim/bundle/Vundle.vim
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-endif
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
 
-Plugin 'vim-scripts/a.vim'                  " Switch .c -> .h files quickly
-Plugin 'mileszs/ack.vim'                    " The search plugin
-Plugin 'vim-airline/vim-airline'            " Lean status line
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'powerman/vim-plugin-AnsiEsc'        " ANSI Esc codes in Vim
-Plugin 'FooSoft/vim-argwrap'
-Plugin 'vim-scripts/AutoComplPop'
-Plugin 'jiangmiao/auto-pairs'
-"Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
-Plugin 'jkramer/vim-checkbox'               " Toggle [ ] [x]
-Plugin 'mbbill/code_complete'
-"Plugin 'zerowidth/vim-copy-as-rtf'          " Copy as RTF (only on OSX)
-Plugin 'ctrlpvim/ctrlp.vim'                 " Fuzzy file finder
-Plugin 'tacahiroy/ctrlp-funky'
-"Plugin 'Raimondi/delimitMate'               " Insert closing delimiter automatically
-Plugin 'EinfachToll/DidYouMean'             " asks for the right file to open
-Plugin 'will133/vim-dirdiff'                " Diff 2 directories in Vim
-Plugin 'ekalinin/Dockerfile.vim'            " Syntax highlight for Docker file
-Plugin 'junegunn/vim-easy-align'            " Easy align
-Plugin 'tpope/vim-fugitive'                 " Git wrapper
-Plugin 'junegunn/fzf'                       " fzf vim plugin
-Plugin 'zivyangll/git-blame.vim'            " Shows a full blown git blame for the entire file
-Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the 'gutter'
-Plugin 'drmikehenry/vim-headerguard'        " Add c++/c header guards
-Plugin 'RRethy/vim-illuminate'              " illuminate all occurances of word under cursor
-Plugin 'inkarkat/vim-ingo-library'          " Dependency for vim-mark plugin
-Plugin 'sk1418/HowMuch'                     " Visual selection total sum
-Plugin 'AndrewRadev/linediff.vim'           " Diff selected blocks
-Plugin 'inkarkat/vim-mark'                  " Mark multiple searches with different highlight color
-Plugin 'xolox/vim-misc'                     " Support plugin for all xolox plugins
-Plugin 'yegappan/mru'                       " most recently used files
-Plugin 'scrooloose/nerdtree'                " NERD Tree file explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin'        " Shows git status in nerd tree
-Plugin 'xolox/vim-notes'                    " Notes from within Vim
-"Plugin 'krisajenkins/vim-projectlocal'      " Local .vimrc
-Plugin 'kien/rainbow_parentheses.vim'       " Rainbow colored parnatheses
-Plugin 'xolox/vim-reload'                   " Reload Vim plugins when saved
-Plugin 'tpope/vim-rhubarb'                  " Github plugin
-Plugin 'tpope/vim-surround'                 " Work with delimiters
-Plugin 'godlygeek/tabular'                  " Vim script for text filtering and alignment
-Plugin 'majutsushi/tagbar'                  " A class outline viewer for vim
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'tomtom/tcomment_vim'                " file-type sensible comments
-Plugin 'roxma/vim-tmux-clipboard'           " Seamless clipboard between vim and tmux
-Plugin 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events with tmux
-Plugin 'christoomey/vim-tmux-navigator'     " Seamless navigation between tmux panes and vim splits
-Plugin 'mbbill/undotree'
-Plugin 'chrisbra/unicode.vim'               " Unicode Plugin
-Plugin 'maxbrunsfeld/vim-yankstack'         " yank ring
-Plugin 'google/yapf', { 'rtp': 'plugins/vim' }  " reformat range of code
-"Plugin 'Valloric/YouCompleteMe'
+Plug 'vim-scripts/a.vim'                                        " Switch .c -> .h files quickly
+Plug 'mileszs/ack.vim'                                          " The search plugin
+Plug 'vim-airline/vim-airline'                                  " Lean status line
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale', { 'on': 'ALEToggle' }                " Lint
+Plug 'powerman/vim-plugin-AnsiEsc'                              " ANSI Esc codes in Vim
+Plug 'FooSoft/vim-argwrap'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'jiangmiao/auto-pairs'
+"Plug 'MattesGroeger/vim-bookmarks'                              " Bookmarks
+Plug 'jkramer/vim-checkbox'                                     " Toggle [ ] [x]
+Plug 'mbbill/code_complete'
+"Plug 'zerowidth/vim-copy-as-rtf'                                " Copy as RTF (only on OSX)
+Plug 'ctrlpvim/ctrlp.vim'                                       " Fuzzy file finder
+Plug 'tacahiroy/ctrlp-funky'
+"Plug 'Raimondi/delimitMate'                                     " Insert closing delimiter automatically
+Plug 'EinfachToll/DidYouMean'                                   " asks for the right file to open
+Plug 'will133/vim-dirdiff'                                      " Diff 2 directories in Vim
+"Plug 'ekalinin/Dockerfile.vim'                                  " Syntax highlight for Docker file
+Plug 'junegunn/vim-easy-align'                                  " Easy align
+Plug 'tpope/vim-eunuch'                                         " Some unix commands to run from within Vim
+Plug 'tpope/vim-fugitive'                                       " Git wrapper
+Plug 'junegunn/fzf'                                             " fzf vim plugin
+Plug 'zivyangll/git-blame.vim'                                  " Shows a full blown git blame for the entire file
+Plug 'airblade/vim-gitgutter'                                   " Shows a git diff in the 'gutter'
+Plug 'junegunn/gv.vim'                                          " Git commit history of current file
+Plug 'drmikehenry/vim-headerguard'                              " Add c++/c header guards
+Plug 'sk1418/HowMuch'                                           " Visual selection total sum
+Plug 'vim-scripts/HTML-AutoCloseTag'                            " Automatically insert the closing HTML tag
+Plug 'RRethy/vim-illuminate', { 'on': 'IlluminationToggle'}     " illuminate all occurances of word under cursor
+Plug 'inkarkat/vim-ingo-library'                                " Dependency for vim-mark plugin
+Plug 'nathanaelkane/vim-indent-guides'                          " Highlight multiple indents
+Plug 'AndrewRadev/linediff.vim'                                 " Diff selected blocks
+Plug 'glts/vim-magnum'                                          " Dependency for vim-radical
+Plug 'inkarkat/vim-mark'                                        " Mark multiple searches with different highlight color
+Plug 'xolox/vim-misc'                                           " Support plugin for all xolox plugins
+Plug 'yegappan/mru'                                             " most recently used files
+Plug 'scrooloose/nerdtree'                                      " NERD Tree file explorer
+Plug 'Xuyuanp/nerdtree-git-plugin'                              " Shows git status in nerd tree
+Plug 'xolox/vim-notes', { 'on': 'Note' }                        " Notes from within Vim
+"Plug 'krisajenkins/vim-projectlocal'                            " Local .vimrc
+Plug 'glts/vim-radical'                                         " Convert numbers between decimal, hex, octal and binary
+Plug 'kien/rainbow_parentheses.vim'                             " Rainbow colored parnatheses
+Plug 'xolox/vim-reload'                                         " Reload Vim plugins when saved
+Plug 'tpope/vim-repeat'                                         " Allow plugins to use '.' for repeat
+Plug 'tpope/vim-rhubarb'                                        " Github plugin
+Plug 'inside/vim-search-pulse'                                  " Pulse every time we search for next match
+Plug 'tpope/vim-surround'                                       " Work with delimiters
+Plug 'godlygeek/tabular'                                        " Vim script for text filtering and alignment
+Plug 'majutsushi/tagbar'                                        " A class outline viewer for vim
+Plug 'vim-scripts/taglist.vim'
+Plug 'tomtom/tcomment_vim'                                      " file-type sensible comments
+Plug 'roxma/vim-tmux-clipboard'                                 " Seamless clipboard between vim and tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'                       " Restore FocusGained and FocusLost events with tmux
+Plug 'christoomey/vim-tmux-navigator'                           " Seamless navigation between tmux panes and vim splits
+Plug 'mbbill/undotree'
+Plug 'chrisbra/unicode.vim'                                     " Unicode Plugin
+Plug 'maxbrunsfeld/vim-yankstack'                               " yank ring
+Plug 'google/yapf', { 'rtp': 'plugins/vim' }                    " reformat range of code
+"Plug 'Valloric/YouCompleteMe'
 
+call plug#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-" }}} Vundle
+" }}} vim-plug
