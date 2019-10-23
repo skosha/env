@@ -1,15 +1,46 @@
-https://github.com/arl/tmux-gitbar
-https://github.com/Shougo/deoplete.nvim
-https://github.com/davidhalter/jedi-vim
-https://github.com/Shougo/neocomplete.vim
-https://github.com/direnv/direnv
-https://www.vim.org/scripts/script.php?script_id=3302
-https://stackoverflow.com/questions/4583394/vim-making-auto-completion-smarter
-
-https://github.com/kristijanhusak/tmux-simple-git-status
-
-https://github.com/rothgar/awesome-tmux#tutorials
-http://cheat.errtheblog.com/s/tmux
-
-https://code.google.com/archive/p/seascope/wikis/Windows.wiki
+General:
 https://bluz71.github.io/2017/10/26/turbocharge-the-ctrlp-vim-plugin.html
+https://github.com/wlvchandler/PuTTY-Ubuntu-Theme
+https://github.com/direnv/direnv
+https://github.com/sirredbeard/Awesome-WSL
+https://code.google.com/archive/p/seascope/wikis/Windows.wiki
+https://scoop.sh/
+https://medium.com/@bhupathy/install-terminator-on-windows-with-wsl-2826591d2156
+
+Log file viewing:
+http://lnav.org/
+https://github.com/peco/peco
+
+MacOS:
+https://github.com/lra/mackup
+
+Vim:
+https://www.ele.uri.edu/faculty/vetter/Other-stuff/vi/vimtips.html
+https://github.com/whiteinge/diffconflicts
+https://github.com/mhinz/vim-startify
+https://github.com/michalliu/sourcebeautify.vim
+https://github.com/pangloss/vim-javascript
+https://github.com/elzr/vim-json
+https://github.com/vim-scripts/Smartput
+https://github.com/davidoc/taskpaper.vim
+
+Python:
+https://github.com/davidhalter/jedi-vim
+https://github.com/python-mode/python-mode
+https://github.com/fs111/pydoc.vim
+https://github.com/cburroughs/pep8.py
+
+Tmux:
+https://github.com/arl/tmux-gitbar
+https://github.com/kristijanhusak/tmux-simple-git-status
+https://jamesoff.net/2017/08/26/tmux-configuration.html
+https://github.com/rothgar/awesome-tmux#tutorials
+https://lgfang.github.io/mynotes/utils/tmux.html
+
+Coding Guidelines:
+http://umich.edu/~eecs381/handouts/CHeaderFileGuidelines.pdf
+
+Cheatsheets:
+Tig - https://devhints.io/tig
+Tmux - http://cheat.errtheblog.com/s/tmux
+Tmux - https://gist.github.com/andreyvit/2921703
