@@ -19,15 +19,16 @@ Plug 'inside/vim-search-pulse'                                  " Pulse every ti
 " }}}
 
 " {{{ Git helpers
-Plug 'tpope/vim-fugitive'                                       " Git wrapper
+"Plug 'tpope/vim-fugitive'                                       " Git wrapper
 Plug 'zivyangll/git-blame.vim'                                  " Shows a full blown git blame for the entire file
 Plug 'airblade/vim-gitgutter'                                   " Shows a git diff in the 'gutter'
-Plug 'junegunn/gv.vim'                                          " Git commit history of current file
 Plug 'Xuyuanp/nerdtree-git-plugin'                              " Shows git status in nerd tree
 Plug 'tpope/vim-rhubarb'                                        " Github plugin
+Plug 'iberianpig/tig-explorer.vim'                              " Use tig from within Vim
 " }}}
 
 " {{{ Coding helpers
+Plug 'tpope/vim-abolish'                                        " spell abbreviation, substitution, Coercion
 Plug 'dense-analysis/ale', { 'on': 'ALEToggle' }                " Lint
 Plug 'vim-scripts/AutoComplPop'
 Plug 'jiangmiao/auto-pairs'

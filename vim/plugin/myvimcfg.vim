@@ -366,13 +366,13 @@ endif
 nnoremap <Leader>a :call WinStartDiff()<CR>
 
 " Add #if 0 ... #endif around a block of code
-map ;' mz'aO<Esc>i#if 0<Esc>'zo<Esc>i#endif<Esc>
+map ;' mz'aO#if 0<ESC>'zo#endif<ESC>
 
 " Add #ifdef <> ... #endif around a block of code
-map ;; mz'aO<Esc>i#ifdef <C-r>"<Esc>'zo<Esc>i#endif /* <C-r>" */<Esc>
+map ;; mz'aO#ifdef <C-r>"<ESC>'zo#endif /* <C-r>" */<ESC>
 
 " Add curly braces around a piece of code
-map ;[ mz'aO<Esc>i{<Esc>lx<Esc>'zo<Esc>i}<Esc>'a=aB
+map ;[ mz'aO{<ESC>lx<ESC>'zo}<ESC>'a=aB
 
 map <Leader>cc :s/\/\/\(.*\)/\/\*\1 \*\//<CR>
 
@@ -672,6 +672,11 @@ function! SwapBytes()
     call winrestview(l:save)
     normal P
     call winrestview(l:save)
+endfunction
+
+let timer = timer_start(60000, 'SaveSession', {'repeat': 1})
+function! SaveSession(timer)
+    :if v:this_session != '' | exec "mks! " . v:this_session | endif
 endfunction
 
 

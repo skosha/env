@@ -52,7 +52,7 @@ alias r-commit='git reset --soft HEAD^'
 alias s-update='git submodule update --remote'
 
 # Grep aliases
-alias grep='grep --color=auto'
+alias grep='grep --exclude="tags" --exclude="cscope.out" --color=auto'
 alias grepo='grep --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'
 alias grepp='grep -rni'
 
@@ -202,7 +202,7 @@ c-del() {
 unalias d-tag 2>/dev/null
 d-tag() {
     local tag
-    tag=$(git tag | fzf-tmux +mulit -1 -0 ) &&
+    tag=$(git tag | fzf-tmux +multi -1 -0 ) &&
     git push --delete origin $tag &&
     git tag -d $tag
 }
