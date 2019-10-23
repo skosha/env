@@ -19,8 +19,8 @@ Plug 'inside/vim-search-pulse'                                  " Pulse every ti
 " }}}
 
 " {{{ Git helpers
-"Plug 'tpope/vim-fugitive'                                       " Git wrapper
 Plug 'zivyangll/git-blame.vim'                                  " Shows a full blown git blame for the entire file
+Plug 'whiteinge/diffconflicts'                                  " Convert a 3-way merge to 2-way merge
 Plug 'airblade/vim-gitgutter'                                   " Shows a git diff in the 'gutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'                              " Shows git status in nerd tree
 Plug 'tpope/vim-rhubarb'                                        " Github plugin
@@ -36,6 +36,7 @@ Plug 'mbbill/code_complete'
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }         " Syntax highlight for Docker file
 Plug 'junegunn/vim-easy-align'                                  " Easy align
 Plug 'nathanaelkane/vim-indent-guides'                          " Highlight multiple indents
+Plug 'michaeljsmith/vim-indent-object'                          " Add indent as object
 Plug 'scrooloose/nerdcommenter'                                 " Better commenting
 Plug 'majutsushi/tagbar'                                        " A class outline viewer for entire project
 Plug 'vim-scripts/taglist.vim'                                  " Local file tag list
