@@ -5,7 +5,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
+else
+    let g:ack_default_options = ' -s -H --nocolor --nogroup --column --ignore-file=is:tags --ignore-file=is:cscope.out --ignore-dir=builds'
 endif
+
+let g:ackhighlight = 1
 
 " bind K to grep word under cursor
 nnoremap <Leader>k :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -30,8 +34,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#tab_nr_type = 1
 
-"imap <expr> <m-h> pumvisible() ? '<esc>a<Plug>snipMateTrigger' : '<Plug>snipMateTrigger'
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => code_complete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:completekey = "<F4>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,12 +82,6 @@ let g:ctrlp_custom_ignore = {
             \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => CtrlP Funky[1]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_funky_syntax_highlight = 1
-nnoremap <leader>pf :CtrlPFunky<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Easy Align
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Start interactive EasyAlign in visual mode (e.g. vipta)
@@ -90,12 +89,6 @@ xmap ta <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. taip)
 nmap ta <Plug>(EasyAlign)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fugitive
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Revert current line/hunk
-vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git-blame

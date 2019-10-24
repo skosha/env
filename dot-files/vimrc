@@ -62,7 +62,6 @@ Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }         " Automatically 
 
 " {{{ File Utils
 Plug 'ctrlpvim/ctrlp.vim'                                       " Fuzzy file finder
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'EinfachToll/DidYouMean'                                   " asks for the right file to open
 Plug 'junegunn/fzf'                                             " fzf vim plugin
 Plug 'vim-scripts/icalendar.vim'                                " for calendar *.ics files
