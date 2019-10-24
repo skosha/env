@@ -18,3 +18,4 @@ sdkconfig.old
 *.dump
 *.bak
 .DS_Store
+*.out
