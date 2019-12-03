@@ -23,6 +23,7 @@ https://github.com/pangloss/vim-javascript
 https://github.com/elzr/vim-json
 https://github.com/vim-scripts/Smartput
 https://github.com/davidoc/taskpaper.vim
+https://freshman.tech/vim-javascript/
 
 Python:
 https://github.com/davidhalter/jedi-vim
@@ -44,3 +45,30 @@ Cheatsheets:
 Tig - https://devhints.io/tig
 Tmux - http://cheat.errtheblog.com/s/tmux
 Tmux - https://gist.github.com/andreyvit/2921703
+
+Google github:
+https://github.com/google/sling
+https://github.com/google/eng-practices
+https://github.com/google/python-adb
+https://github.com/google/nsync
+https://github.com/google/night-sight
+https://github.com/google/ci_edit
+https://github.com/google/proto-lens
+https://github.com/google/codeworld
+https://github.com/google/pix-image-viewer
+https://github.com/google/haskell-trainings
+https://github.com/google/vim-codefmt
+https://github.com/google/cmockery
+https://github.com/google/git-appraise
+https://github.com/google/rekall
+https://github.com/google/pcbdl
+https://github.com/google/gif-for-cli
+https://github.com/google/startup-os
+https://github.com/google/usbtool
+https://github.com/google/diff-match-patch
+https://github.com/google/libaddressinput
+https://github.com/google/ffcc
+https://github.com/google/dimsum
+https://github.com/google/.github
+https://github.com/google/live-transcribe-speech-engine
+https://github.com/google/stm32_bare_lib
