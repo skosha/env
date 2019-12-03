@@ -15,10 +15,8 @@ alias l='ls -CF'
 # refresh shell
 alias reload='source ~/.bashrc'
 
-alias screen='screen -A'
-
 # My git aliases
-alias gitl='git log --name-only'
+alias gitl='git log --name-only'        # full log with filenames
 alias g-ls='git ls-files'
 alias go-ls='git ls-files -o --directory'
 alias st='git status'
@@ -229,6 +227,14 @@ f-stash() {
             git stash show -p $sha
         fi
     done
+}
+
+unalias df-commit 2>/dev/null
+df-commit() {
+    local file
+    file=$(git show --pretty="" --name-only --relative=$(basename $PWD) HEAD | fzf +m) &&
+    git checkout HEAD~ $file &&
+    git commit -a --amend --no-edit
 }
 
 is_in_git_repo() {
