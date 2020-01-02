@@ -29,6 +29,7 @@ let g:ale_sign_warning = '∙∙'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Show PASTE if in paste mode
 let g:airline_detect_paste=1
+
 " Show airline for tabs too
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -131,8 +132,32 @@ let g:mwHistAdd = '/@'
 nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
 nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 
-nmap <Leader>1 <Plug>MarkSearchGroupNext
-nmap <Leader>! <Plug>MarkSearchGroupPrev
+nmap <Leader>1 <Plug>MarkSearchGroup1Next
+nmap <Leader>! <Plug>MarkSearchGroup1Prev
+
+nmap <Leader>2 <Plug>MarkSearchGroup2Next
+nmap <Leader>" <Plug>MarkSearchGroup2Prev
+
+nmap <Leader>3 <Plug>MarkSearchGroup3Next
+nmap <Leader>£ <Plug>MarkSearchGroup3Prev
+
+nmap <Leader>4 <Plug>MarkSearchGroup4Next
+nmap <Leader>$ <Plug>MarkSearchGroup4Prev
+
+nmap <Leader>5 <Plug>MarkSearchGroup5Next
+nmap <Leader>% <Plug>MarkSearchGroup5Prev
+
+nmap <Leader>6 <Plug>MarkSearchGroup6Next
+nmap <Leader>^ <Plug>MarkSearchGroup6Prev
+
+nmap <Leader>7 <Plug>MarkSearchGroup7Next
+nmap <Leader>& <Plug>MarkSearchGroup7Prev
+
+nmap <Leader>8 <Plug>MarkSearchGroup8Next
+nmap <Leader>) <Plug>MarkSearchGroup8Prev
+
+nmap <Leader>9 <Plug>MarkSearchGroup9Next
+nmap <Leader>( <Plug>MarkSearchGroup9Prev
 
 """"""""""""""""""""""""""""""
 " => MRU plugin

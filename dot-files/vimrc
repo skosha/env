@@ -5,6 +5,8 @@ if !has('win32')
     set shell=/bin/bash
 endif
 
+source ~/.vim/.regexlist.vim
+
 call plug#begin('~/.vim/plugged')
 
 " Git plugin not hosted on GitHub
@@ -80,7 +82,8 @@ Plug 'sk1418/HowMuch'                                           " Visual selecti
 Plug 'AndrewRadev/linediff.vim'                                 " Diff selected blocks
 Plug 'inkarkat/vim-mark'                                        " Mark multiple searches with different highlight color
 Plug 'xolox/vim-notes', { 'on': 'Note' }                        " Notes from within Vim
-"Plug 'krisajenkins/vim-projectlocal'                            " Local .vimrc
+Plug 'tpope/vim-obsession'                                      " Vim session management
+Plug 'krisajenkins/vim-projectlocal'                            " Local .vimrc
 Plug 'glts/vim-radical'                                         " Convert numbers between decimal, hex, octal and binary
 Plug 'xolox/vim-reload'                                         " Reload Vim plugins when saved
 Plug 'tpope/vim-repeat'                                         " Allow plugins to use '.' for repeat

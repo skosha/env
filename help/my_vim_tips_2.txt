@@ -541,3 +541,19 @@ N      last / or ? search in opposite direction"
 
 # Paste from insert mode
 <Ctrl-r> <register>
+
+# Save search pattern to a list and reuse it again
+Put: source ~/.regexlist.vim into your vimrc.
+Do the search. Decide you might want to use that one again. Type this
+literally:
+:sp ~/.regexlist.vim<CR>
+olet MyRegExName = '<C-R>/'<ESC>
+:w<CR>
+:so %<CR>
+:q<CR>
+Where <C-R> is CtrlR, <CR> is ENTER and <ESC> is ESC.
+Next time you want to use it:
+/<C-R>=MyRegExName<CR><CR>
+Ctrl-R is your friend! Ctrl-R followed by / pulls up the last search. Ctrl-R
+followed by = allows you to enter an expression.
+

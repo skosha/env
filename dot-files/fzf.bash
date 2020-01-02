@@ -12,4 +12,5 @@ fi
 # ------------
 source "/home/kshah/.fzf/shell/key-bindings.bash"
 
+export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND='fd --type f'
