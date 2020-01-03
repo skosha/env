@@ -152,11 +152,6 @@ set magic
     " \m, \M: 'magic' mode.
     " use \m and \M to switch 'magic' on or off.
 
-" Add fzf to runtime path
-if has('mac') && has('unix')
-    set rtp+=/usr/local/opt/fzf
-endif
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on

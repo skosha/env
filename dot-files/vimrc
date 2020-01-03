@@ -65,7 +65,8 @@ Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }         " Automatically 
 " {{{ File Utils
 Plug 'ctrlpvim/ctrlp.vim'                                       " Fuzzy file finder
 Plug 'EinfachToll/DidYouMean'                                   " asks for the right file to open
-Plug 'junegunn/fzf'                                             " fzf vim plugin
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-bash'  }
+Plug 'junegunn/fzf.vim'"
 Plug 'vim-scripts/icalendar.vim'                                " for calendar *.ics files
 Plug 'yegappan/mru'                                             " most recently used files
 Plug 'scrooloose/nerdtree'                                      " NERD Tree file explorer
