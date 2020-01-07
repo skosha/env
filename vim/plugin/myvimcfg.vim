@@ -287,10 +287,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 " duplicate tab
 noremap _t :tab split<CR>
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
 " Disable F1 for help screen - I open this accidentally all the time!
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
@@ -397,6 +393,9 @@ cnoremap <C-A>        <Home>
 cnoremap <C-E>        <End>
 cnoremap <C-K>        <C-U>
 
+" quickly edit your macro
+nnoremap ;m  :<c-u><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
 " }}}
 
 " Visual settings {{{
@@ -463,6 +462,9 @@ endif
 " }}}
 
 " Helper Functions {{{
+
+command! CleanEol call lib#WithSavedState('%s/$//e')
+command! CleanDoubleLines call lib#WithSavedState('%s/^\n\+/\r/e')
 
 " function to toggle the number mode
 function! g:ToggleNuMode()

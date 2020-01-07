@@ -25,11 +25,16 @@ https://github.com/vim-scripts/Smartput
 https://github.com/davidoc/taskpaper.vim
 https://freshman.tech/vim-javascript/
 
+https://github.com/AndrewRadev/deleft.vim
+https://github.com/andymass/vim-matchup
+https://github.com/AndrewRadev/undoquit.vim
+
 Python:
 https://github.com/davidhalter/jedi-vim
 https://github.com/python-mode/python-mode
 https://github.com/fs111/pydoc.vim
 https://github.com/cburroughs/pep8.py
+Python Keyring - https://stackoverflow.com/questions/36341923/cache-user-remote-credentials-for-command-line-tool
 
 Tmux:
 https://github.com/arl/tmux-gitbar

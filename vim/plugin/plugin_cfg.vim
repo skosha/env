@@ -96,6 +96,31 @@ nmap ta <Plug>(EasyAlign)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <Leader>] :Tags<CR>
 
+command! FZFMru call fzf#run({
+            \  'source':  v:oldfiles,
+            \  'sink':    'e',
+            \  'options': '-m -x +s',
+            \  'down':    '40%' })
+
+" Select Buffer
+function! s:buflist()
+    redir => ls
+    silent ls
+    redir END
+    return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+    execute 'buffer' matchstr(a:e, '^[ 0-9 ]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+            \   'source':  reverse(<sid>buflist()),
+            \   'sink':    function('<sid>bufopen'),
+            \   'options': '+m',
+            \   'down':    len(<sid>buflist()) + 2
+            \ })<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git-blame
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -128,6 +153,11 @@ hi illuminatedWord cterm=NONE ctermfg=white ctermbg=blue guibg=peru guifg=wheat
 let g:Illuminate_delay = 150
 
 let g:mwDefaultHighlightingPalette = 'extended'
+
+""""""""""""""""""""""""""""""
+" => vim-lengthmatters
+""""""""""""""""""""""""""""""
+let g:lengthmatters_start_at_column = 121
 
 """"""""""""""""""""""""""""""
 " => vim-mark
@@ -199,13 +229,14 @@ function! SetupRainbowParentheses()
         \ ], '[v:val, v:val]')
     let l:custom_colors_dark = map([
             \ 'DarkRed',
+            \ 'DarkCyan',
             \ 'DarkGreen',
             \ 'DarkBlue',
             \ 'Magenta',
             \ 'Green',
             \ 'LightBlue',
             \ 'LightCyan',
-            \ 'White',
+            \ 'Yellow',
         \ ], '[v:val, v:val]')
     let g:rainbow#max_level = max([len(l:custom_colors_dark), len(l:custom_colors_light)])
     let g:rainbow#colors = { 'dark': l:custom_colors_dark, 'light': l:custom_colors_light  }
@@ -217,6 +248,14 @@ augroup rainbowParantheses
     autocmd!
     au VimEnter * call SetupRainbowParentheses()
 augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => switch settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:switch_mapping = '-'
+let g:switch_custom_definitions = [
+\   ['MON', 'TUE', 'WED', 'THU', 'FRI']
+\ ]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => majutsushi/tagbar settings
@@ -249,6 +288,16 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 " => Undo tree
 """"""""""""""""""""""""""""""
 nnoremap <F6> :UndotreeToggle<cr>
+
+""""""""""""""""""""""""""""""
+" => Undo Quit
+""""""""""""""""""""""""""""""
+let g:undoquit_mapping = '_u'
+
+""""""""""""""""""""""""""""""
+" => unicode
+""""""""""""""""""""""""""""""
+let g:enableUnicodeCompletion=1
 
 """"""""""""""""""""""""""""""
 " => YankStack
