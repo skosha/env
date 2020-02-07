@@ -240,3 +240,17 @@ df-commit() {
 is_in_git_repo() {
     git rev-parse HEAD > /dev/null 2>&1
 }
+
+cp_from() {
+    [[ ! -z "$1" ]] &&
+    [[ ! -z "$2" ]] &&
+    c_sha=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short $1 | fzf +m -1 -0 | cut -d' ' -f1) &&
+    c_name=$(git show --oneline $c_sha | head -n 1 | cut -d' ' -f2) &&
+    git checkout -b "${c_name}_${2}" &&
+    git cherry-pick $c_sha
+}
+
+mkcd () {
+    mkdir "$1"
+    cd "$1"
+}
