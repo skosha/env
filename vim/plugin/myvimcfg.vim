@@ -170,12 +170,6 @@ if has("autocmd")
         autocmd VimResized * :wincmd =
     augroup END
 
-    augroup session_mgmt
-        autocmd!
-        " Auto-save current session
-        au VimLeavePre * if v:this_session != '' | exec "mks! " . v:this_session | endif
-    augroup END
-
     " netrw immediately activate when using [g]vim without any filenames, showing the current directory
     augroup VimStartup
         autocmd!
@@ -238,9 +232,6 @@ set ttimeout ttimeoutlen=50
 
 let mapleader='\'
 
-" Visually select the text that was last edited/pasted (Vimcast#26).
-noremap gV `[v`]
-
 " `Ctrl-U` in insert mode deletes a lot. Use `Ctrl-G` u to first break undo,
 " so that you can undo `Ctrl-U` without undoing what you typed before it.
 inoremap <C-U> <C-G>u<C-U>
@@ -256,10 +247,6 @@ noremap <C-n> :call g:ToggleNuMode()<CR>
 nnoremap <silent><C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
 
-" insert blank lines in normal mode
-nno <silent> ;o :pu! _<cr>:']+1<cr>
-nno <silent> ;i :pu _<cr>:']-1<cr>
-
 " Use '\,' to add a space
 nmap <Leader>, i<Space><Esc>
 
@@ -269,15 +256,6 @@ nnoremap <Leader>; A;
 " Use line diff
 noremap <Leader>ldt :Linediff<CR>
 noremap <Leader>ldo :LinediffReset<CR>
-
-" Jump to window 1
-nnoremap <Leader>1 1<C-w>w
-" Jump to window 2
-nnoremap <Leader>2 2<C-w>w
-" Jump to window 3
-nnoremap <Leader>3 3<C-w>w
-" Jump to window 4
-nnoremap <Leader>4 4<C-w>w
 
 " Open last accessed tab
 let g:lasttab = 1
@@ -315,12 +293,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('')<CR>?<C-R>=@/<CR><CR>
 
 " clear the search buffer when hitting return
 nnoremap <silent> <CR> :nohlsearch<cr>
-
-" Use 'X' to invoke search for visually selected text
-vmap X y/<C-R>"<CR>
-
-" Use 'gX' to invoke global search for visually selected text
-vmap gX y:vimgrep /<C-R>"/ **/*<CR>
 
 " Map double-click to search the word under cursor
 nnoremap <silent> <2-LeftMouse> :let @/='\V'.escape(expand('<cword>'), '\')<cr>:set hls<cr>
@@ -365,28 +337,16 @@ map ;; mz'aO#ifdef <C-r>"<ESC>'zo#endif /* <C-r>" */<ESC>
 " Add curly braces around a piece of code
 map ;[ mz'aO{<ESC>lx<ESC>'zo}<ESC>'a=aB
 
-map <Leader>cc :s/\/\/\(.*\)/\/\*\1 \*\//<CR>
+map <Leader>cc :s/\/\/\(.*\)/\/\*\1 \*\/*<CR> */
 
 " remove wrapped function call from expression
 nnoremap ;ac diw%x<c-o>x<esc>
-
-" anon func to bracket func
-nnoremap <silent> ;af c]){}<left><cr><c-r>"<enter><up><esc>
-"nnoremap <silent> ;aa :call feedkeys("ds{")<cr>J
-
-" split ternary if/else on separate lines
-nnoremap ;at 0f?hi<cr><esc>/ : <cr>:noh<cr>i<cr><esc>
 
 " save word under cursor to ~/word.txt
 nmap ,p :call SaveWord()
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap ,m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" opens search results in a window w/ links and highlight the matches
-command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e <args>' | copen | execute 'silent /<args>'
-" shift-control-* Greps for the word under the cursor
-:nmap _g :Grep <c-r>=expand("<cword>")<cr><cr>")'
 
 " Bash like keys for the command line
 cnoremap <C-A>        <Home>
@@ -462,9 +422,6 @@ endif
 " }}}
 
 " Helper Functions {{{
-
-command! CleanEol call lib#WithSavedState('%s/$//e')
-command! CleanDoubleLines call lib#WithSavedState('%s/^\n\+/\r/e')
 
 " function to toggle the number mode
 function! g:ToggleNuMode()
@@ -823,19 +780,9 @@ if (g:cscope_loaded == 0)
     nmap <Leader>E :tab scs find e <C-R>=expand("<cword>")<CR><CR>
     nmap <Leader>I :tab scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 
-    nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR><CR>
-
     " Short cut key
 	nmap <C-\><SPACE> :cs find<SPACE>
 	nmap <C-@><SPACE> :tab scs find<SPACE>
-    nmap <C-@><C-@><SPACE> :vert scs find<SPACE>
 
     """"""""""""" key map timeouts
     "

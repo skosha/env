@@ -215,6 +215,11 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_suffix = '.txt'
 
+""""""""""""""""""""""""""""""
+" => Peekaboo
+""""""""""""""""""""""""""""""
+let g:peekaboo_delay = 200  " wait for 200ms before sidebar appears
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Rainbow Parantheses
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
