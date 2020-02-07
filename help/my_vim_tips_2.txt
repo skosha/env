@@ -1,42 +1,12 @@
-# Macros
-record - q<x>
-play - @<x>
-repeat - @@
-paste - "<x>p
-append to macro - q<X>
+################# Setting/Commands ####################
 
-# Add a permanent macro
-Can add a macro to the vimrc:
-let @a='blah_blah_blah'
+# Use mouse in Vim
+:set mouse=a (a for all, n for normal, v for visual, i for insert)
 
-# Fold a function
-zf% - fold a function
-zo - open the fold
-za - toggle the fold
-zA - toggle the folds recursively
-zf#j - fold next # lines
-zf/string - fold till string
-zj or zk - move between folds
-zM - close all open folds
-zm - increases fold level by 1
-zR - open all close folds
-zr - decreases fold level by 1
-zd - delete fold
-zE - delete all folds
-:mkview - save folds
-:loadview - reload folds
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
-
-# Visual mode
-V - linewise
-o - move to other end
-O - move to other corner
-aw - mark a word
-ab - mark () block
-aB - mark {} block
-ib - mark inner () block
-iB - mark inner {} block
+# Saving
+:sav <new_fname> - save as <new_fname> and "move" to <new_fname>
+:sav! %:r.<ext> - save file with a new <ext> extension
+:e! - return to unmodified file
 
 # Marks
 'a-z    - same file
@@ -46,10 +16,14 @@ iB - mark inner {} block
 ab #b /**************************************************************
 ab #e **************************************************************/
 
-# Saving
-:sav <new_fname> - save as <new_fname> and "move" to <new_fname>
-:sav! %:r.<ext> - save file with a new <ext> extension
-:e! - return to unmodified file
+# Open mulitple files in vertically split window
+vim -O<n> <file> ... n
+( -o for horizontally split window )
+
+# Open multiple files in separate tabs
+vim -p <filename> ...
+
+################# !Setting/Commands ####################
 
 ################# Editing ####################
 
@@ -152,6 +126,14 @@ gi
 10j
 "A5yy
 
+# Delete last word typed in insert mode
+Ctrl-w
+Ctrl-h - delete prev character
+Ctrl-u - delete entire entered
+
+# Delete extra lines
+:%s/\(\n\n\)\+/\1/g
+
 ################# !Editing ####################
 
 ################## Motion #####################
@@ -205,13 +187,6 @@ gj moves down one screen line instead of a logical line
 # Scroll current line to top of window
 zt
 
-################## !Motion #####################
-
-# Mini calculator
-in Insert mode
-Ctlr-R
-=5*5 (inserts 25 into text)
-
 # Move back/forward in jumplist
 Ctrl-O/Ctrl-I
 :jumps (opens jumplist)
@@ -220,17 +195,89 @@ Ctrl-O/Ctrl-I
 g, g;
 :changes (opens changelist)
 
+# Visual mode
+V - linewise
+o - move to other end
+O - move to other corner
+aw - mark a word
+ab - mark () block
+aB - mark {} block
+ib - mark inner () block
+iB - mark inner {} block
+
+################## !Motion #####################
+
+################## Search/Replace #####################
+
 # Ignore or match cases dynamically
 /\cfoo or /\Cfoo
 
-# Open command/search window
-q: q/
+# Lookup word under cursor in man pages
+K
 
-# Open last file
-'0
+# Regexp cheatsheet
+. - Any single character except newline
+* - zero or more occurances of any character
+[...] - Any single character specified in the set
+[^...] - Any single character not specified in the set
+\< - Matches beginning of word
+\> - Matches end of word
+^ - Anchor - beginning of the line
+$ - Anchor - end of line
+\(...\) - Grouping - usually used to group conditions
+[...]{m} - look for m occurances of the Set
+[...]{m,n} - look for atleast m occurances but no more than n
 
-# Alternate file
-Ctrl-6
+# Show only matching/non matching lines
+:g/pattern/ - matching
+:v/pattern/ - nonmatching
+
+# Delete all matching/non matching lines
+:g/pattern/d - matching
+:v/pattern/d - nonmatching
+
+# Save search pattern to a list and reuse it again
+Put: source ~/.regexlist.vim into your vimrc.
+Do the search. Decide you might want to use that one again. Type this
+literally:
+:sp ~/.regexlist.vim<CR>
+olet MyRegExName = '<C-R>/'<ESC>
+:w<CR>
+:so %<CR>
+:q<CR>
+Where <C-R> is CtrlR, <CR> is ENTER and <ESC> is ESC.
+Next time you want to use it:
+/<C-R>=MyRegExName<CR><CR>
+Ctrl-R is your friend! Ctrl-R followed by / pulls up the last search. Ctrl-R
+followed by = allows you to enter an expression.
+
+################## !Search/Replace #####################
+
+################## Utils #####################
+
+# Fold a function
+zf% - fold a function
+zo - open the fold
+za - toggle the fold
+zA - toggle the folds recursively
+zf#j - fold next # lines
+zf/string - fold till string
+zj or zk - move between folds
+zM - close all open folds
+zm - increases fold level by 1
+zR - open all close folds
+zr - decreases fold level by 1
+zd - delete fold
+zE - delete all folds
+:mkview - save folds
+:loadview - reload folds
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
+# Mini calculator
+in Insert mode
+Ctlr-R
+=5*5 (inserts 25 into text)
 
 # Using spell check
 echo $spelllang
@@ -256,6 +303,42 @@ dp (put diff to other file)
 
 # Adding todays date
 !!date (in Normal mode)
+
+# Show number of lines in file
+:=
+
+# Cursor position info
+gCtrl-g
+
+# Char value
+ga
+
+# Change the buffer to Hex Dump
+:%!xxd
+
+# Format a table
+:%!column -t
+:'<,'>!column -t
+
+# Use bash calculator
+Select a line
+!bc - usage: ibase=x; obase=x; <equation>
+
+# Macros
+record - q<x>
+play - @<x>
+repeat - @@
+paste - "<x>p
+append to macro - q<X>
+
+# Add a permanent macro
+Can add a macro to the vimrc:
+let @a='blah_blah_blah'
+
+# Perform calculations
+nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
+
+################## !Utils #####################
 
 ####################### Buffers, Windows, Tabs #######################
 
@@ -286,70 +369,24 @@ Ctrl-w c
 :tabs - list all tabs
 gt and gT - to navigate between tabs
 
-####################### !Buffers, Windows, Tabs #######################
+# Open command/search window
+q: q/
 
-# Delete last word typed in insert mode
-Ctrl-w
-Ctrl-h - delete prev character
-Ctrl-u - delete entire entered
+# Open last file
+'0
 
-# Lookup word under cursor in man pages
-K
-
-# Regexp cheatsheet
-. - Any single character except newline
-* - zero or more occurances of any character
-[...] - Any single character specified in the set
-[^...] - Any single character not specified in the set
-\< - Matches beginning of word
-\> - Matches end of word
-^ - Anchor - beginning of the line
-$ - Anchor - end of line
-\(...\) - Grouping - usually used to group conditions
-[...]{m} - look for m occurances of the Set
-[...]{m,n} - look for atleast m occurances but no more than n
-
-# Show number of lines in file
-:=
-
-# Cursor position info
-gCtrl-g
-
-# Char value
-ga
-
-# Change the buffer to Hex Dump
-:%!xxd
-
-# Delete extra lines
-:%s/\(\n\n\)\+/\1/g
+# Alternate file
+Ctrl-6
 
 # Operate on all buffers/windows/tabs
 bufdo, windo, tabdo
+
+####################### !Buffers, Windows, Tabs #######################
 
 # To convert the file use fileformat command
 :set ff?
 :set ff=dos
 :set ff=unix
-
-# Format a table
-:%!column -t
-:'<,'>!column -t
-
-# Use bash calculator
-Select a line
-!bc - usage: ibase=x; obase=x; <equation>
-
-# Show only matching/non matching lines
-:g/pattern/ - matching
-:v/pattern/ - nonmatching
-
-# Delete all matching/non matching lines
-:g/pattern/d - matching
-:v/pattern/d - nonmatching
-
-# Use mouse in Vim
-:set mouse=a (a for all, n for normal, v for visual, i for insert)
 
 # count number of lines
 !<motion>
@@ -358,16 +395,6 @@ Select a line
 d - make new directory
 D - delete
 R - rename
-
-# Display the man page for word under cursor
-K
-
-# Open mulitple files in vertically split window
-vim -O<n> <file> ... n
-( -o for horizontally split window )
-
-# Open multiple files in separate tabs
-vim -p <filename> ...
 
 # Using Vim File Explorer
 <del>           Deleting Files or Directories
@@ -521,6 +548,9 @@ Ctrl-w r
 # Replace the last replacement string
 :%s/~/<new_replacement>/
 
+# Search Nth occurance of your PATTERN
+\(.\{-}\zsPATTERN\)\{N}
+
 " Summary of repeated searches
 ;      last f, t, F or T
 ,      last f, t, F or T in opposite direction
@@ -541,19 +571,4 @@ N      last / or ? search in opposite direction"
 
 # Paste from insert mode
 <Ctrl-r> <register>
-
-# Save search pattern to a list and reuse it again
-Put: source ~/.regexlist.vim into your vimrc.
-Do the search. Decide you might want to use that one again. Type this
-literally:
-:sp ~/.regexlist.vim<CR>
-olet MyRegExName = '<C-R>/'<ESC>
-:w<CR>
-:so %<CR>
-:q<CR>
-Where <C-R> is CtrlR, <CR> is ENTER and <ESC> is ESC.
-Next time you want to use it:
-/<C-R>=MyRegExName<CR><CR>
-Ctrl-R is your friend! Ctrl-R followed by / pulls up the last search. Ctrl-R
-followed by = allows you to enter an expression.
 

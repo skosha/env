@@ -1,62 +1,95 @@
-                !           "           £           $           %           ^           &           *           (           )           _               +
-key
+                <F1>            <F2>            <F3>            <F4>            <F5>            <F6>            <F7>            <F8>            <F9>            <F10>           <F11>           <F12>
+key                             paste mode                      code comp                       Undotree        Tagbar          taglist         toggle window
 C-key
 A-key
-<Leader>-key                                                                                        commentify
-other                                                                                                                                   _t split tab
-                                                                                                                                        _d hex2dec
-                                                                                                                                        _h dec2hex
-                                                                                                                                        _a char2ascii
-                                                                                                                                        _c ascii2char
-
-                1           2           3           4           5           6           7           8           9           0           -               =
-key
-C-key
-A-key
-<Leader>-key    window 1    window 2    window 3    window 4
-other           ,1 hlts     ,2 hlts     ,3 hlts     ,4 hlts     ,5 hlts     ,6 hlts     ,7 hlts     ,8 hlts     ,9 hlts     ,0 hlts
-
-                q           w           e           r           t           y           u           i           o           p           [               ]
-key
-C-key                                                           new tab                                                     ctrlp
-A-key
-<Leader>-key    quickfix                cscope                  cscope                              cscope      nerdtree    yankstack
-                qo
-                qc
-other                                                                                                                                   [q quickfix     ]q quickfix
-                                                                                                                                        [Q quickfix     ]Q quickfix
-
-                Q           W           E           R           T           Y           U           I           O           P           {               }
-key
-C-key
-A-key
-<Leader>-key    quickfix                cscope                  cscope                              cscope      nerdtree    yankstack
+<Leader>-key
 other
 
-                a           s           d           f           g           h           j           k           l           '           #
-key                                                             gl lasttab
-C-key                       save
-A-key                                               MRU         gitgutter
-<Leader>-key    diff        cscope      cscope      cscope      cscope      hx hex      scrollbind  Ag search
-other           _al Ale                                         <leader>gb                                      ldt, ldo
-
-                A           S           D           F           G           H           J           K           L           @           ~
+                !               "               £               $               %               ^               &               *               (               )               _               +
 key
 C-key
 A-key
-<Leader>-key                cscope      cscope      cscope      cscope
+<Leader>-key    vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        commentify      vim-mark        vim-mark
+other                                                                                                                                                                           _a char2ascii
+                                                                                                                                                                                _c ascii2char
+
+                1               2               3               4               5               6               7               8               9               0               -               =
+key                                                                                                                                                                             Switch
+C-key
+A-key
+<Leader>-key    vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark        vim-mark
 other
 
-                \           z           x           c           v           b           n           m           ,           .           /
+                q               w               e               r               t               y               u               i               o               p               [               ]
+key
+C-key                                                                           new tab                                                                         ctrlp
+A-key
+<Leader>-key    quickfix                        cscope                          cscope                                          cscope          nerdtree        yankstack                       FZFTags
+other           <l>qo qf open                                                   _t dup tab                      _u undoquit                                     ,p save word    [q quickfix     ]q quickfix
+                <l>qc qf close                                                  <l>tl lasttab                                                                                   [Q quickfix     ]Q quickfix
+                                                                                                                                                                                [c p-hunk       ]c n-hunk
+                                                                                ta EasyAlign                                    <l>ig indentguide
+                                                                                <l>tt checkbox
+
+                Q               W               E               R               T               Y               U               I               O               P               {               }
+key
+C-key
+A-key
+<Leader>-key    quickfix                        cscope                          cscope                                          cscope          nerdtree        yankstack
+other
+command                         sudo write
+
+                a               s               d               f               g               h               j               k               l               ;               '           #
+key                                                                                                             gj              gk
+C-key                           save
+A-key                                                                           gitgutter
+<Leader>-key    diff            cscope          cscope          cscope          cscope                          scrollbind      Ack                             semi-colon
+other           _al Ale                         ds Dsurround                    <l>gb gitblame  <l>hx Hex                                       <l>ldt, <l>ldo  ;' #if 0
+                                                                                gS VgSurround   <l>hu undo hunk                                                 ;; #ifdef <>
+                                                                                                                                                                ;[ add {}
+                                                                                                                                                                ;ac del fn()
+
+                A               S               D               F               G               H               J               K               L               :               @           ~
+key                             VSurround
+C-key
+A-key
+<Leader>-key                    cscope          cscope          cscope          cscope
+other
+
+                \               z               x               c               v               b               n               m               ,               .               /
 key             <Leader>
-C-key                                                                       tagbar      togglenu
+C-key                                                                                                           togglenu
 A-key
-<Leader>-key                                        cscope                  toggle buf  nerdtree    highlights  space
-other
+<Leader>-key                                                    cscope                          toggle buf      vim-mark        vim-mark        space
+other                                                           <l>cc c-comment                                 <l><l>n nerdt   ,m del ^M
+                                                                <l>cu uncomment                                                 ;m edit macro
+                                                                <l>cn comment
+                                                                <l>c<space> comment toggle
+                                                                cs Surround
+                                                                cS Surround
+                                                                crb binary
+                                                                cro octal
+                                                                crd decimal
+                                                                crx hex
+                                                                crs snake_case
+                                                                crm MixedCase
+                                                                crc camelCase
+                                                                cru UPPER_CASE
+                                                                cr. dot.case
+                                                                cr- dash-case
+                                                                cr<space> space case
+                                                                crt Title Case
 
-                |           Z           X           C           V           B           N           M           <           >           ?
+                |               Z               X               C               V               B               N               M               <               >               ?
 key
 C-key
 A-key
-<Leader>-key                                        cscope
+<Leader>-key                                                    cscope
+other
+
+                <Enter>
+key             nohlt
+C-key
+A-key
+<Leader>-key    FZFBuffers
 other
