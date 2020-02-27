@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
+/* Find the length of a string using a single line while */
+
+#include "common.h"
 
 int main()
 {

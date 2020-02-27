@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
+/* Dynamic Circular Buffer
+ * no indices and count kept */
+
+#include "common.h"
 
 #define DEBUG               (0)
 #define PAINT_PATTERN       (0xabababab)

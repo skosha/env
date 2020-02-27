@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdint.h>
+/* Example to print ascii values from char */
+
+#include "common.h"
 
 int main()
 {

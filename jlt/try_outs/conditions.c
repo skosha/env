@@ -1,3 +1,5 @@
+/* Check complex boolean conditions outcomes */
+
 #include "common.h"
 
 #define BOOL_2_NUM(val)     ((val) ? 1 : 0)

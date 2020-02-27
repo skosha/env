@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
+/* Use a filter string to find matching string from a list of strings */
+
+#include "common.h"
 
 int main()
 {

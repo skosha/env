@@ -1,7 +1,8 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
+/* Dynamic circular buffer implementation
+ * Instead of two indices, use a paint pattern and write index for read
+ * Only needs write index and total size of buffer, no count needed as well
+ */
+#include "common.h"
 
 #define DEBUG               (0)
 
