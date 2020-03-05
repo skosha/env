@@ -7,59 +7,55 @@ stty -ixon
 alias ls='ls --color'
 
 # some more ls aliases
-alias ll='ls -alFX' # Sort by type
-alias la='ls -AX' # Sort by type
-alias lt='ls -lt' # Sort by date
-alias l='ls -CF'
+alias ll='ls -alFX'         # Sort by type
+alias la='ls -AX'           # Sort by type
+alias lt='ls -lt'           # Sort by date
+alias l='ls -CF'            # Useful for passing to pager
 
 # refresh shell
 alias reload='source ~/.bashrc'
 
 # My git aliases
-alias gitl='git log --name-only'        # full log with filenames
-alias g-ls='git ls-files'
-alias go-ls='git ls-files -o --directory'
-alias st='git status'
-alias g-diff='git diff'
-alias gs-diff='git diff --staged'
-alias g-show='git show'
-alias gn-show='git show --name-only'
-alias pull='git pull --rebase'
-alias r-pull='git pull --rebase origin'
-alias push='git push'
-alias rebase='git rebase $(git --no-pager branch | fzf +m)'
-alias co='git checkout'
-alias br='git --no-pager branch -vv'
-alias n-br='git checkout -b'
-alias commit='git commit'
-alias a-commit='git commit --amend'
-alias ae-commit='git commit --amend --no-edit'
-alias add='git add'
-alias stash='git stash'
-alias save='git stash save -u'
-alias a-stash='git stash apply $(git stash list | fzf +m -1 -0| cut -d':' -f1)'
-alias d-stash='git stash drop $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'
-alias s-stash='git show $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'
+alias gitl='git log --name-only'            # full log with filenames
+alias g-ls='git ls-files'                   # list files in git
+alias go-ls='git ls-files -o --directory'   # list only directories part of git
+alias st='git status'                       # short for status
+alias gs-diff='git diff --staged'           # diff staged files (git diff is for unstaged files only and git show for commited files)
+alias pull='git pull --rebase'              # pull with rebase
+alias r-pull='git pull --rebase origin'     # pull with rebase to origin
+alias push='git push'                       # short for push
+alias rebase='git rebase $(git --no-pager branch | fzf +m)' # choose from a list of branches to rebase to
+alias co='git checkout'                     # short for checkout
+alias br='git --no-pager branch -vv'        # short for listing branches
+alias n-br='git checkout -b'                # create and checkout a new branch
+alias commit='git commit'                   # short for commit
+alias a-commit='git commit --amend'         # re-commit the same commit with editing the commit message
+alias ae-commit='git commit --amend --no-edit'  # re-commit the same commit without editing the commit message
+alias add='git add'                         # short for add
+alias stash='git stash'                     # short for stash
+alias save='git stash save -u'              # short for saving to a new stash (untracked files as well)
+alias a-stash='git stash apply $(git stash list | fzf +m -1 -0| cut -d':' -f1)'     # choose a stash to apply from a list
+alias d-stash='git stash drop $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'     # choose a stash to delete from a list
+alias s-stash='git show $(git stash list | fzf +m -1 -0 | cut -d':' -f1)'           # show a stash from a list
 alias flog='git log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(dim white) - %an%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
-alias g-patch='git format-patch -1'
-alias a-patch='git am <'
-alias l-merge='git merge $(git --no-pager branch | fzf +m -1 -0)'
-alias r-merge='git merge --no-ff $(git --no-pager branch | fzf +m -1 -0)'
-alias d-commit='git reset --hard HEAD^'
-alias r-commit='git reset --soft HEAD^'
-alias s-update='git submodule update --remote'
+alias g-patch='git format-patch -1'         # create a patch
+alias a-patch='git am <'                    # apply a patch
+alias l-merge='git merge $(git --no-pager branch | fzf +m -1 -0)'       # local merge from a list of branches
+alias r-merge='git merge --no-ff $(git --no-pager branch | fzf +m -1 -0)'   # no-ff merge from a list of branches
+alias d-commit='git reset --hard HEAD^'     # delete the head commit (hard)
+alias r-commit='git reset --soft HEAD^'     # delete the head commit and update the workspace to changes
+alias s-update='git submodule update --remote'  # submodule update
 
 # Grep aliases
-alias grep='grep --exclude="tags" --exclude="cscope.out" --color=auto'
-alias grepo='grep --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'
-alias grepp='grep -rni'
+alias grep='grep --exclude="tags" --exclude="cscope.out" --color=auto'  # do not include tags and cscope when searching
+alias grepo='grep --exclude=\*.{bin,out,t32,elf,o,a,map,git,rst}'       # exclude all output files from search
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Make mount command output pretty and human readable format
-alias mount='mount |column -t'
+alias mount='mount | column -t'
 
 # Resume wget by default
 alias wget='wget -c'
@@ -72,8 +68,8 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
 
 # Finding stuff!
-alias fd='find . -type d -iname'
-alias ff='find . -type f -iname'
+alias fd='find . -type d -iname'        # find only directories
+alias ff='find . -type f -iname'        # find only files
 
 # OSX specific aliases
 unamestr=`uname`
@@ -103,49 +99,48 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias smartsleep='sudo pmset -a hibernatemode 2'
 fi
 
+# Make and cd to the directory
+unalias mkcd 2>/dev/null
+mkcd () {
+    mkdir "$1"
+    cd "$1"
+}
+
+# Kill process
+unalias fkill 2>/dev/null
+fkill() {
+    pid=$(ps -ef | sed 1d | fzf --cycle -m | awk '{print $2}')
+    if [ "x$pid" != "x" ]
+    then
+        kill -${1:-9} $pid
+    fi
+}
+
+########################################## git functions
+
+# Add selected files to staged (select using shift-tab)
 unalias f-add 2>/dev/null
 f-add() {
     git add $(git status -s | fzf --multi -1 -0 | awk '{print $2}')
 }
 
-
+# remove selected files from staged (select using shift-tab)
 unalias r-file 2>/dev/null
 r-file() {
     git reset HEAD $(git status -s | fzf --multi -1 -0 | awk '{print $2}')
 }
 
-
-unalias g-revert 2>/dev/null
-g-revert() {
+# revert file(s) changes in current workspace, supply a filename or select from a list of file(s) (can select multiple)
+unalias gf-revert 2>/dev/null
+gf-revert() {
     if [ ! -n "$1" ]; then
         git checkout $(git status -s | fzf --multi | awk '{print $2}')
     else
-        git checkout "$1" $(git status | fzf --multi | awk '{print $2}')
+        git checkout "$1"
     fi
 }
 
-unalias r-sync 2>/dev/null
-r-sync() {
-    next=$PWD
-    substr=fw-
-    while :
-    do
-        if [[ $next = ${next#*$substr} ]] ; then
-            break
-        elif [[ $next == "/" ]] ; then
-            echo "ERROR: could not find fw-* directory"
-            exit 1
-        else
-            repo_dir=$next
-            next=$(dirname $next)
-        fi
-    done
-
-    pushd $repo_dir
-    repo sync
-    popd
-}
-
+# checkout a branch selected from a list of local branches
 unalias ci 2>/dev/null
 ci() {
     local branch
@@ -153,6 +148,7 @@ ci() {
     git checkout $branch
 }
 
+# delete a branch selected from a list of local branches
 unalias b-del 2>/dev/null
 b-del() {
     local branch
@@ -160,6 +156,7 @@ b-del() {
     git branch -D $branch
 }
 
+# create and checkout a new tracking branch selected from a list of remote branches
 unalias r-br 2>/dev/null
 r-br() {
     local branch
@@ -170,7 +167,7 @@ r-br() {
     git checkout -b $target --track $remote/$target
 }
 
-
+# Delete a remote branch selected from a list of remote branches
 unalias r-del 2>/dev/null
 r-del() {
     local branch
@@ -181,7 +178,7 @@ r-del() {
     git push $remote --delete $target
 }
 
-
+# diff a selected commit with its previous commit
 unalias c-diff 2>/dev/null
 c-diff() {
     local c_sha
@@ -189,6 +186,7 @@ c-diff() {
     git diff $c_sha~ $c_sha
 }
 
+# delete a selected commit completely
 unalias c-del 2>/dev/null
 c-del() {
     local c_sha
@@ -196,7 +194,7 @@ c-del() {
     git rebase --onto $c_sha^ $c_sha
 }
 
-
+# delete a tag locally and remotely
 unalias d-tag 2>/dev/null
 d-tag() {
     local tag
@@ -205,6 +203,11 @@ d-tag() {
     git tag -d $tag
 }
 
+# tig like stash viewer
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+unalias f-stash 2>/dev/null
 f-stash() {
     local out q k sha
     while out=$(
@@ -229,6 +232,8 @@ f-stash() {
     done
 }
 
+# Delete a file from a commit
+# Note: requires the workspace to be clean, otherwise commits all the unstaged changes as well
 unalias df-commit 2>/dev/null
 df-commit() {
     local file
@@ -237,10 +242,10 @@ df-commit() {
     git commit -a --amend --no-edit
 }
 
-is_in_git_repo() {
-    git rev-parse HEAD > /dev/null 2>&1
-}
-
+# cherry-pick selected commit from $1 branch by creating a new branch
+# new branch name is derived from first word of commit message + "_$2"
+# Example: cp_from dev c4
+unalias cp_from 2>/dev/null
 cp_from() {
     [[ ! -z "$1" ]] &&
     [[ ! -z "$2" ]] &&
@@ -250,7 +255,54 @@ cp_from() {
     git cherry-pick $c_sha
 }
 
-mkcd () {
-    mkdir "$1"
-    cd "$1"
+# cherry-pick $1 by creating a new branch
+# new branch name is derived from first word of commit message + "_$2"
+# Example: cp_sha <sha> c4
+unalias cp_sha 2>/dev/null
+cp_sha() {
+    [[ ! -z "$1" ]] &&
+    [[ ! -z "$2" ]] &&
+    c_name=$(git show --oneline $1 | head -n 1 | cut -d' ' -f2) &&
+    git checkout -b "${c_name}_${2}" &&
+    git cherry-pick $c_sha
+}
+
+# fcs - get git commit sha
+# example usage: git rebase -i `fcs`
+unalias fcs 2>/dev/null
+fcs() {
+    local commits commit
+    commit=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short $1 | fzf +m -1 -0 | cut -d' ' -f1) &&
+    echo -n "$commit"
+}
+
+# fco - checkout git branch/tag (remote/local)
+unalias fco 2>/dev/null
+fco() {
+    local tags branches target
+    tags=$(
+    git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+    branches=$(
+    git branch --all | grep -v HEAD             |
+        sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+        sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+    target=$(
+    (echo "$tags"; echo "$branches") |
+        fzf-tmux -l30 -- --no-hcycle --ansi +m -d "\t" -n 2) || return
+    git checkout $(echo "$target" | awk '{print $2}')
+}
+
+# fcoc - checkout git commit
+unalias fcoc 2>/dev/null
+fcoc() {
+    local commit=$(fcs)
+    [[ -n "$commit"  ]] && git checkout "$commit"
+}
+
+unalias log_since 2>/dev/null
+log_since() {
+    local to_commit="HEAD"
+    [[ ! -z "$2" ]] && to_commit="$2"
+    [[ ! -z "$1" ]] &&
+    git log --pretty=format:'%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s' --date=short "$1".."$to_commit"^
 }
