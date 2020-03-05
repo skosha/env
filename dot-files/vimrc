@@ -81,7 +81,8 @@ Plug 'AndrewRadev/undoquit.vim'
 " }}}
 
 " {{{ Utils
-Plug 'mileszs/ack.vim'                                                  " The search plugin
+"Plug 'mileszs/ack.vim'                                                  " The search plugin
+Plug 'AndrewRadev/ack.vim'
 Plug 'powerman/vim-plugin-AnsiEsc'                                      " ANSI Esc codes in Vim
 "Plug 'MattesGroeger/vim-bookmarks'                                      " Bookmarks
 Plug 'jkramer/vim-checkbox'                                             " Toggle [ ] [x]

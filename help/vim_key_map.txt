@@ -24,7 +24,7 @@ other
 key
 C-key                                                                           new tab                                                                         ctrlp
 A-key
-<Leader>-key    quickfix                        cscope                          cscope                                          cscope          nerdtree        yankstack                       FZFTags
+<Leader>-key    quickfix                        cscope          vim-mark        cscope                                          cscope          nerdtree        yankstack                       FZFTags
 other           <l>qo qf open                                                   _t dup tab                      _u undoquit                                     ,p save word    [q quickfix     ]q quickfix
                 <l>qc qf close                                                  <l>tl lasttab                                                                                   [Q quickfix     ]Q quickfix
                                                                                                                                                                                 [c p-hunk       ]c n-hunk
