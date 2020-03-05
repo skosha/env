@@ -38,6 +38,8 @@ Plug 'vim-scripts/AutoComplPop'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mbbill/code_complete'
 Plug 'junegunn/vim-easy-align'                                          " Easy align
+Plug 'ludovicchabant/vim-gutentags'										" auto tags and cscope db
+Plug 'skywind3000/gutentags_plus'										" auto tags and cscope db
 Plug 'nathanaelkane/vim-indent-guides'                                  " Highlight multiple indents
 Plug 'michaeljsmith/vim-indent-object'                                  " Add indent as object
 Plug 'scrooloose/nerdcommenter'                                         " Better commenting

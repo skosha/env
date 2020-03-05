@@ -126,6 +126,49 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>gb :<C-u>call gitblame#echo()<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Guten-Tag
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.git', '.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
+" Make Gutentags generate in most cases.
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+
+" Let Gutentags generate more info for the tags.
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+let g:gutentags_plus_nomap = 1
+
+noremap <silent> <leader>s :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>g :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>c :GscopeFind c <C-R><C-W><cr>
+"noremap <silent> <leader>t :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>t :GscopeFind t <C-R>=expand("<cword>")<CR><CR>
+noremap <silent> <leader>e :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>f :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>i :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>d :GscopeFind d <C-R><C-W><cr>
+"noremap <silent> <leader>a :GscopeFind a <C-R><C-W><cr>
+"noremap <silent> <leader>z :GscopeFind z <C-R><C-W><cr>
+
+" Clear cache
+command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
