@@ -2,8 +2,6 @@ syntax on
 set t_Co=256
 set background=dark
 
-set encoding=UTF-8
-
 if has('win32')
     "colorscheme solarized
     "colorscheme one
@@ -320,8 +318,6 @@ noremap <Leader>q :cfirst<CR>
 noremap <Leader>Q :clast<CR>
 noremap <Leader>qo :cwindow<CR>
 noremap <Leader>qc :cclose<CR>
-
-autocmd BufReadPost quickfix nnoremap <buffer> q :q<CR>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
@@ -679,7 +675,7 @@ else
     set csprg=/usr/bin/cscope
 endif
 
-let g:cscope_loaded = 1
+let g:cscope_loaded = 0
 if (g:cscope_loaded == 0)
 
     """"""""""""" Standard cscope/vim boilerplate
