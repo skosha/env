@@ -3,3 +3,31 @@ expand('<cword>')
 
 # current column
 col('.')
+
+# Vimscript Variable Scoping:
+g:varname   The variable is global
+s:varname   The variable is local to the current script file
+w:varname   The variable is local to the current editor window
+t:varname   The variable is local to the current editor tab
+b:varname   The variable is local to the current editor buffer
+l:varname   The variable is local to the current function
+a:varname   The variable is a parameter of the current function
+v:varname   The variable is one that Vim predefines
+&varname    A Vim option (local option if defined, otherwise global)
+&l:varname  A local Vim option
+&g:varname  A global Vim option
+@varname    A Vim register
+$varname    An environment variable
+
+# Lists
+let mylist = [1, two, 3, "four"]
+let first = mylist[0]
+let last  = mylist[-1]
+
+
+# Dictionaries
+let colors = {
+  \ "apple": "red",
+  \ "banana": "yellow"
+}
+:help E715

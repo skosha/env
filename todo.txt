@@ -24,6 +24,7 @@ https://github.com/elzr/vim-json
 https://github.com/vim-scripts/Smartput
 https://github.com/davidoc/taskpaper.vim
 https://freshman.tech/vim-javascript/
+https://www.ubuntupit.com/best-vim-plugins-for-programming/
 
 https://github.com/AndrewRadev/deleft.vim
 https://github.com/andymass/vim-matchup
@@ -43,6 +44,9 @@ https://jamesoff.net/2017/08/26/tmux-configuration.html
 https://github.com/rothgar/awesome-tmux#tutorials
 https://lgfang.github.io/mynotes/utils/tmux.html
 
+Coding:
+https://sourceware.org/gdb/current/onlinedocs/gdb/Macros.html
+
 Coding Guidelines:
 http://umich.edu/~eecs381/handouts/CHeaderFileGuidelines.pdf
 
@@ -50,6 +54,8 @@ Cheatsheets:
 Tig - https://devhints.io/tig
 Tmux - http://cheat.errtheblog.com/s/tmux
 Tmux - https://gist.github.com/andreyvit/2921703
+Gdb - https://gist.github.com/rkubik/b96c23bd8ed58333de37f2b8cd052c30
+Gdb - https://sourceware.org/gdb/current/onlinedocs/gdb/Memory.html
 
 Google github:
 https://github.com/google/sling
@@ -77,3 +83,16 @@ https://github.com/google/dimsum
 https://github.com/google/.github
 https://github.com/google/live-transcribe-speech-engine
 https://github.com/google/stm32_bare_lib
+
+
+Vim scripting:
+https://vim-jp.org/vimdoc-en/eval.html#Lists
+https://learnxinyminutes.com/docs/vimscript/
+https://developer.ibm.com/technologies/linux/tutorials/l-vim-script-2/
+https://devhints.io/vimscript-functions
+https://learnvimscriptthehardway.stevelosh.com/
+https://devhints.io/vimscript
+
+Learn:
+https://devopedia.org/ieee-802-11ad
+https://www.electronicdesign.com/technologies/communications/article/21798297/understanding-ieee-80211ac-vht-wireless

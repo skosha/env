@@ -1,3 +1,3 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.dot-files/.aliasrc ] && source ~/.dot-files/.aliasrc
-[ -f ~/.dot-files/.mostrc ] && source ~/.dot-files//.mostrc
+[ -f ~/.dot-files/.mostrc ] && source ~/.dot-files/.mostrc
