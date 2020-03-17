@@ -628,11 +628,92 @@ function! SwapBytes()
     call winrestview(l:save)
 endfunction
 
-let timer = timer_start(60000, 'SaveSession', {'repeat': 1})
-function! SaveSession(timer)
-    :if v:this_session != '' | exec "mks! " . v:this_session | endif
+function! FileHeading()
+    execute 'normal! gg'
+    execute 'normal! O'
+    let s:line=line(".")
+    call setline(s:line,"/**")
+    call append(s:line,  " * Filename    - ".expand('%:t'))
+    call append(s:line+1," * Description - ")
+    call append(s:line+2," * Author      - Kosha Shah")
+    call append(s:line+3," * Date        - ".strftime("%b %d %Y"))
+    call append(s:line+4," */")
+    unlet s:line
 endfunction
 
+function! AddFunctionHeader(type)
+    " Function definition
+    if a:type == 0
+        " Find the start bracket of the function
+        let s:func_proto_end=searchpair('^{', '', '^}', 'b')
+        while s:func_proto_end == 0
+            execute 'normal! j'
+            let s:func_proto_end=searchpair('^{', '', '^}', 'b')
+        endwhile
+    else
+        " TODO: Verify this is the function declaration
+        let s:func_proto_end=search('^$', 'n')
+    endif
+
+    " Find the function definition start line and move to it
+    let l:func_proto_start=search('\(^$\|\/$\)', 'bn')+1
+    execute l:func_proto_start
+
+    " Get the function definition line(s) as string
+    let l:func_proto=join(getline('.', s:func_proto_end-1))
+
+    " Get the function name
+    let l:func_name=split(split(l:func_proto, '(')[0], ' ')[-1]
+
+    " Find the parameters to the function
+    let l:params=split(split(split(l:func_proto, '(')[1], ')')[0], ',')
+    if (l:params[0] == 'void')
+        let l:params = []
+    endif
+
+    " Get the return type and filter out 'static' and 'inline' keywords
+    let l:return_type_list=split(split(l:func_proto, '(')[0], ' ')[0:-2]
+    call filter(l:return_type_list, 'v:val !~ "static"')    " Remove static keyword
+    call filter(l:return_type_list, 'v:val !~ "inline"')    " Remove inline keyword
+    let l:return_type=join(l:return_type_list)
+
+    " Start from a line above func_start
+    let l:line=l:func_proto_start-1
+
+    " Start appending header
+    let l:offset=0
+    call append(l:line+l:offset,  "/**")
+    let l:offset=l:offset+1
+    call append(l:line+l:offset," * @function: ".l:func_name)
+    let l:offset=l:offset+1
+    call append(l:line+l:offset," * <<Description>>")
+    let l:offset=l:offset+1
+
+    " Append params, if any
+    if len(l:params) != 0
+        call append(l:line+l:offset," *")
+        let l:offset=l:offset+1
+    endif
+    for p in l:params
+        let l:param_name=split(split(p)[-1], '*')[-1]
+        call append(l:line+l:offset, " * @param ".l:param_name)
+        let l:offset=l:offset+1
+    endfor
+
+    " Append return type, if any
+    if l:return_type != 'void'
+        call append(l:line+l:offset, " *")
+        let l:offset=l:offset+1
+        call append(l:line+l:offset, " * @return ".l:return_type)
+        let l:offset=l:offset+1
+    endif
+
+    " Append the end of header
+    call append(l:line+l:offset, " */")
+
+    " Move to the func_start
+    execute l:func_proto_start
+endfunction
 
 " }}}
 
