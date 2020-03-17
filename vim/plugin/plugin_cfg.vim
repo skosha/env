@@ -75,12 +75,13 @@ let g:ctrlp_tabpage_position = 'ac'
 let g:ctrlp_clear_cache_on_exit = 0     " Hit <F5> to refresh index
 let g:ctrlp_extensions = ['mixed', 'changes', 'quickfix']
 let g:ctrlp_cmd='CtrlPMixed'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
             \ 'file': '\v\.(exe|so|dll)$',
             \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
             \ }
+
+nmap <F12> <Plug>CscopeDBInit
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Easy Align

@@ -37,6 +37,7 @@ Plug 'dense-analysis/ale', { 'on': 'ALEToggle' }                        " Lint
 Plug 'vim-scripts/AutoComplPop'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mbbill/code_complete'
+Plug 'erig0/cscope_dynamic'
 Plug 'junegunn/vim-easy-align'                                          " Easy align
 Plug 'nathanaelkane/vim-indent-guides'                                  " Highlight multiple indents
 Plug 'michaeljsmith/vim-indent-object'                                  " Add indent as object
