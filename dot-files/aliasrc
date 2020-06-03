@@ -255,6 +255,15 @@ cp_from() {
     git cherry-pick $c_sha
 }
 
+# cherry-pick selected commit from $1 to the current branch
+# Example: cp_into dev
+unalias cp_into 2>/dev/null
+cp_into() {
+    [[ ! -z "$1" ]] &&
+    c_sha=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short $1 | fzf +m -1 -0 | cut -d' ' -f1) &&
+    git cherry-pick $c_sha
+}
+
 # cherry-pick $1 by creating a new branch
 # new branch name is derived from first word of commit message + "_$2"
 # Example: cp_sha <sha> c4
@@ -264,7 +273,7 @@ cp_sha() {
     [[ ! -z "$2" ]] &&
     c_name=$(git show --oneline $1 | head -n 1 | cut -d' ' -f2) &&
     git checkout -b "${c_name}_${2}" &&
-    git cherry-pick $c_sha
+    git cherry-pick $1
 }
 
 # fcs - get git commit sha
