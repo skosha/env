@@ -49,41 +49,41 @@ class Helper:
                 yield file
 
     def verbose_print(self, str):
-        if self._verbose: print str
+        if self._verbose: print(str)
 
     def _check_arg(self, arg):
         if arg.startswith('-'):
-            print 'ERROR: Incorrect argument: ' + arg + '\n'
+            print('ERROR: Incorrect argument: {}\n'.format(arg))
             self._print_usage()
             sys.exit(2)
 
     def _print_usage(self):
-        print 'Sort Pics Version: ' + str(self._version)
-        print ''
-        print 'Usage: sort_pics.py -p <prefix> [-n <start_number>]'
-        print '\t-h, --help     print this help'
-        print '\t-V, --version  print version information'
-        print '\t-v, --verbose  print verbose messages'
-        print '\t-p, --prefix   prefix to be added to all filenames'
-        print '\t-n, --num      starting count of the filenames, default 0'
-        print ''
+        print('Sort Pics Version: ' + str(self._version))
+        print('')
+        print('Usage: sort_pics.py -p <prefix> [-n <start_number>]')
+        print('\t-h, --help     print this help')
+        print('\t-V, --version  print version information')
+        print('\t-v, --verbose  print verbose messages')
+        print('\t-p, --prefix   prefix to be added to all filenames')
+        print('\t-n, --num      starting count of the filenames, default 0')
+        print('')
 
     def _print_version(self):
-        print 'Sort Pics Version: ' + str(self._version)
-        print ''
-        print ''
-        print 'Changelist:'
-        print '\tv0.2'
-        print '\t - Add argument validation'
-        print '\t - Add changelist'
-        print '\t - Modularisation of the code'
-        print ''
-        print '\tv0.1'
-        print '\t - Initial version'
-        print '\t - Take a prefix and add it to all the image files'
-        print '\t   and move them to jpg, raw and mobile folders.'
-        print '\t - Take a starting number to begin the image count as'
-        print ''
+        print('Sort Pics Version: ' + str(self._version))
+        print('')
+        print('')
+        print('Changelist:')
+        print('\tv0.2')
+        print('\t - Add argument validation')
+        print('\t - Add changelist')
+        print('\t - Modularisation of the code')
+        print('')
+        print('\tv0.1')
+        print('\t - Initial version')
+        print('\t - Take a prefix and add it to all the image files')
+        print('\t   and move them to jpg, raw and mobile folders.')
+        print('\t - Take a starting number to begin the image count as')
+        print('')
 
 # End of class Helper
 
