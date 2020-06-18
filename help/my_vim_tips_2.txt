@@ -134,6 +134,10 @@ Ctrl-u - delete entire entered
 # Delete extra lines
 :%s/\(\n\n\)\+/\1/g
 
+# Reverse order of lines
+:g/^/m0             # All lines
+:<n>,<m>g/^/m<n-1>  # Reverse lines <n> to <m>
+
 ################# !Editing ####################
 
 ################## Motion #####################

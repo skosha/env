@@ -66,6 +66,10 @@ git commit --amend              # amend the last commit
 git commit --amend --no-edit    # Do so without having to edit the commit message.
 git commit -s                   # Signed off commit
 
+# Update older multiple commits
+git rebase -i HEAD~N
+  - Move to the lines of the commit message you want to change and replace 'pick' with 'reword'
+
 # Delete a commit
 git rebase -i HEAD~2            # Delete the local commit
 git push -f                     # Force the delete to remote
@@ -137,7 +141,14 @@ git log -S'the line from your file' -- path/to/your/file.txt
 git log remotename/branchname
 
 # Shows content differences between two branches
-git diff <first-branch>...<second-branch>
+git diff <branch1>..<branch2>
+git diff <branch1>...<branch2> - compares the top of the right branch with the common ancestor of the two branches.
+
+# Compare commits between two branches
+git log <branch1>..<branch2>
+
+# Compare specific file between two branches
+git diff <branch1>..branch2 -- <file>
 
 # Outputs metadata and content changes of the specified commit
 git show <commit>
@@ -168,6 +179,9 @@ git_next() {
     PREV=`git rev-list --topo-order HEAD..$HASH | tail -1`
     git checkout $PREV
 }
+
+# Fetch a file from another branch
+git show another_branch:path/to/file.c > path/to/file.c
 
 # cherry-pick
 git cherry-pick <sha>
@@ -203,6 +217,10 @@ git format-patch -1 <sha1>/path/to/file
 git apply --stat file.patch # show stats.
 git apply --check file.patch # check for error before applying.
 git am < file.patch # apply the patch finally.
+
+# Merge a branch as one commit
+git merge --squash <feature branch>
+git commit
 
 # cache credentials
 git config --global credential.helper cache

@@ -7,6 +7,16 @@ https://code.google.com/archive/p/seascope/wikis/Windows.wiki
 https://scoop.sh/
 https://medium.com/@bhupathy/install-terminator-on-windows-with-wsl-2826591d2156
 
+https://github.com/dandavison/delta
+https://github.com/wfxr/forgit
+
+https://medium.com/better-programming/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d
+
+https://www.gnu.org/software/gawk/manual/gawk.html
+
+# Terminal cheatsheet
+https://gist.github.com/cferdinandi/ef665330286fd5d7127d
+
 Log file viewing:
 http://lnav.org/
 https://github.com/peco/peco
@@ -43,6 +53,7 @@ https://github.com/kristijanhusak/tmux-simple-git-status
 https://jamesoff.net/2017/08/26/tmux-configuration.html
 https://github.com/rothgar/awesome-tmux#tutorials
 https://lgfang.github.io/mynotes/utils/tmux.html
+https://gist.github.com/MohamedAlaa/2961058
 
 Coding:
 https://sourceware.org/gdb/current/onlinedocs/gdb/Macros.html

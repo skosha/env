@@ -1,0 +1,7 @@
+fzf       | https://github.com/junegunn/fzf
+tmux      | https://github.com/tmux/tmux/wiki
+tmuxp     | https://github.com/tmux               - python/tmuxp
+tig       | https://github.com/jonas/tig
+ripgrep   | https://github.com/BurntSushi/ripgrep
+git-delta | https://github.com/dandavison/delta
+vim-plug  | https://github.com/junegunn/vim     - plug
