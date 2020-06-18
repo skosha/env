@@ -6,7 +6,7 @@ typedef struct PACKED misc_tag_s
 } misc_tag_t;
 
 #define TAG_1           (0x11)
-#define TAG_2           (0x22)
+#define TAG_2           (0x110022)
 
 void print_tag(misc_tag_t *in_tag)
 {
@@ -27,7 +27,7 @@ void print_tag(misc_tag_t *in_tag)
 int main()
 {
     misc_tag_t tag_1 = { .tag = TAG_1 };
-    misc_tag_t tag_2 = { .tag = TAG_2 };
+    misc_tag_t tag_2 = { .tag = {TAG_2} };
     misc_tag_t tag_3 = { .tag = 9 };
 
     print_tag(&tag_1);
