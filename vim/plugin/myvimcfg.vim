@@ -230,6 +230,12 @@ set ttimeout ttimeoutlen=50
 
 " Mappings {{{
 
+" Put the search result at the top of the screen
+nnoremap n nzt
+nnoremap N Nzt
+xnoremap n nzt
+xnoremap N Nzt
+
 let mapleader='\'
 
 " `Ctrl-U` in insert mode deletes a lot. Use `Ctrl-G` u to first break undo,
@@ -324,6 +330,11 @@ noremap <Leader>qc :cclose<CR>
 if !has("win32")
     command! W w !sudo tee % > /dev/null
 endif
+
+" Delete current file and open explorer
+command! D call delete(expand('%')) | bdelete! | Ex
+" Delete current file and quit
+command! Dq call delete(expand('%')) | q!
 
 " Shortcut for toggling a diff in a window
 nnoremap <Leader>a :call WinStartDiff()<CR>
