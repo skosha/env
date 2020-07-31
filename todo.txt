@@ -14,6 +14,9 @@ https://medium.com/better-programming/boost-your-command-line-productivity-with-
 
 https://www.gnu.org/software/gawk/manual/gawk.html
 
+https://www.embeddedrelated.com/showarticle/900.php
+http://manoharvanga.com/hackme/
+
 # Terminal cheatsheet
 https://gist.github.com/cferdinandi/ef665330286fd5d7127d
 
