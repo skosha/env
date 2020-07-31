@@ -54,10 +54,11 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'drmikehenry/vim-headerguard'                                      " Add c++/c header guards
 " }}}
 
-" {{{ Python
+" {{{ Python & R
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop'  }   " Python IDE
 Plug 'vim-scripts/indentpython.vim'                                     " indent python
 Plug 'fisadev/vim-isort', { 'for': 'python' }
+Plug 'jpalardy/vim-slime'                                               " Send text to REPL
 " }}}
 
 " {{{ Language specifics
