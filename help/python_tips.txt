@@ -1,0 +1,59 @@
+# One line if else (like ternary)
+<expression1> if <condition> else <expression2>
+
+# shutil.copy
+┌──────────────────┬────────┬───────────┬───────┬────────────────┐
+│     Function     │ Copies │   Copies  │Can use│   Destination  │
+│                  │metadata│permissions│buffer │may be directory│
+├──────────────────┼────────┼───────────┼───────┼────────────────┤
+│shutil.copy       │   No   │    Yes    │   No  │      Yes       │
+│shutil.copyfile   │   No   │     No    │   No  │       No       │
+│shutil.copy2      │  Yes   │    Yes    │   No  │      Yes       │
+│shutil.copyfileobj│   No   │     No    │  Yes  │       No       │
+└──────────────────┴────────┴───────────┴───────┴────────────────┘
+
+## Executing shell commands
+
+#1 os.system
+import os
+os.system('ls -l')
+
+#2 os.popen
+import os
+stream = os.popen('echo Returned output')
+output = stream.read()
+output
+
+#3 subprocess.run
+list_files = subprocess.run(["ls", "-l"])
+print("The exit code was: %d" % list_files.returncode)
+
+#4 subprocess.Popen
+import subprocess
+process = subprocess.Popen(['echo', 'More output'],
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE)
+stdout, stderr = process.communicate()
+stdout, stderr
+
+┌──────────────────┬───────────┬────────────────┬──────────────────┐
+│     Use-case     │ os.system │ subprosess.run │ subprocess.Popen │
+├──────────────────┼───────────┼────────────────┼──────────────────┤
+│Requires parsed   │           │                │                  │
+│arguments         │     No    │       Yes      │      Yes         │
+├──────────────────┼───────────┼────────────────┼──────────────────┤
+│Waits for the     │           │                │                  │
+│command           │    Yes    │       Yes      │      No          │
+├──────────────────┼───────────┼────────────────┼──────────────────┤
+│Communicates with │           │                │                  │
+│stdin and stdout  │     No    │       Yes      │      Yes         │
+├──────────────────┼───────────┼────────────────┼──────────────────┤
+│                  │ Return    │                │                  │
+│Returns           │ value     │    Object      │    Object        │
+└──────────────────┴───────────┴────────────────┴──────────────────┘
+
+
+
+
+## Interesting modules
+https://pypi.org/project/keyring/

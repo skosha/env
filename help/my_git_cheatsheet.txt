@@ -103,6 +103,14 @@ git checkout -- <FILE>      # throw away local modifications and reset to last c
 git clean -f                # remove untracked files
 git revert HEAD             # Make a commit that undoes the last commit. Used to reset a commit that has already been pushed to a remote.
 
+# Revert multiple commits in one commit
+git revert abcd123                  # Revert first commit; creates a new commit
+git revert --no-commit wxyz789      # Revert next commit; puts the revert as staged.
+git commit --amend                  # Add the staged revert to the last revert commit
+OR
+git revert abcd123 wxyz789 --no-commit
+git commit
+
 # Resets
 git reset --hard <commit>   # Discards all history and changes back to the specified commit
 git reset <commit>          # Undoes all commits after [commit], preserving changes locally
@@ -149,6 +157,12 @@ git log <branch1>..<branch2>
 
 # Compare specific file between two branches
 git diff <branch1>..branch2 -- <file>
+
+# Get all branches that contains $COMMIT_ID
+git branch --contains $COMMIT_ID
+
+# Grep for a pattern in commit message
+git log --grep='<pattern>'
 
 # Outputs metadata and content changes of the specified commit
 git show <commit>
