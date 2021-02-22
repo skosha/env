@@ -276,7 +276,10 @@ nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
 
 " Use <F9> to toggle between open windows
-nmap <F9> <C-w><C-w>
+nmap <F9> <C-w><C-p>
+
+" Use <F10> to navigate to next window
+nmap <F10> <C-w><C-w>
 
 " Toggle back and forth between current and previous buffer
 map <Leader>b :buffer#<cr>
