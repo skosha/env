@@ -45,6 +45,10 @@ alias r-merge='git merge --no-ff $(git --no-pager branch | fzf +m -1 -0)'   # no
 alias d-commit='git reset --hard HEAD^'     # delete the head commit (hard)
 alias r-commit='git reset --soft HEAD^'     # delete the head commit and update the workspace to changes
 alias s-update='git submodule update --remote'  # submodule update
+alias cont-rebase='git add . && git rebase --continue'   # Continue rebase after adding all conflict resolutions
+alias abt-rebase='git rebase --abort'       # Abort rebase
+alias cont-cp='git add . && git cherry-pick --continue'  # Continue cherry-pick after adding all conflict resolutions
+alias abt-cp='git cherry-pick --abort'      # Abort cherry-pick
 
 # Grep aliases
 alias grep='grep --exclude="tags" --exclude="cscope.out" --color=auto'  # do not include tags and cscope when searching
@@ -117,6 +121,13 @@ fkill() {
 }
 
 ########################################## git functions
+
+# Grep a git branch for pattern in commit message
+# git-grep <pattern>
+unalias git-grep 2>/dev/null
+git-grep() {
+    git log --grep="$1"
+}
 
 # Add selected files to staged (select using shift-tab)
 unalias f-add 2>/dev/null
