@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <time.h>
 
 #define GCC_ATTRIBUTE(x) __attribute__ ((x))
 
@@ -36,6 +37,10 @@
 #define UNUSED(x)       ((void)(x))
 #endif
 
+#ifndef CTYPEOF
+#define CTYPEOF(a)      (__typeof__(a))
+#endif
+
 /* Get the size of a member of a struct */
 #define MEMBER_SIZE(type, member)       sizeof(((type *)0)->member)
 
@@ -43,6 +48,9 @@
 #define SET_NTH_BIT_TYPE(wd,n,type)     ((wd) |= (type)(1 << (n)))
 #define CLEAR_NTH_BIT_TYPE(wd,n,type)   ((wd) &= ~((type)(1 << (n))))
 #define IS_NTH_BIT_TYPE_SET(wd,n,type)  ((wd) & (type)(1 << (n)))
+
+#define SET_NTH_BIT(wd,n)               ((wd) |= (CTYPEOF((wd)) 1 << (n)))
+#define IS_NTH_BIT_SET(wd, n)           ((((wd) >> (n)) & 1) != 0)
 
 #define IS_VALID_PTR(ptr)               (NULL!=(ptr))
 
