@@ -20,3 +20,6 @@ sdkconfig.old
 *.bak
 .DS_Store
 *.out
+n.cscope.*
+.gitreview
+*.tmp
