@@ -49,6 +49,7 @@ https://github.com/python-mode/python-mode
 https://github.com/fs111/pydoc.vim
 https://github.com/cburroughs/pep8.py
 Python Keyring - https://stackoverflow.com/questions/36341923/cache-user-remote-credentials-for-command-line-tool
+https://piexif.readthedocs.io/en/latest/appendices.html#exif-data-in-piexif
 
 Tmux:
 https://github.com/arl/tmux-gitbar
