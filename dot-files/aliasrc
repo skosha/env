@@ -129,6 +129,14 @@ git-grep() {
     git log --grep="$1"
 }
 
+unalias git-show 2>/dev/null
+git-show() {
+	local sha
+    [[ ! -z "$1" ]] &&
+	sha=$(git log --grep="$1" | head -n 1 | awk '{print $2}') &&
+	[[ ! -z "$sha" ]] && git show "$sha"
+}
+
 # Add selected files to staged (select using shift-tab)
 unalias f-add 2>/dev/null
 f-add() {
@@ -212,6 +220,17 @@ d-tag() {
     tag=$(git tag | fzf-tmux +multi -1 -0 ) &&
     git push --delete origin $tag &&
     git tag -d $tag
+}
+
+# Export a stash to a patch
+unalias e-stash 2>/dev/null
+e-stash() {
+	local str index name
+	str=$(git stash list | fzf +m -1 -0) &&
+	index=$(echo "$str" | cut -d':' -f1) &&
+	name=$(echo "$str" | cut -d' ' -f4) &&
+	git stash show -p $index > $name.patch && # export a stash as patch file
+	echo "exported to $name.patch"
 }
 
 # tig like stash viewer
@@ -298,6 +317,15 @@ cp_from_to() {
     dest_br=$(git --no-pager branch -vv | fzf +m -1 -0 --header 'Select destination branch' | awk '{print $1}') || return
     c_sha=$(git log --pretty=format:"%h  %ad%x09%cd  %<(20)%cr%<(40trunc)%an%s" --date=short $src_br | fzf +m -1 -0 --header 'Select commit to cherry-pick' | cut -d' ' -f1) &&
     git cherry-pick $c_sha
+}
+
+unalias cp_from_firm 2>/dev/null
+cp_from_firm() {
+    local src_br c_sha
+    src_br=$(git --no-pager branch -vv | fzf +m -1 -0 --header 'Select source branch' | awk '{print $1}') || return
+    [[ ! -z "$1" ]] &&
+	c_sha=$(git log $src_br --grep="$1" | head -n 1 | awk '{print $2}') &&
+	[[ ! -z "$c_sha" ]] && git cherry-pick $c_sha
 }
 
 # cherry-pick selected commit from selected branch to the current branch
