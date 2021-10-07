@@ -203,6 +203,8 @@ set nobackup
 " https://github.com/neoclide/coc.nvim/issues/649
 set nowritebackup
 
+set shellpipe=>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
@@ -218,12 +220,14 @@ catch
 endtry
 
 " {{{ <A- key work-around for gnome terminals
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
+if has("mac")
+    let c='a'
+    while c <= 'z'
+      exec "set <A-".c.">=\e".c
+      exec "imap \e".c." <A-".c.">"
+      let c = nr2char(1+char2nr(c))
+    endw
+endif
 
 set ttimeout ttimeoutlen=50
 " }}} <A- key workaround end
@@ -758,8 +762,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" This tests to see if vim was configured with the '--enable-cscope' option
-" when it was compiled.  If it wasn't, time to recompile vim...
 if has('win32')
     "set csprg=C:\Work\Tools\my_gvim\cscope.exe
     set csprg=$HOME/.vim/vimfiles/cscope.exe

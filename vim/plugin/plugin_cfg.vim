@@ -81,6 +81,9 @@ let g:ctrlp_custom_ignore = {
             \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
             \ }
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Cscope Dynamic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <F12> <Plug>CscopeDBInit
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,13 +136,14 @@ nnoremap <Leader>gb :<C-u>call gitblame#echo()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 let g:gitgutter_updatetime=750
+let g:gitgutter_close_preview_on_escape=1
 nnoremap <A-g> :GitGutterToggle<cr>
 
 """"""""""""""""""""""""""""""
 " => headerguard
 """"""""""""""""""""""""""""""
 function! g:HeaderguardName()
-    return "__" . toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g')) . "__"
+    return "" . toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g')) . "_"
 endfunction
 
 function! g:HeaderguardLine3()
@@ -254,6 +258,11 @@ augroup rainbowParantheses
     autocmd!
     au VimEnter * call SetupRainbowParentheses()
 augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-ragtag
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ragtag_global_maps = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-slime

@@ -35,13 +35,13 @@ if has("autocmd")
     au FileType python map <buffer> F :set foldmethod=indent<cr>
     au FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
     au BufNewFile,BufRead *.py
-                \ set tabstop=4
-                \ set softtabstop=4
-                \ set shiftwidth=4
-                \ set textwidth=79
-                \ set expandtab
-                \ set autoindent
-                \ set shiftround    " round indent to multiple of 'shiftwidth'"
+                \ set tabstop=4 |
+                \ set softtabstop=4 |
+                \ set shiftwidth=4 |
+                \ set textwidth=79 |
+                \ set expandtab |
+                \ set autoindent |
+                \ set shiftround |
                 \ set fileformat=unix
 endif
 
