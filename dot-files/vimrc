@@ -62,7 +62,6 @@ Plug 'jpalardy/vim-slime'                                               " Send t
 " }}}
 
 " {{{ Language specifics
-Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }                 " Automatically insert the closing HTML tag
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }                 " Syntax highlight for Docker file
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }                 " js indent
 Plug 'chrisbra/vim-xml-runtime', { 'for': 'xml' }                       " xml ft plugin
@@ -78,6 +77,7 @@ Plug 'vim-scripts/icalendar.vim'                                        " for ca
 "Plug 'yegappan/mru'                                                     " most recently used files
 Plug 'scrooloose/nerdtree'                                              " NERD Tree file explorer
 Plug 'AndrewRadev/undoquit.vim'
+Plug 'wsdjeg/vim-fetch'													" file:line jump
 " }}}
 
 " {{{ Utils
@@ -101,6 +101,8 @@ Plug 'glts/vim-radical'                                                 " Conver
 Plug 'xolox/vim-reload'                                                 " Reload Vim plugins when saved
 Plug 'tpope/vim-repeat'                                                 " Allow plugins to use '.' for repeat
 Plug 'tpope/vim-surround'                                               " Work with delimiters
+Plug 'tpope/vim-ragtag'                                                 " A set of mappings for HTML, XML, PHP, ASP, eRuby, JSP, and more
+Plug 'tpope/vim-unimpaired'                                             " Mappings for a lot navigation stuff
 Plug 'AndrewRadev/switch.vim'                                           " Switch the word under cursor
 Plug 'godlygeek/tabular'                                                " Vim script for text filtering and alignment
 Plug 'roxma/vim-tmux-clipboard'                                         " Seamless clipboard between vim and tmux

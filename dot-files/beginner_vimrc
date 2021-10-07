@@ -1,0 +1,175 @@
+set nocompatible              " be iMproved, required
+
+if !has('win32')
+    set shell=/bin/bash
+endif
+
+syntax on
+set t_Co=256
+set background=dark
+
+colorscheme PaperColor
+
+" Set path to current and sub-directories only, will not search other system related directories
+if has('win32')
+    set path=./**
+else
+    set path=.,,**
+endif
+set path+=./**                  " Add the current directory to path
+
+" tabs and indents
+set autoindent                  " set auto indent on
+set copyindent                  " copy the previous indentation on autoindenting
+set smartindent                 " Set smart indent on
+set shiftround                  " Round indent to nearest shiftwidth multiple
+set smarttab                    " Set smart tabbing on
+set shiftwidth=4                " Shiftwidth to be 4
+set softtabstop=4
+set expandtab                   " Expand tab to spaces
+set tabstop=4                   " 1 tab = 4 spaces
+
+set number                      " line numbers
+set showmatch                   " Show the matching bracket
+set matchtime=1                 " shorten the jump time for showmatch
+set ignorecase                  " Ignore case in search
+set smartcase                   " Ignore case in searches excepted if an uppercase letter is used
+set hls                         " Highlight search
+set incsearch                   " Incremental search
+set matchpairs+=<:>             " Add < > to match pairs command
+set ruler                       " Set ruler on
+set backspace=indent,eol,start  " Backspace over everything
+set autowrite                   " Auto write modified files
+set autowriteall                " Auto write modified files
+set autoread                    " Auto load files modified outside of Vim
+set equalalways                 " Have all windows of equal size
+set virtualedit=block           " Allow visual block mode to select blank spaces as well
+set formatoptions+=M            " don't insert space when joining lines
+set formatoptions+=j            " remove comment leader when joining lines with comments
+set formatoptions+=n            " when editing text recognize numbered lists and indent them
+set formatoptions+=2            " use the indent of the second line of para for the rest of the para
+set formatoptions+=q            " allow formatting of comments with "gq"
+set shortmess=filtIoOA          " shorten up messages
+set report=0                    " always get report for all the line changes
+set confirm                     " get a dialog when :q, :w, or :wq fails"
+set startofline                 " Jump to non-blank start of line
+set laststatus=2                " Always show the statusline
+set lazyredraw                  " Don't redraw while executing macros (good performance config)
+set ttyfast                     " Performance improvements
+set foldcolumn=1                " Add a bit extra margin to the left
+set mouse=a                     " use mouse in all modes
+
+" Start scrolling three lines before the horizontal window border
+set scrolloff=3
+
+" Use wild chars in Vim search
+set wildmenu            " see :h 'wildmenu'
+set wildmode=list:longest,full  " see :h 'wildmode' for all the possible values
+set wildchar=<Tab>      " <Tab> to complete in cmdline.
+set wildignorecase      " ignore case when completing file names and directories.
+
+" diff mode
+set diffopt=vertical,filler,context:10,foldcolumn:1
+
+" [ completion options ]
+set complete=.,w,b,t,i,u,k       " completion buffers
+"            | | | | | | |
+"            | | | | | | `-dict
+"            | | | | | `-unloaded buffers
+"            | | | | `-include files
+"            | | | `-tags
+"            | | `-other loaded buffers
+"            | `-windows buffers
+"            `-the current buffer
+set completeopt=menuone " menu,menuone,longest,preview
+set completeopt-=preview " dont show preview window
+
+" Netrw config
+let g:netrw_liststyle=1     " Long style listing
+let g:netrw_keepdir=1       " Keep current directory immune from browsing directory
+let g:netrw_sort_by="exten"
+
+" magic/nomagic: changes special chars that can be used in search patterns
+set magic
+    " \v: 'very magic', make every character except a-zA-Z0-9 and '_' have special meaning
+    " use \v and \V to switch 'very magic' on or off.
+    " \m, \M: 'magic' mode.
+    " use \m and \M to switch 'magic' on or off.
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+if has("autocmd")
+
+    augroup trail_whitespace
+        autocmd!
+        " Automatically remove all trailing whitespace
+        autocmd BufWritePre * :%s/\s\+$//e
+    augroup END
+
+    " automatically rebalance windows on vim resize
+    augroup window_resize
+        autocmd!
+        autocmd VimResized * :wincmd =
+    augroup END
+
+    " netrw immediately activate when using [g]vim without any filenames, showing the current directory
+    augroup VimStartup
+        autocmd!
+        autocmd VimEnter * if expand("%") == "" | e . | endif
+    augroup END
+
+    " Make sure that enter is never overriden in the quickfix window
+    autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+endif
+
+ " No Residue files
+set noswapfile
+set nobackup
+
+set ttimeout ttimeoutlen=50
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+set linespace=2
+
+" Configure wrap
+set wrap linebreak  " linebreak - Wrap at word boundary
+set sidescroll=5
+set listchars+=precedes:<,extends:>
+set breakat+={}()"|<>&
+set textwidth=0
+
+" Save file with C-s
+nnoremap <silent><C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
+
+" Map double-click to search the word under cursor
+nnoremap <silent> <2-LeftMouse> :let @/='\V'.escape(expand('<cword>'), '\')<cr>:set hls<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+if !has("win32")
+    command! W w !sudo tee % > /dev/null
+endif
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap ,m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Grep for word under cursor in the cwd and open it in a quickfix window
+command! Grep cgetexpr system('grep --exclude-dir=builds --color -Hrnw ' . escape(expand('<cword>'), '\')) | cwindow
+
+" quickfix window key mapping overrides
+augroup my_grep_qf
+    autocmd!
+    autocmd BufReadPost quickfix nnoremap <silent> <buffer> q :ccl<CR>
+    autocmd BufReadPost quickfix nnoremap <silent> <buffer> t <C-W><CR><C-W>T
+    autocmd BufReadPost quickfix nnoremap <silent> <buffer> o <CR>
+    autocmd BufReadPost quickfix nnoremap <silent> <buffer> <2-LeftMouse> <CR>
+    autocmd BufReadPost quickfix nnoremap <silent> <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
+augroup END
