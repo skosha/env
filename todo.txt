@@ -111,3 +111,4 @@ https://devhints.io/vimscript
 Learn:
 https://devopedia.org/ieee-802-11ad
 https://www.electronicdesign.com/technologies/communications/article/21798297/understanding-ieee-80211ac-vht-wireless
+http://web.cse.ohio-state.edu/~reeves.92/CSE2421au12/SlidesDay52.pdf

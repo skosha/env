@@ -5,6 +5,10 @@ https://null-byte.wonderhowto.com/how-to/mac-for-hackers-install-iterm2-using-te
 
 By default, word jumps (option + → or ←) and word deletions (option + backspace) do not work. To enable these, go to "iTerm → Preferences → Profiles → Keys → Load Preset... → Natural Text Editing → Boom! Head explodes"
 
+Tools:
+https://git.kernel.org/pub/scm/devel/pahole/pahole.git
+git clone https://git.kernel.org/pub/scm/devel/pahole/pahole.git
+
 
 Go to iTerm2 > Preferences > Profiles > Colors Tab
 Click Color Presets... at the bottom right
@@ -17,6 +21,11 @@ Copy/Paste configurations:
   This works through ANSI escape sequences, and you actually want this OFF.
   iTerm2 -> Preferences -> General -> "Allow clipboard access to terminal apps" OFF
 -
+
+psql:
+- Connect: psql --host=<host_name> --username=<user> <db_name>
+- List all tables: \dt+
+- List all columns of a table: \d+ <table_name>
 
 https://www.reddit.com/r/unixporn/comments/5vke7s/osx_iterm2_tmux_vim/
 

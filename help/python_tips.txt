@@ -57,3 +57,5 @@ stdout, stderr
 
 ## Interesting modules
 https://pypi.org/project/keyring/
+$ python -m keyring set <system> <username>
+$ python -m keyring get <system> <username>

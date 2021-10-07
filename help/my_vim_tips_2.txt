@@ -339,6 +339,9 @@ append to macro - q<X>
 Can add a macro to the vimrc:
 let @a='blah_blah_blah'
 
+# Repeat last colon command
+The last command entered with ':' can be repeated with @: and further repeats can be done with @@
+
 # Perform calculations
 nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
 
