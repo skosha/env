@@ -66,6 +66,7 @@ set lazyredraw                  " Don't redraw while executing macros (good perf
 set ttyfast                     " Performance improvements
 set foldcolumn=1                " Add a bit extra margin to the left
 set mouse=a                     " use mouse in all modes
+set listchars=tab:␉·            " Show tabs as ....
 
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3

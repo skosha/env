@@ -95,7 +95,7 @@ Plug 'AndrewRadev/linediff.vim'                                         " Diff s
 Plug 'inkarkat/vim-mark'                                                " Mark multiple searches with different highlight color
 Plug 'xolox/vim-notes', { 'on': 'Note' }                                " Notes from within Vim
 Plug 'tpope/vim-obsession'                                              " Vim session management
-Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo'                                            " peek at register contents for Ctrl-r, @
 Plug 'krisajenkins/vim-projectlocal'                                    " Local .vimrc
 Plug 'glts/vim-radical'                                                 " Convert numbers between decimal, hex, octal and binary
 Plug 'xolox/vim-reload'                                                 " Reload Vim plugins when saved
