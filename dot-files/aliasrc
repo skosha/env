@@ -24,7 +24,6 @@ alias gs-diff='git diff --staged'           # diff staged files (git diff is for
 alias pull='git pull --rebase'              # pull with rebase
 alias r-pull='git pull --rebase origin'     # pull with rebase to origin
 alias push='git push'                       # short for push
-alias rebase='git rebase $(git --no-pager branch | fzf +m)' # choose from a list of branches to rebase to
 alias co='git checkout'                     # short for checkout
 alias br='git --no-pager branch -vv'        # short for listing branches
 alias n-br='git checkout -b'                # create and checkout a new branch
@@ -165,6 +164,14 @@ ci() {
     local branch
     branch=$(git --no-pager branch -vv | fzf +m -1 -0 | awk '{print $1}')
     git checkout $branch
+}
+
+# choose from a list of branches to rebase to
+unalias rebase 2>/dev/null
+rebase() {
+    local branch
+    branch=$(git --no-pager branch -vv | fzf +m -1 -0 | awk '{print $1}')
+    git rebase $branch
 }
 
 # delete a branch selected from a list of local branches
