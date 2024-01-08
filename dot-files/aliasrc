@@ -15,6 +15,9 @@ alias l='ls -CF'            # Useful for passing to pager
 # refresh shell
 alias reload='source ~/.bashrc'
 
+# Always list the pid for bg jobs
+alias jobs="jobs -l"
+
 # My git aliases
 alias gitl='git log --name-only'            # full log with filenames
 alias g-ls='git ls-files'                   # list files in git
@@ -134,6 +137,14 @@ git-show() {
     [[ ! -z "$1" ]] &&
 	sha=$(git log --grep="$1" | head -n 1 | awk '{print $2}') &&
 	[[ ! -z "$sha" ]] && git show "$sha"
+}
+
+unalias del-change 2>/dev/null
+del-change() {
+	local c_sha
+    [[ ! -z "$1" ]] &&
+	c_sha=$(git log --grep="$1" | head -n 1 | awk '{print $2}') &&
+	[[ ! -z "$c_sha" ]] && git rebase --onto "$c_sha"^ "$c_sha"
 }
 
 # Add selected files to staged (select using shift-tab)
