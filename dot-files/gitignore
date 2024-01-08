@@ -23,3 +23,8 @@ sdkconfig.old
 n.cscope.*
 .gitreview
 *.tmp
+.log
+.scap
+.svace-dir
+output
+output.log

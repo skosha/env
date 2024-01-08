@@ -9,10 +9,13 @@ else
     let g:ack_default_options = ' -s -H --nocolor --nogroup --column --ignore-file=is:tags --ignore-file=is:cscope.out --ignore-dir=builds'
 endif
 
-let g:ackhighlight = 1
+"let g:ackhighlight = 1
 
-" bind K to grep word under cursor
-nnoremap <Leader>k :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind K to grep word under cursor in current file
+nnoremap <Leader>k :Ack! <C-R>=expand("<cword>")<CR> % <CR>
+
+" bind kg to grep word under cursor in cwd
+nnoremap <Leader>kg :Ack! <C-R>=expand("<cword>")<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ale Lint
@@ -167,37 +170,40 @@ let g:lengthmatters_start_at_column = 121
 """"""""""""""""""""""""""""""
 " => vim-mark
 """"""""""""""""""""""""""""""
-let g:mwHistAdd = '/@'
+let g:mwHistAdd = '@'
 
 nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
 nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 
-nmap <Leader>1 <Plug>MarkSearchGroup1Next
-nmap <Leader>! <Plug>MarkSearchGroup1Prev
+nmap <Leader>1 <Plug>MarkSearchAnyNext
+nmap <Leader>2 <Plug>MarkSearchAnyPrev
 
-nmap <Leader>2 <Plug>MarkSearchGroup2Next
-nmap <Leader>" <Plug>MarkSearchGroup2Prev
+nmap ]1 <Plug>MarkSearchGroup1Next
+nmap [1 <Plug>MarkSearchGroup1Prev
 
-nmap <Leader>3 <Plug>MarkSearchGroup3Next
-nmap <Leader>£ <Plug>MarkSearchGroup3Prev
+nmap ]2 <Plug>MarkSearchGroup2Next
+nmap [2 <Plug>MarkSearchGroup2Prev
 
-nmap <Leader>4 <Plug>MarkSearchGroup4Next
-nmap <Leader>$ <Plug>MarkSearchGroup4Prev
+nmap ]3 <Plug>MarkSearchGroup3Next
+nmap [3 <Plug>MarkSearchGroup3Prev
 
-nmap <Leader>5 <Plug>MarkSearchGroup5Next
-nmap <Leader>% <Plug>MarkSearchGroup5Prev
+nmap ]4 <Plug>MarkSearchGroup4Next
+nmap [4 <Plug>MarkSearchGroup4Prev
 
-nmap <Leader>6 <Plug>MarkSearchGroup6Next
-nmap <Leader>^ <Plug>MarkSearchGroup6Prev
+nmap ]5 <Plug>MarkSearchGroup5Next
+nmap [5 <Plug>MarkSearchGroup5Prev
 
-nmap <Leader>7 <Plug>MarkSearchGroup7Next
-nmap <Leader>& <Plug>MarkSearchGroup7Prev
+nmap ]6 <Plug>MarkSearchGroup6Next
+nmap [6 <Plug>MarkSearchGroup6Prev
 
-nmap <Leader>8 <Plug>MarkSearchGroup8Next
-nmap <Leader>) <Plug>MarkSearchGroup8Prev
+nmap ]7 <Plug>MarkSearchGroup7Next
+nmap [7 <Plug>MarkSearchGroup7Prev
 
-nmap <Leader>9 <Plug>MarkSearchGroup9Next
-nmap <Leader>( <Plug>MarkSearchGroup9Prev
+nmap ]8 <Plug>MarkSearchGroup8Next
+nmap [8 <Plug>MarkSearchGroup8Prev
+
+nmap ]9 <Plug>MarkSearchGroup9Next
+nmap [9 <Plug>MarkSearchGroup9Prev
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
@@ -213,6 +219,8 @@ let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
+nnoremap <silent> <leader>cd <Plug>NERDCommenterToEOL
 
 """"""""""""""""""""""""""""""
 " => Notes

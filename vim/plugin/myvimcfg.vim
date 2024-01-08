@@ -235,11 +235,11 @@ set ttimeout ttimeoutlen=50
 
 " Mappings {{{
 
-" Put the search result at the top of the screen
-nnoremap n nzt
-nnoremap N Nzt
-xnoremap n nzt
-xnoremap N Nzt
+" Put the search result at the center of the screen
+nnoremap n nzz
+nnoremap N Nzz
+xnoremap n nzz
+xnoremap N Nzz
 
 let mapleader='\'
 
