@@ -1,16 +1,15 @@
 GDB commands by function - simple guide
 ---------------------------------------
-More important commands have a (*) by them.
 
 Startup
 % gdb -help         	                print startup help, show switches
-*% gdb object      	                    normal debug
-*% gdb object core 	                    core debug (must specify core file)
+% gdb object      	                    normal debug
+% gdb object core 	                    core debug (must specify core file)
 %% gdb object pid  	                    attach to running process
 % gdb        		                    use file command to load object
 
 Help
-*(gdb) help        	                    list command classes
+(gdb) help        	                    list command classes
 (gdb) help running                      list commands in one command class
 (gdb) help run        	                bottom-level help for a command "run"
 (gdb) help info                         list info commands (running program state)
@@ -19,17 +18,22 @@ Help
 (gdb) help show commands                specific help for a show command
 
 Breakpoints
-*(gdb) break main                       set a breakpoint on a function
-*(gdb) break 101                        set a breakpoint on a line number
-*(gdb) break basic.c:101                set breakpoint at file and line (or function)
-*(gdb) info breakpoints                 show breakpoints
-*(gdb) delete 1                         delete a breakpoint by number
+(gdb) break main                        set a breakpoint on a function
+(gdb) break 101                         set a breakpoint on a line number
+(gdb) break basic.c:101                 set breakpoint at file and line (or function)
+(gdb) info breakpoints                  show breakpoints
+(gdb) delete 1                          delete a breakpoint by number
 (gdb) delete        	                delete all breakpoints (prompted)
 (gdb) clear                             delete breakpoints at current line
 (gdb) clear function                    delete breakpoints at function
 (gdb) clear line                        delete breakpoints at line
 (gdb) disable 2                         turn a breakpoint off, but don't remove it
 (gdb) enable 2                          turn disabled breakpoint back on
+(gdb) disable 2-4                       turn a range of breakpoints off, but don't remove them
+(gdb) enable 2-4                        turn disabled range of breakpoints back on
+(gdb) disable                           turn all breakpoints off, but don't remove them
+(gdb) enable                            turn all breakpoints back on
+(gdb) enable [breakpoints] once list…   Enable the specified breakpoints temporarily
 (gdb) tbreak function|line              set a temporary breakpoint
 (gdb) commands break-no ... end         set gdb commands with breakpoint
 (gdb) ignore break-no count             ignore bpt N-1 times before activation
@@ -39,36 +43,39 @@ Breakpoints
 (gdb) info watchpoints                  show current watchpoints
 
 Running the program
-*(gdb) run        	                    run the program with current arguments
-*(gdb) run args redirection             run with args and redirection
+(gdb) run        	                    run the program with current arguments
+(gdb) run args redirection              run with args and redirection
 (gdb) set args args...                  set arguments for run
 (gdb) show args                         show current arguments to run
-*(gdb) cont                             continue the program
-*(gdb) step                             single step the program; step into functions
+(gdb) cont                              continue the program
+(gdb) step                              single step the program; step into functions
 (gdb) step count                        singlestep \fIcount\fR times
-*(gdb) next                             step but step over functions
+(gdb) next                              step but step over functions
 (gdb) next count                        next \fIcount\fR times
-*(gdb) CTRL-C                           actually SIGINT, stop execution of current program
-*(gdb) attach <process-id>              attach to running program
-*(gdb) detach                           detach from running program
-*(gdb) finish                           finish current function's execution
+(gdb) CTRL-C                            actually SIGINT, stop execution of current program
+(gdb) attach <process-id>               attach to running program
+(gdb) detach                            detach from running program
+(gdb) finish                            finish current function's execution
 (gdb) kill                              kill current executing program
+(gdb) until                             execute until reaching a later line
 
 Stack backtrace
-*(gdb) bt        	                    print stack backtrace
+(gdb) bt        	                    print stack backtrace
 (gdb) frame        	                    show current execution position
 (gdb) up        	                    move up stack trace  (towards main)
 (gdb) down        	                    move down stack trace (away from main)
-*(gdb) info locals                      print automatic variables in frame
+(gdb) info locals                       print automatic variables in frame
 (gdb) info args                         print function parameters
 
 Browsing source
-*(gdb) list 101        	                list 10 lines around line 101
-*(gdb) list 1,10                        list lines 1 to 10
-*(gdb) list main  	                    list lines around function
-*(gdb) list basic.c:main                list from another file basic.c
-*(gdb) list -        	                list previous 10 lines
+(gdb) list 101        	                list 10 lines around current line
+(gdb) list 101        	                list 10 lines around line 101
+(gdb) list 1,10                         list lines 1 to 10
+(gdb) list main  	                    list lines around function
+(gdb) list basic.c:main                 list from another file basic.c
+(gdb) list -        	                list previous 10 lines
 (gdb) list *0x22e4                      list source at address
+(gdb) set listsize 20                   increase the listsize
 (gdb) cd dir        	                change current directory to \fIdir\fR
 (gdb) pwd          	                    print working directory
 (gdb) search <regexpr>                  forward current for regular expression
@@ -78,8 +85,8 @@ Browsing source
 (gdb) show directories                  show source path
 
 Browsing Data
-*(gdb) print <expression>               print expression, added to value history
-*(gdb) print/x <expression>             print in hex
+(gdb) print <expression>                print expression, added to value history
+(gdb) print/x <expression>              print in hex
 (gdb) print array[i]@count              artificial array - print array range
 (gdb) print $        	                print last value
 (gdb) print *$->next                    print thru list
@@ -92,12 +99,12 @@ Browsing Data
 (gdb) x/4wx &main                       print 4 longs at start of \fImain\fR in hex
 (gdb) x/gf &gd1                         print double
 (gdb) help x        	                show formats for x
-*(gdb) info locals                      print local automatics only
+(gdb) info locals                       print local automatics only
 (gdb) info functions <regexp>           print function names
 (gdb) info variables  <regexp>          print global variable names
-*(gdb) ptype <name>                     print type definition
+(gdb) ptype <name>                      print type definition
 (gdb) whatis <expression>               print type of expression
-*(gdb) set <variable> = <expression>    assign value
+(gdb) set <variable> = <expression>     assign value
 (gdb) display <expression>              display expression result at stop
 (gdb) undisplay                         delete displays
 (gdb) info display                      show displays
@@ -151,10 +158,10 @@ History Display
 
 Miscellaneous
 (gdb) define command ... end            define user command
-*(gdb) RETURN        		            repeat last command
-*(gdb) shell command args               execute shell command
-*(gdb) source file        	            load gdb commands from file
-*(gdb) quit        		                quit gdb
+(gdb) RETURN        		            repeat last command
+(gdb) shell command args                execute shell command
+(gdb) source file        	            load gdb commands from file
+(gdb) quit        		                quit gdb
 
 Use macros example:
 (gdb) define prm

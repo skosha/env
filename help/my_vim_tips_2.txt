@@ -36,6 +36,11 @@ ma
 move to last line of interest
 !'asort
 
+# Sort based on column
+:%!sort -k<col>
+:%!sort -k<col>nr               # treat text as number (n) and sort in reverse (r)
+:%!sort -k<col1> -bk<col2>g     # ignore leading blank spaces (b), sort using a general numeric sort (g)
+
 # Insert literal character. In insert mode
 <Ctrl-V>[Key]
 
@@ -231,6 +236,13 @@ $ - Anchor - end of line
 \(...\) - Grouping - usually used to group conditions
 [...]{m} - look for m occurances of the Set
 [...]{m,n} - look for atleast m occurances but no more than n
+
+# Search for a pattern which follows another pattern
+/\<foo\>.*\zsbar
+Will search 'bar':
+foo blah_blah_blah bar
+Not search:
+bar blah_blah_blah foo
 
 # Show only matching/non matching lines
 :g/pattern/ - matching
