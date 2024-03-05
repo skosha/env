@@ -734,6 +734,28 @@ function! AddFunctionHeader(type)
     execute l:func_proto_start
 endfunction
 
+"" line1 is the line number the first timestamp is on.
+" line2 is the line number the second timestamp is on.
+function! GetTimeDifference(line1,line2)
+    " Get line content and split it where ":" matches.
+    let l:t1List = split( getline(a:line1), ":" )
+    let l:t2List = split( getline(a:line2), ":" )
+
+    " Get the difference in seconds
+    let l:diffSec = abs(  (l:t1List[0] * 3600 + l:t1List[1] * 60 + l:t1List[2]) -
+                           \ (l:t2List[0] * 3600 + l:t2List[1] * 60 + l:t2List[2])   )
+    let l:sec=trunc(fmod(l:diffSec,60))
+    let l:min=trunc(fmod(l:diffSec,3600) / 60) " 60x60
+    let l:hrs=trunc(l:diffSec / 3600)
+
+    " Replace the line with the result.
+   call append(a:line2, printf("%02f:%02f:%02.03f", l:hrs,l:min,l:sec))
+
+    " Delete the other one.
+    " execute a:line2 . "delete"
+endfunction
+command! -range TimeDifference :call GetTimeDifference(<line1>,<line2>)
+
 " }}}
 
 
