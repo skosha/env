@@ -38,6 +38,8 @@ https://github.com/vim-scripts/Smartput
 https://github.com/davidoc/taskpaper.vim
 https://freshman.tech/vim-javascript/
 https://www.ubuntupit.com/best-vim-plugins-for-programming/
+https://vimhelp.org/builtin.txt.html
+Netrw quick ref - https://gist.github.com/t-mart/610795fcf7998559ea80
 
 https://github.com/AndrewRadev/deleft.vim
 https://github.com/andymass/vim-matchup
@@ -64,6 +66,10 @@ https://sourceware.org/gdb/current/onlinedocs/gdb/Macros.html
 
 Coding Guidelines:
 http://umich.edu/~eecs381/handouts/CHeaderFileGuidelines.pdf
+
+Git:
+https://github.com/kamranahmedse/git-standup
+
 
 Cheatsheets:
 Tig - https://devhints.io/tig
